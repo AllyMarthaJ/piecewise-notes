@@ -1,0 +1,7 @@
+*.fls
+*.aux
+*.log
+*.gz
+*.toc
+*.pdf
+*.fdb*
