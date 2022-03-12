@@ -1,7 +1,8 @@
+# why does latex produce so much junk?
 *.fls
 *.aux
 *.log
 *.gz
 *.toc
-*.pdf
+/*.pdf
 *.fdb*
