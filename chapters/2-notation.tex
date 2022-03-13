@@ -1,0 +1,37 @@
+\section{Notation}
+\subsection{Piecewise functions}
+A piecewise \textit{function} is a function defined over several pieces. 
+
+Let us consider some function $f:\mathbb{R}\to\mathbb{R}$ and some intervals ${D_1,D_2,\dots,D_n\subseteq\mathbb{R}}$ such that ${D_1\cap D_2\cap \dots\cap D_n=\varnothing}$. Suppose we have some functions $f_1: D_1\to\mathbb{R}$ and so on. We describe this function using the following notation:
+$$
+    f(x) = \begin{cases} 
+        f_1(x) & x\in D_1 \\
+        f_2(x) & x\in D_2 \\
+        \vdots & \vdots \\
+        f_n(x) & x\in D_n
+    \end{cases}
+$$
+
+This same function could instead be written as the following:
+
+\begin{align*}
+    f:D_1\to\mathbb{R}&, f(x)=f_1(x), \\
+    f:D_2\to\mathbb{R}&, f(x)=f_2(x), \\
+    \vdots \\
+    f:D_n\to\mathbb{R}&, f(x)=f_n(x)
+\end{align*}
+
+This essentially describes the same function over different domains. Alternatively, one might think about it as different functions under the same label, $f$.
+
+Reading this function more verbosely, we say that if $x$ is in the domain $D_1$ and so on, then we might `choose' to have $f(x)=f_1(x)$ as per our definition.
+
+\begin{example}[Absolute value function]
+    Let us define the absolute value function, $\abs{x}$ as the following:
+
+    $$
+        \abs{x} = \begin{cases}
+            x & x\geq 0 \\
+            -x & x\leq 0
+        \end{cases}
+    $$
+\end{example}
