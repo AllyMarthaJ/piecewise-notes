@@ -3,13 +3,14 @@
 A piecewise \textit{function} is a function defined over several pieces. 
 
 Let us consider some function $f:\mathbb{R}\to\mathbb{R}$ and some intervals ${D_1,D_2,\dots,D_n\subseteq\mathbb{R}}$ such that ${D_1\cap D_2\cap \dots\cap D_n=\varnothing}$. Suppose we have some functions $f_1: D_1\to\mathbb{R}$ and so on. We describe this function using the following notation:
+
 $$
-    f(x) = \begin{cases} 
+    f(x) = \begin{piecewise} 
         f_1(x) & x\in D_1 \\
         f_2(x) & x\in D_2 \\
         \vdots & \vdots \\
         f_n(x) & x\in D_n
-    \end{cases}
+    \end{piecewise}
 $$
 
 This same function could instead be written as the following:
@@ -29,25 +30,25 @@ Reading this function more verbosely, we say that if $x$ is in the domain $D_1$ 
     Let us define the absolute value function, $\abs{x}$ as the following:
 
     $$
-        \abs{x} = \begin{cases}
+        \abs{x} = \begin{piecewise}
             x & x\geq 0 \\
             -x & x\leq 0
-        \end{cases}
+        \end{piecewise}
     $$
 
     To evaluate, for example, $\abs{-3}$, we use the definition:
 
     $$
-        \abs{-3} = \begin{cases}
+        \abs{-3} = \begin{piecewise}
             -3 & -3\geq 0 \\
             3 & -3\leq 0
-        \end{cases}
+        \end{piecewise}
     $$
 
     Since the condition in the second piece (or case) evaluates to true, we use the value in that piece. That is, since $-3\leq 0$ is true, $\abs{-3}=3$.
 \end{example}
 
 \subsection{Piecewise functions}
-Piecewise functions needn't be restricted to a single variable. More generally, they needn't be restricted to any arbitrary number of conditions within a piece, nor the number of pieces restricted.
+Piecewise functions needn't be restricted to a single variable. More generally, piecewise functions needn't be restricted to any number of conditions or pieces.
 
 \newpage{}

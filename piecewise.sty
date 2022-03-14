@@ -25,3 +25,17 @@
 
 \theoremstyle{definition}
 \newtheorem{example}{Example}[section]
+
+% my first environment
+% i hate amsmath doesn't support multicase piecewise
+\newenvironment{piecewise}[1]
+    {
+        \renewcommand*{\arraystretch}{1.2}
+            \left\{
+                \begin{matrix*}[l] 
+                #1
+    }
+    {
+                \end{matrix*}
+            \right.
+    }
