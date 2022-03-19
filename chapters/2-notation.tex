@@ -6,11 +6,11 @@ Let us consider some function $f:\mathbb{R}\to\mathbb{R}$ and some intervals ${D
 
 $$
     f(x) = \begin{piecewise} 
-        f_1(x) & x\in D_1 \\
-        f_2(x) & x\in D_2 \\
-        \vdots & \vdots \\
-        f_n(x) & x\in D_n
-    \end{piecewise}
+                f_1(x) & x\in D_1 \\
+                f_2(x) & x\in D_2 \\
+                \vdots & \vdots \\
+                f_n(x) & x\in D_n
+            \end{piecewise}
 $$
 
 This same function could instead be written as the following:
@@ -27,28 +27,119 @@ This essentially describes the same function over different domains. Alternative
 Reading this function more verbosely, we say that if $x$ is in the domain $D_1$ and so on, then we might `choose' to have $f(x)=f_1(x)$ as per our definition.
 
 \begin{example}[Absolute value function]
+    \label{example:abs_1}
     Let us define the absolute value function, $\abs{x}$ as the following:
 
     $$
         \abs{x} = \begin{piecewise}
-            x & x\geq 0 \\
-            -x & x\leq 0
-        \end{piecewise}
+                        x & x\geq 0 \\
+                        -x & x\leq 0
+                    \end{piecewise}
     $$
 
     To evaluate, for example, $\abs{-3}$, we use the definition:
 
     $$
         \abs{-3} = \begin{piecewise}
-            -3 & -3\geq 0 \\
-            3 & -3\leq 0
-        \end{piecewise}
+                        -3 & -3\geq 0 \\
+                        3 & -3\leq 0
+                    \end{piecewise}
     $$
 
     Since the condition in the second piece (or case) evaluates to true, we use the value in that piece. That is, since $-3\leq 0$ is true, $\abs{-3}=3$.
 \end{example}
 
 \subsection{Piecewise functions}
-Piecewise functions needn't be restricted to a single variable. More generally, piecewise functions needn't be restricted to any number of conditions or pieces.
+Piecewise functions needn't be restricted to a single variable. More generally, piecewise functions needn't be restricted to any number of conditions or pieces. The perfect example, as we'll see later, is the floor function, which has an infinite number of pieces. Similarly, the bivariate function describing a square when it intersects a certain plane has 4 pieces.
+
+In general, we can notate such a more general piecewise function like the following:
+
+$$
+f(x) = \begin{piecewise} 
+            f_1(x) & C_{1,1} & C_{1,2} & \dots & C_{1,m} \\ 
+            f_2(x) & C_{2,1} & C_{2,2} & \dots & C_{2,m} \\ 
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            f_n(x) & C_{n,1} & C_{n,2} & \dots & C_{n,m} \\ 
+        \end{piecewise}
+$$
+
+Where $C_{p,q}$ is some condition which evaluates to true or false for some inputs (e.g. a predicate). We interpret the string of conditions in each piece, such as $\{C_{1,1}\quad C_{1,2}\quad\dots\quad C_{1,m}\}$, as equivalent to the condition $C_{1,1}\land C_{1,2}\land\dots\land C_{1,m}$.
+
+Such conditions could be anything, and per the section above, we could have $C_{p,q}$ denote the predicate $x\in D_{p,q}$ for some set $D_{p,q}$.
+
+Importantly, we note in general this piecewise object is written in a shortened form, without commas or English terms such as `and' or `or', or their respective logical operators. This is a conventional decision in these notes given the number of piecewise objects written. For example, the following is identical to the above:
+
+$$
+f(x) = \begin{piecewise} 
+            f_1(x), & \text{if } C_{1,1}\land C_{1,2}\land \dots\land C_{1,m} \\ 
+            f_2(x), & \text{if } C_{2,1}\land C_{2,2}\land \dots\land C_{2,m} \\ 
+            \vdots & \vdots \\
+            f_n(x), & \text{if } C_{n,1}\land C_{n,2}\land \dots\land C_{n,m} \\ 
+        \end{piecewise}
+$$
+
+And of course we might package each piece's conditions together, effectively making one condition per piece. Though, in practice, this doesn't help very much at all.
+
+\subsection{Generalised piecewise object}
+Finally, we might consider a set-like generalised form of a piecewise object. Let us denote the following:
+
+$$
+\phi = \left\{\phi_i,\quad C_i\mid i\in I\right\}
+$$
+
+Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator), $\phi=\phi_i$ for when $C_i$ is true. 
+
+\begin{example}[Expanding a generalised piecewise object]
+    Suppose we have a set $I=\{1,2,\dots,n\}$ and a piecewise function $f$ such that $f=f_i$ when $C_i$ is true.
+
+    We can express this function as:
+
+    $$
+        f = \begin{piecewise} 
+                f_1 & C_1 \\
+                f_2 & C_2 \\
+                \vdots & \vdots \\
+                f_n & C_n
+            \end{piecewise}
+    $$
+
+    Alternatively, we might express it using the generalised notation:
+    
+    $$
+        f=\{f_1,\quad C_i\mid i\in\{1,2,\dots,n\}\}
+    $$
+\end{example}
+
+\begin{example}[Floor function]
+    We will see the floor function later on where it will be described more deeply, but we can introduce it like so using our notation:
+
+    $$
+        \left\lfloor x\right\rfloor=\left\{n,\quad x\in[n,n+1)\mid n\in\mathbb{Z}\right\}
+    $$
+
+    To evaluate this function at $x=3.5$ consider that for all $n\in\mathbb{Z}$ there exists only one such interval $N=[n,n+1)$ such that $3.5\in N$. This interval is $[3,4)$, i.e. $n=3$; the corresponding piece value is $3$ and so $\left\lfloor 3.5\right\rfloor=3$.
+\end{example}
+
+If a single iterator (e.g. $i\in I$) isn't sufficient to describe the piecewise object we desire, we might consider using several; $i\in I$, $j\in J$ for example). Alternatively, we might consider joining two piecewise objects together using $\cup$:
+
+$$
+\varphi = \phi_1 \cup \phi_2 = \left\{\phi_{1,i},\quad A_i\mid i\in I\right\}\cup\left\{\phi_{2,j},\quad B_j\mid j\in J\right\}
+$$
+
+This can be interpreted similarly to before, though we now have that $\varphi=\phi_{1,i}$ if $A_i$ is true for some $i$, or $\varphi=\phi_{2,j}$ is $B_j$ is true for some $j$. 
+
+Notably, this notation can be used to express individual pieces explicitly in a piecewise object rather than collectively. If such a piece isn't dependent on the iterator, we can ignore that part entirely (keeping in mind we might be able to rewrite it using an iterator later on).
+
+\begin{example}[Absolute value function]
+    \label{example:abs_2}
+
+    Recall the absolute value function; see Example \ref{example:abs_1}.
+
+    We can then express $\abs{x}$ as:
+
+    $$
+        \abs{x} = \{x,\quad x\geq 0\} \cup \{-x,\quad x\leq 0\} 
+    $$
+\end{example}
 
 \newpage{}
