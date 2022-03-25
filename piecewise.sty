@@ -28,7 +28,13 @@
 
 
 % theorems and things
-\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newmdtheoremenv[%
+    outerlinecolor = black, %
+    nobreak = true, %
+    linewidth = 1pt, %
+    roundcorner = 8pt, %
+]{theorem}{}[section]
 
 \theoremstyle{definition}
 \newmdtheoremenv[%
@@ -51,3 +57,6 @@
                 \end{matrix*}
             \right.
     }
+
+% fun commands
+\newcommand{\dom}[1]{\operatorname{dom}\left(#1\right)}

@@ -1,6 +1,62 @@
 \section{Algebra on Piecewise Objects}
+\subsection{Piece association}
+Operations on piecewise objects are fairly straightforward and behave as any other object in the context you're working in (whether this be with the real numbers, complex numbers, certain algebras, spaces, and so on). 
+
+What this section aims to do is not to teach you directly how to perform exactly the operations you want to on each piecewise object, but instead provide a basis for which you can base your ideas: no piece of a piecewise object is independent of another. Equivalently, each piece is dependent on each other piece. There is an intuitive reason for this: you are evaluating an object not conditionally, but in full generality; each piece exists, in some sense, `simultaneously'.
+
+It is here we might recognise that this idea could fairly easily lead into combinatorics; an area of maths which deals heavily with the enumeration and construction of such objects.
+\subsection{Equality property}
+\begin{theorem}
+    Consider the following piecewise object:
+
+    $$
+        \phi=\left\{\phi_i,\quad C_i\mid i\in I\right\}    
+    $$
+
+    Then if for all $i,j\in I$ we have that $\phi_i=\phi_j$ (that is, all piece values are equal for when $\phi$ is defined), then $\phi=\phi_i$ for some $i\in I$.
+
+    For example, consider the function $f:(-\infty,0]\to\mathbb{R}$:
+
+    $$
+        f(x) = \begin{piecewise}
+            0 & x \geq 0 \\
+            0 & x < 0
+        \end{piecewise}
+    $$
+
+    We have that $f(x)=0$. This is because everywhere in $\dom{f}$, or both when $x\geq 0$ and $x < 0$, we have that $f(x)=0$.
+\end{theorem}
+\subsection{Piece and condition substitutions}
+Arguably one of the most fundamental property of piecewise objects is the relationship between each piece's conditions and its respective value. That is, the values for which a piecewise object takes is dependent on their respective conditions, and so can be treated explicitly as such.
+
+This idea becomes far more important when working using other functions, such as $\max$, $\min$ and $\abs{x}$ (which will be covered later), although it can still be used in other contexts. In essence, for certain classes of piecewise functions
+\begin{example}
+    As an example, let us consider the function $f:(-6, 6)\to\mathbb{R}$:
+
+    $$
+        f(x) = \begin{piecewise}
+            x & x > 5 \\
+            5 & x = 5 \\
+            x & x < 5
+        \end{piecewise}
+    $$
+
+    Consider the piece for which $x=5$: note that the piece value is equal to $5$. Since $x=5$ we can replace $5$ with $x$ to get:
+
+    $$
+        f(x) = \begin{piecewise}
+            x & x > 5 \\
+            x & x = 5 \\
+            x & x < 5
+        \end{piecewise}
+    $$
+
+    And by the equality property, we know that this function is equivalent to $f(x)=x$.
+\end{example}
+
 % piece values = conditions for all pieces, object = values
 \subsection{(De)nesting pieces; logical `and'}
+The third of several special operations on piecewise objects involves the nesting and denesting of cases; essentially, we decouple the conditions in each piece from one another in order to group and subsequently simply the piece values.
 \subsection{Combining, splitting piece conditions; logical `or'}
 \subsection{Functions on piecewise objects}
 % f(\phi)=yeah; also, explicitly note that a+\phi = ... , a*\phi = ...
