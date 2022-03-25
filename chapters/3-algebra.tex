@@ -13,7 +13,7 @@ It is here we might recognise that this idea could fairly easily lead into combi
         \phi=\left\{\phi_i,\quad C_i\mid i\in I\right\}    
     $$
 
-    Then if for all $i,j\in I$ we have that $\phi_i=\phi_j$ (that is, all piece values are equal for when $\phi$ is defined), then $\phi=\phi_i$ for some $i\in I$.
+    Then if for all $i,j\in I$ we have that $\phi_i=\phi_j$ (that is, all piece values are equal for when $\phi$ is defined), then $\phi=\phi_i$ for any $i\in I$.
 
     For example, consider the function $f:(-\infty,0]\to\mathbb{R}$:
 
@@ -26,11 +26,28 @@ It is here we might recognise that this idea could fairly easily lead into combi
 
     We have that $f(x)=0$. This is because everywhere in $\dom{f}$, or both when $x\geq 0$ and $x < 0$, we have that $f(x)=0$.
 \end{theorem}
-\subsection{Piece and condition substitutions}
+\subsection{Piece and condition equivalence}
 Arguably one of the most fundamental property of piecewise objects is the relationship between each piece's conditions and its respective value. That is, the values for which a piecewise object takes is dependent on their respective conditions, and so can be treated explicitly as such.
 
-This idea becomes far more important when working using other functions, such as $\max$, $\min$ and $\abs{x}$ (which will be covered later), although it can still be used in other contexts. In essence, for certain classes of piecewise functions
+\begin{theorem}
+    Consider the following piecewise function:
+
+    $$
+        f(x) = \left\{f_i(x),\quad C_i\mid i\in I\right\}
+    $$
+
+    For all $i\in I$, let us define a substitution $x\sim y_i$, where $\sim$ represents equality under the condition $C_i$. Then we might consider writing $f(x)$ as:
+
+    $$
+        f(x) = \left\{f_i(y_i),\quad C_i\mid i\in I\right\}
+    $$
+
+    And $f(x)$ may still remain a non-constant function, but in this way we've given it another representation. For some $C_i$ we might just have $x\sim x$ (and is effectively no substitution at all). This substitution can also go the other way, i.e. $y_i\sim x$.
+\end{theorem}
+
+This idea becomes far more important when working using other functions, such as $\max$, $\min$ and $\abs{x}$ (which will be covered later), although it can still be used in other contexts. In essence, for certain classes of piecewise functions, we can build off existing functions to construct not only transformations, but completely new functions and representations.
 \begin{example}
+    \label{example:equality_1}
     As an example, let us consider the function $f:(-6, 6)\to\mathbb{R}$:
 
     $$
@@ -52,6 +69,32 @@ This idea becomes far more important when working using other functions, such as
     $$
 
     And by the equality property, we know that this function is equivalent to $f(x)=x$.
+\end{example}
+
+Finally, depending on the context of the problem, function or object, we can rewrite conditions in some way to make it more straightforward for us to understand. This becomes relevant in the context of function domains.
+
+\begin{example}
+    Let us consider the function from Example $\ref{example:equality_1}$.
+
+    The following two representations are equivalent:
+
+    $$
+        f(x) = \begin{piecewise}
+            x & x > 5 \\
+            5 & x = 5 \\
+            x & x < 5
+        \end{piecewise}
+    $$
+
+    $$
+        f(x) = \begin{piecewise}
+            x & x\in(5,6) \\
+            5 & x = 5 \\
+            x & x\in(-6,5)
+        \end{piecewise}
+    $$
+
+    The reason for this is that for all $x\in(-6,5)$ we have that $x<5$, despite the contrary not being always true. The reason the contrary needn't always be true for all $\mathbb{R}$ is because our function $f$ is defined on the interval $(-6,6)$. This same argument can also be applied to $x\in(5,6)\implies x>5$.
 \end{example}
 
 % piece values = conditions for all pieces, object = values
