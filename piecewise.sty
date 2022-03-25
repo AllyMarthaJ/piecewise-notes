@@ -7,6 +7,7 @@
 \usepackage{mathtools}
 \usepackage{physics}
 \usepackage{import}
+\usepackage{mdframed}
 
 % yay for proofs
 \usepackage{amsthm}
@@ -18,6 +19,8 @@
 % but having no space between them makes the content *really* dense.
 \usepackage{parskip}
 
+\usepackage{hyperref}
+
 % doc info 
 \title{Piecewise Notes}
 \author{Ally Macdonald}
@@ -28,7 +31,12 @@
 \newtheorem{theorem}{Theorem}
 
 \theoremstyle{definition}
-\newtheorem{example}{Example}[section]
+\newmdtheoremenv[%
+    outerlinecolor = black, %
+    nobreak = true, %
+    linewidth = 1pt, %
+    roundcorner = 8pt, %
+]{example}{}[section]
 
 % my first environment
 % i hate amsmath doesn't support multicase piecewise

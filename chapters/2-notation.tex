@@ -2,7 +2,7 @@
 \subsection{Single variable piecewise functions}
 A piecewise \textit{function} is a function defined over several pieces. 
 
-Let us consider some function $f:\mathbb{R}\to\mathbb{R}$ and some intervals ${D_1,D_2,\dots,D_n\subseteq\mathbb{R}}$ such that ${D_1\cap D_2\cap \dots\cap D_n=\varnothing}$. Suppose we have some functions $f_1: D_1\to\mathbb{R}$ and so on. We describe this function using the following notation:
+Let us consider some function $f:\mathbb{R}\to\mathbb{R}$ and some intervals ${D_1,D_2,\dots,D_n\subseteq\mathbb{R}}$ such that ${D_1\cap D_2\cap \dots\cap D_n=\varnothing}$. That is, we have some number real intervals which do not overlap. Suppose we have some functions $f_1: D_1\to\mathbb{R}$ and so on. We describe this function using the following notation:
 
 $$
     f(x) = \begin{piecewise} 
@@ -26,9 +26,9 @@ This essentially describes the same function over different domains. Alternative
 
 Reading this function more verbosely, we say that if $x$ is in the domain $D_1$ and so on, then we might `choose' to have $f(x)=f_1(x)$ as per our definition.
 
-\begin{example}[Absolute value function]
+\begin{example}
     \label{example:abs_1}
-    Let us define the absolute value function, $\abs{x}$ as the following:
+    Let us define the absolute value function, $\abs{x}$, as the following:
 
     $$
         \abs{x} = \begin{piecewise}
@@ -89,7 +89,7 @@ $$
 
 Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator), $\phi=\phi_i$ for when $C_i$ is true. 
 
-\begin{example}[Expanding a generalised piecewise object]
+\begin{example}
     Suppose we have a set $I=\{1,2,\dots,n\}$ and a piecewise function $f$ such that $f=f_i$ when $C_i$ is true.
 
     We can express this function as:
@@ -110,7 +110,7 @@ Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator
     $$
 \end{example}
 
-\begin{example}[Floor function]
+\begin{example}
     We will see the floor function later on where it will be described more deeply, but we can introduce it like so using our notation:
 
     $$
@@ -130,7 +130,7 @@ This can be interpreted similarly to before, though we now have that $\varphi=\p
 
 Notably, this notation can be used to express individual pieces explicitly in a piecewise object rather than collectively. If such a piece isn't dependent on the iterator, we can ignore that part entirely (keeping in mind we might be able to rewrite it using an iterator later on).
 
-\begin{example}[Absolute value function]
+\begin{example}
     \label{example:abs_2}
 
     Recall the absolute value function; see Example \ref{example:abs_1}.
