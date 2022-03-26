@@ -10,10 +10,10 @@ It is here we might recognise that this idea could fairly easily lead into combi
     Consider the following piecewise object:
 
     $$
-        \phi=\pwobj{\phi_i}{C_i}{i\in I}
+        \phi=\pwobj{\varphi_i}{C_i}{i\in I}
     $$
 
-    Then if for all $i,j\in I$ we have that $\phi_i=\phi_j$ (that is, all piece values are equal for when $\phi$ is defined), then $\phi=\phi_i$ for any $i\in I$.
+    Then if for all $i,j\in I$ we have that $\varphi_i=\varphi_j$ (that is, all piece values are equal for when $\phi$ is defined), then $\phi=\varphi_i$ for any $i\in I$.
 
     For example, consider the function $f:(-\infty,0]\to\mathbb{R}$:
 
@@ -50,13 +50,13 @@ Arguably one of the most fundamental property of piecewise objects is the relati
     Consider the following piecewise object:
 
     $$
-        \phi=\pwobj{\phi_i}{C_i}{i\in I}
+        \phi=\pwobj{\varphi_i}{C_i}{i\in I}
     $$
 
     For all $i\in I$, suppose that $C_i \leftrightarrow D_i$ in the context of $\phi$ (i.e. if a function, within its domain, etc.). Then we can rewrite this object as:
 
     $$
-        \phi=\pwobj{\phi_i}{D_i}{i\in I}
+        \phi=\pwobj{\varphi_i}{D_i}{i\in I}
     $$ 
 
     That is, we've substituted the set of our conditions for another set of conditions (and again, we may not have substituted all of them). For example, we know that $x=5$ when $(x-5)^2\leq 0$, and so these two conditions are interchangeable.
@@ -119,7 +119,7 @@ A strong note on functions which are not well-defined: Piecewise objects can eas
 \begin{theorem}
     A piecewise function is only well-defined if all of its piece values denote well-defined functions, and in places where two conditions in separate pieces are true, their respective values must be equal.
 
-    Formally, given the piecewise object $\phi=\pwobj{\phi_i}{C_i}{i\in I}$ if there exists $i\neq j\in I$ such that $C_i\land C_j$ is true, then $\phi$ is well-defined iff $\phi_i=\phi_j$ and each $\phi_k$ for $k\in I$ is well-defined.
+    Formally, given the piecewise object $\phi=\pwobj{\varphi_i}{C_i}{i\in I}$ if there exists $i\neq j\in I$ such that $C_i\land C_j$ is true, then $\phi$ is well-defined iff $\varphi_i=\varphi_j$ and each $\varphi_k$ for $k\in I$ is well-defined.
 
     For example, the following is not well-defined:
 
@@ -160,17 +160,17 @@ The third of several special operations on piecewise objects involves the nestin
     
     $$
         \phi = \begin{piecewise}
-            \phi_1 & C_1 \\ 
-            \phi_2 & C_2 \\
+            \varphi_1 & C_1 \\ 
+            \varphi_2 & C_2 \\
             \vdots & \vdots \\
-            \phi_n & C_n
+            \varphi_n & C_n
         \end{piecewise}
     $$
 
     Suppose that we have
 
     $$
-        \phi_1 = \begin{piecewise}
+        \varphi_1 = \begin{piecewise}
             \mu_1 & D_1 \\
             \mu_2 & D_2 
         \end{piecewise}
@@ -184,9 +184,9 @@ The third of several special operations on piecewise objects involves the nestin
                 \mu_1 & D_1 \\
                 \mu_2 & D_2
             \end{piecewise} & C_1 \\ 
-            \phi_2 & C_2 \\
+            \varphi_2 & C_2 \\
             \vdots & \vdots \\
-            \phi_n & C_n
+            \varphi_n & C_n
         \end{piecewise}
     $$
 
@@ -196,9 +196,9 @@ The third of several special operations on piecewise objects involves the nestin
         \phi = \begin{piecewise}
             \mu_1 & C_1 & D_1 \\
             \mu_2 & C_1 & D_2 \\
-            \phi_2 & C_2 \\
+            \varphi_2 & C_2 \\
             \vdots & \vdots \\
-            \phi_n & C_n
+            \varphi_n & C_n
         \end{piecewise}
     $$
 
@@ -211,13 +211,13 @@ In general, if we have common, and multiple, conditions for pieces, we should be
     Given the following piecewise object:
     
     $$
-        \phi=\pwobj{\phi_i}{C_i}{i\in I}
+        \phi=\pwobj{\varphi_i}{C_i}{i\in I}
     $$
     
     If we have that $C_i\leftrightarrow A_i\land B_i$ for some conditions $A_i$, $B_i$, then
 
     $$
-        \phi=\pwobj{\phi_i}{A_i\land B_i}{i\in I}
+        \phi=\pwobj{\varphi_i}{A_i\land B_i}{i\in I}
     $$
 
     This is a semi-obvious fact, but becomes useful when coupled with the grouping/nesting of piecewise objects via their piece's conditions. This was also touched on in Chapter \ref{section:notation}.
@@ -229,13 +229,13 @@ Finally, we'll look at explicit logical `or' in piece conditions at a basic leve
     Given the following piecewise object:
 
     $$
-        \phi=\pwobj{\phi_i}{A_i\lor B_i}{i\in I}
+        \phi=\pwobj{\varphi_i}{A_i\lor B_i}{i\in I}
     $$
 
     For some conditions $A_i$, $B_i$, we can rewrite this as the following:
 
     $$
-        \phi=\pwobj{\phi_i}{A_i}{i\in I}\cup\pwobj{\phi_i}{B_i}{i\in I}
+        \phi=\pwobj{\varphi_i}{A_i}{i\in I}\cup\pwobj{\varphi_i}{B_i}{i\in I}
     $$
 
     And vice versa.
@@ -268,13 +268,13 @@ Finally, we'll look at explicit logical `or' in piece conditions at a basic leve
     That is the following, for some set $J\subseteq I$
 
     $$
-        \phi=\pwobj{\phi_i}{C_i}{i\in I}
+        \phi=\pwobj{\varphi_i}{C_i}{i\in I}
     $$
 
     is equivalent to:
 
     $$
-        \phi=\pwobj{\phi_i}{C_i}{i\in I}\cup\pwobj{\phi_j}{C_j}{j\in J}
+        \phi=\pwobj{\varphi_i}{C_i}{i\in I}\cup\pwobj{\varphi_j}{C_j}{j\in J}
     $$
 
     The reason for this comes down to our well-definition argument as before (equal values).
@@ -285,16 +285,16 @@ Finally! The fun begins.
     Given the following piecewise object:
     
     $$
-        \phi = \pwobj{\phi_i}{C_i}{i\in I}
+        \phi = \pwobj{\varphi_i}{C_i}{i\in I}
     $$
 
     We have that:
 
     $$
-        f(\phi) = \pwobj{f(\phi_i)}{C_i}{i\in I}
+        f(\phi) = \pwobj{f(\varphi_i)}{C_i}{i\in I}
     $$
     
-    A quick intuition/proof is as follows: For all $i\in I$ suppose that at least one $C_i$ is true. Then we have that $\phi=\phi_i\implies f(\phi)=f(\phi_i)$. By definition that means $f(\phi)$ is as above.
+    A quick intuition/proof is as follows: For all $i\in I$ suppose that at least one $C_i$ is true. Then we have that $\phi=\varphi_i\implies f(\phi)=f(\varphi_i)$. By definition that means $f(\phi)$ is as above.
 \end{theorem}
 % f(\phi)=yeah; also, explicitly note that a+\phi = ... , a*\phi = ...
 \newpage{}

@@ -85,10 +85,10 @@ And of course we might package each piece's conditions together, effectively mak
 Finally, we might consider a set-like generalised form of a piecewise object. Let us denote the following:
 
 $$
-    \phi = \pwobj{\phi_i}{C_i}{i\in I}
+    \phi = \pwobj{\varphi_i}{C_i}{i\in I}
 $$
 
-Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator), $\phi=\phi_i$ for when $C_i$ is true. 
+Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator), $\phi=\varphi_i$ for when $C_i$ is true. 
 
 \begin{example}
     Suppose we have a set $I=\{1,2,\dots,n\}$ and a piecewise function $f$ such that $f=f_i$ when $C_i$ is true.
@@ -124,10 +124,10 @@ Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator
 If a single iterator (e.g. $i\in I$) isn't sufficient to describe the piecewise object we desire, we might consider using several; $i\in I$, $j\in J$ for example). Alternatively, we might consider joining two piecewise objects together using $\cup$:
 
 $$
-\varphi = \phi_1 \cup \phi_2 = \left\{\phi_{1,i},\quad A_i\mid i\in I\right\}\cup\left\{\phi_{2,j},\quad B_j\mid j\in J\right\}
+\varphi = \varphi_1 \cup \varphi_2 = \left\{\varphi_{1,i},\quad A_i\mid i\in I\right\}\cup\left\{\varphi_{2,j},\quad B_j\mid j\in J\right\}
 $$
 
-This can be interpreted similarly to before, though we now have that $\varphi=\phi_{1,i}$ if $A_i$ is true for some $i$, or $\varphi=\phi_{2,j}$ is $B_j$ is true for some $j$. 
+This can be interpreted similarly to before, though we now have that $\varphi=\varphi_{1,i}$ if $A_i$ is true for some $i$, or $\varphi=\varphi_{2,j}$ is $B_j$ is true for some $j$. 
 
 Notably, this notation can be used to express individual pieces explicitly in a piecewise object rather than collectively. If such a piece isn't dependent on the iterator, we can ignore that part entirely (keeping in mind we might be able to rewrite it using an iterator later on).
 
