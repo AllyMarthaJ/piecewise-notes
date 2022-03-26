@@ -84,7 +84,7 @@ And of course we might package each piece's conditions together, effectively mak
 Finally, we might consider a set-like generalised form of a piecewise object. Let us denote the following:
 
 $$
-\phi = \left\{\phi_i,\quad C_i\mid i\in I\right\}
+    \phi = \pwobj{\phi_i}{C_i}{i\in I}
 $$
 
 Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator), $\phi=\phi_i$ for when $C_i$ is true. 
@@ -106,7 +106,7 @@ Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator
     Alternatively, we might express it using the generalised notation:
     
     $$
-        f=\{f_1,\quad C_i\mid i\in\{1,2,\dots,n\}\}
+        f=\pwobj{f_i}{C_i}{i\in\{1,2,\dots,n\}}
     $$
 \end{example}
 
@@ -114,7 +114,7 @@ Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator
     We will see the floor function later on where it will be described more deeply, but we can introduce it like so using our notation:
 
     $$
-        \left\lfloor x\right\rfloor=\left\{n,\quad x\in[n,n+1)\mid n\in\mathbb{Z}\right\}
+        \floor{x}=\left\{n,\quad x\in[n,n+1)\mid n\in\mathbb{Z}\right\}
     $$
 
     To evaluate this function at $x=3.5$ consider that for all $n\in\mathbb{Z}$ there exists only one such interval $N=[n,n+1)$ such that $3.5\in N$. This interval is $[3,4)$, i.e. $n=3$; the corresponding piece value is $3$ and so $\left\lfloor 3.5\right\rfloor=3$.
@@ -138,7 +138,7 @@ Notably, this notation can be used to express individual pieces explicitly in a 
     We can then express $\abs{x}$ as:
 
     $$
-        \abs{x} = \{x,\quad x\geq 0\} \cup \{-x,\quad x\leq 0\} 
+        \abs{x} = \pwarg{x}{x\geq 0}\cup\pwarg{-x}{x\leq 0}
     $$
 \end{example}
 

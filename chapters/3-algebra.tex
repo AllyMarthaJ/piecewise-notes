@@ -10,7 +10,7 @@ It is here we might recognise that this idea could fairly easily lead into combi
     Consider the following piecewise object:
 
     $$
-        \phi=\left\{\phi_i,\quad C_i\mid i\in I\right\}    
+        \phi=\pwobj{\phi_i}{C_i}{i\in I}
     $$
 
     Then if for all $i,j\in I$ we have that $\phi_i=\phi_j$ (that is, all piece values are equal for when $\phi$ is defined), then $\phi=\phi_i$ for any $i\in I$.
@@ -26,6 +26,7 @@ It is here we might recognise that this idea could fairly easily lead into combi
 
     We have that $f(x)=0$. This is because everywhere in $\dom{f}$, or both when $x\geq 0$ and $x < 0$, we have that $f(x)=0$.
 \end{theorem}
+
 \subsection{Piece and condition equivalence}
 Arguably one of the most fundamental property of piecewise objects is the relationship between each piece's conditions and its respective value. That is, the values for which a piecewise object takes is dependent on their respective conditions, and so can be treated explicitly as such.
 
@@ -33,16 +34,32 @@ Arguably one of the most fundamental property of piecewise objects is the relati
     Consider the following piecewise function:
 
     $$
-        f(x) = \left\{f_i(x),\quad C_i\mid i\in I\right\}
+        f(x) = \pwobj{f_i(x)}{C_i}{i\in I}
     $$
 
     For all $i\in I$, let us define a substitution $x\sim y_i$, where $\sim$ represents equality under the condition $C_i$. Then we might consider writing $f(x)$ as:
 
     $$
-        f(x) = \left\{f_i(y_i),\quad C_i\mid i\in I\right\}
+        f(x) = \pwobj{f_i(y_i)}{C_i}{i\in I}
     $$
 
     And $f(x)$ may still remain a non-constant function, but in this way we've given it another representation. For some $C_i$ we might just have $x\sim x$ (and is effectively no substitution at all). This substitution can also go the other way, i.e. $y_i\sim x$.
+\end{theorem}
+
+\begin{theorem}
+    Consider the following piecewise object:
+
+    $$
+        \phi=\pwobj{\phi_i}{C_i}{i\in I}
+    $$
+
+    For all $i\in I$, suppose that $C_i \leftrightarrow D_i$ in the context of $\phi$ (i.e. if a function, within its domain, etc.). Then we can rewrite this object as:
+
+    $$
+        \phi=\pwobj{\phi_i}{D_i}{i\in I}
+    $$ 
+
+    That is, we've substituted the set of our conditions for another set of conditions (and again, we may not have substituted all of them). For example, we know that $x=5$ when $(x-5)^2\leq 0$, and so these two conditions are interchangeable.
 \end{theorem}
 
 This idea becomes far more important when working using other functions, such as $\max$, $\min$ and $\abs{x}$ (which will be covered later), although it can still be used in other contexts. In essence, for certain classes of piecewise functions, we can build off existing functions to construct not only transformations, but completely new functions and representations.
@@ -96,6 +113,14 @@ Finally, depending on the context of the problem, function or object, we can rew
 
     The reason for this is that for all $x\in(-6,5)$ we have that $x<5$, despite the contrary not being always true. The reason the contrary needn't always be true for all $\mathbb{R}$ is because our function $f$ is defined on the interval $(-6,6)$. This same argument can also be applied to $x\in(5,6)\implies x>5$.
 \end{example}
+
+\begin{theorem}
+    A strong note on functions which are not well-defined: Piecewise objects can easily define not well-defined functions. In these cases, care must be taken when working with pieces in general, values or conditions. 
+
+    More generally, a piecewise function is only well-defined if all of its piece values denote well-defined functions, and in places where two conditions in separate pieces are true, their respective values must be equal.
+
+    Formally, given the piecewise object $\phi=\pwobj{\phi_i}{C_i}{i\in I}$ if there exists $i\neq j\in I$ such that $C_i\land C_j$ is true, then $\phi$ is well-defined iff $\phi_i=\phi_j$ and each $\phi_k$ for $k\in I$ is well-defined.
+\end{theorem}
 
 % piece values = conditions for all pieces, object = values
 \subsection{(De)nesting pieces; logical `and'}
