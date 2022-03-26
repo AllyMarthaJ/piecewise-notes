@@ -120,12 +120,165 @@ A strong note on functions which are not well-defined: Piecewise objects can eas
     A piecewise function is only well-defined if all of its piece values denote well-defined functions, and in places where two conditions in separate pieces are true, their respective values must be equal.
 
     Formally, given the piecewise object $\phi=\pwobj{\phi_i}{C_i}{i\in I}$ if there exists $i\neq j\in I$ such that $C_i\land C_j$ is true, then $\phi$ is well-defined iff $\phi_i=\phi_j$ and each $\phi_k$ for $k\in I$ is well-defined.
+
+    For example, the following is not well-defined:
+
+    $$
+        f(x) = \begin{piecewise}
+            1 & x\in\mathbb{Q} \\
+            0 & x\in\mathbb{R}\setminus\mathbb{Z}
+        \end{piecewise}
+    $$
+
+    This is because the latter piece is $0$ for all real numbers that aren't integers, and the first piece is $1$ for all rational numbers; these include non-integers. There are a few ways we could change this function to be well-defined:
+    
+    $$
+        f(x) = \begin{piecewise}
+            1 & x\in\mathbb{Q} \\
+            0 & x\in\mathbb{R}\setminus\mathbb{Q}
+        \end{piecewise}
+    $$
+
+    This is known as the Dirichlet function; it's the indicator function of the rationals (which we'll cover later on). Alternatively:
+
+    $$
+        f(x) = \begin{piecewise}
+            0 & x\in\mathbb{Q} \\
+            0 & x\in\mathbb{R}\setminus\mathbb{Z}
+        \end{piecewise}
+    $$
+
+    Which would simply make the function $0$ for all $\mathbb{R}$.
 \end{theorem}
 
 % piece values = conditions for all pieces, object = values
 \subsection{(De)nesting pieces; logical `and'}
-The third of several special operations on piecewise objects involves the nesting and denesting of cases; essentially, we decouple the conditions in each piece from one another in order to group and subsequently simply the piece values.
+The third of several special operations on piecewise objects involves the nesting and denesting of cases; essentially, we decouple the conditions in each piece from one another in order to group and subsequently simplify the piece values.
+
+\begin{example}
+    Consider the following piecewise object:
+    
+    $$
+        \phi = \begin{piecewise}
+            \phi_1 & C_1 \\ 
+            \phi_2 & C_2 \\
+            \vdots & \vdots \\
+            \phi_n & C_n
+        \end{piecewise}
+    $$
+
+    Suppose that we have
+
+    $$
+        \phi_1 = \begin{piecewise}
+            \mu_1 & D_1 \\
+            \mu_2 & D_2 
+        \end{piecewise}
+    $$
+
+    Then we can rewrite $\phi$ as:
+
+    $$
+        \phi = \begin{piecewise}
+            \begin{piecewise}
+                \mu_1 & D_1 \\
+                \mu_2 & D_2
+            \end{piecewise} & C_1 \\ 
+            \phi_2 & C_2 \\
+            \vdots & \vdots \\
+            \phi_n & C_n
+        \end{piecewise}
+    $$
+
+    Suppose that $D_1\land C_1$ is true: then it stands to reason that $\phi=\mu_1$. Likewise, if $D_2\land C_1$ then $\phi=\mu_2$. The behaviour is as normal for each other piece. This also means $\phi$ can be represented as:
+
+    $$
+        \phi = \begin{piecewise}
+            \mu_1 & C_1 & D_1 \\
+            \mu_2 & C_1 & D_2 \\
+            \phi_2 & C_2 \\
+            \vdots & \vdots \\
+            \phi_n & C_n
+        \end{piecewise}
+    $$
+
+    And so we might go back and forth between these two forms to represent the same object, keeping in mind each column of the piecewise object, other than the first, represents the conditions under which that piece value is taken (the logical `and').
+\end{example}
+
+In general, if we have common, and multiple, conditions for pieces, we should be able to nest, or denest, piecewise objects. This often helps simplify piecewise problems in multiple variables, or single variables with intervals, etc.
+
+\begin{theorem}
+    Given the following piecewise object:
+    
+    $$
+        \phi=\pwobj{\phi_i}{C_i}{i\in I}
+    $$
+    
+    If we have that $C_i\leftrightarrow A_i\land B_i$ for some conditions $A_i$, $B_i$, then
+
+    $$
+        \phi=\pwobj{\phi_i}{A_i\land B_i}{i\in I}
+    $$
+
+    This is a semi-obvious fact, but becomes useful when coupled with the grouping/nesting of piecewise objects via their piece's conditions. This was also touched on in Chapter \ref{section:notation}.
+\end{theorem}
 \subsection{Combining, splitting piece conditions; logical `or'}
+Finally, we'll look at explicit logical `or' in piece conditions at a basic level and in full generality. This is just as important as the previous section, particularly for grouping.
+
+\begin{theorem}
+    Given the following piecewise object:
+
+    $$
+        \phi=\pwobj{\phi_i}{A_i\lor B_i}{i\in I}
+    $$
+
+    For some conditions $A_i$, $B_i$, we can rewrite this as the following:
+
+    $$
+        \phi=\pwobj{\phi_i}{A_i}{i\in I}\cup\pwobj{\phi_i}{B_i}{i\in I}
+    $$
+
+    And vice versa.
+
+    We are effectively using the logical `or' condition in each case to split up the pieces such that each piece only has one condition in the piecewise object representation. For example,
+
+    $$
+        f(x) = \begin{piecewise}
+            5 & x\geq 5 \lor x\leq -5 \\
+            0 & -5<x<5
+        \end{piecewise}
+    $$
+
+    Is equivalent to:
+
+    $$
+        f(x) = \begin{piecewise}
+            5 & x\geq 5 \\
+            5 & x\leq -5 \\
+            0 & -5<x<5
+        \end{piecewise}
+    $$
+
+    Noting that the last piece cannot be split as it is a logical `and'; that is, $x<5\land x>-5$.
+\end{theorem}
+
+\begin{theorem}
+    Finally, there is no rule that says pieces are unique in a piecewise object (although generally redundant, duplicate pieces can be useful for grouping once more).
+
+    That is the following, for some set $J\subseteq I$
+
+    $$
+        \phi=\pwobj{\phi_i}{C_i}{i\in I}
+    $$
+
+    is equivalent to:
+
+    $$
+        \phi=\pwobj{\phi_i}{C_i}{i\in I}\cup\pwobj{\phi_j}{C_j}{j\in J}
+    $$
+
+    The reason for this comes down to our well-definition argument as before (equal values).
+\end{theorem}
 \subsection{Functions on piecewise objects}
 % f(\phi)=yeah; also, explicitly note that a+\phi = ... , a*\phi = ...
 \newpage{}
