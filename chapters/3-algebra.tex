@@ -153,7 +153,7 @@ A strong note on functions which are not well-defined: Piecewise objects can eas
 
 % piece values = conditions for all pieces, object = values
 \subsection{(De)nesting pieces; logical `and'}
-The third of several special operations on piecewise objects involves the nesting and denesting of cases; essentially, we decouple the conditions in each piece from one another in order to group and subsequently simplify the piece values.
+The third of several special operations on piecewise objects involves the nesting and denesting of pieces; essentially, we decouple the conditions in each piece from one another in order to group and subsequently simplify the piece values.
 
 \begin{example}
     Consider the following piecewise object:
@@ -240,7 +240,7 @@ Finally, we'll look at explicit logical `or' in piece conditions at a basic leve
 
     And vice versa.
 
-    We are effectively using the logical `or' condition in each case to split up the pieces such that each piece only has one condition in the piecewise object representation. For example,
+    We are effectively using the logical `or' condition in each piece to split up the pieces such that each piece only has one condition in the piecewise object representation. For example,
 
     $$
         f(x) = \begin{piecewise}
