@@ -280,5 +280,21 @@ Finally, we'll look at explicit logical `or' in piece conditions at a basic leve
     The reason for this comes down to our well-definition argument as before (equal values).
 \end{theorem}
 \subsection{Functions on piecewise objects}
+Finally! The fun begins.
+\begin{theorem}
+    Given the following piecewise object:
+    
+    $$
+        \phi = \pwobj{\phi_i}{C_i}{i\in I}
+    $$
+
+    We have that:
+
+    $$
+        f(\phi) = \pwobj{f(\phi_i)}{C_i}{i\in I}
+    $$
+    
+    A quick intuition/proof is as follows: For all $i\in I$ suppose that at least one $C_i$ is true. Then we have that $\phi=\phi_i\implies f(\phi)=f(\phi_i)$. By definition that means $f(\phi)$ is as above.
+\end{theorem}
 % f(\phi)=yeah; also, explicitly note that a+\phi = ... , a*\phi = ...
 \newpage{}
