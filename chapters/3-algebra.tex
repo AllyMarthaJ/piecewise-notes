@@ -114,10 +114,10 @@ Finally, depending on the context of the problem, function or object, we can rew
     The reason for this is that for all $x\in(-6,5)$ we have that $x<5$, despite the contrary not being always true. The reason the contrary needn't always be true for all $\mathbb{R}$ is because our function $f$ is defined on the interval $(-6,6)$. This same argument can also be applied to $x\in(5,6)\implies x>5$.
 \end{example}
 
-\begin{theorem}
-    A strong note on functions which are not well-defined: Piecewise objects can easily define not well-defined functions. In these cases, care must be taken when working with pieces in general, values or conditions. 
+A strong note on functions which are not well-defined: Piecewise objects can easily define not well-defined functions. In these cases, care must be taken when working with pieces in general, values or conditions. 
 
-    More generally, a piecewise function is only well-defined if all of its piece values denote well-defined functions, and in places where two conditions in separate pieces are true, their respective values must be equal.
+\begin{theorem}
+    A piecewise function is only well-defined if all of its piece values denote well-defined functions, and in places where two conditions in separate pieces are true, their respective values must be equal.
 
     Formally, given the piecewise object $\phi=\pwobj{\phi_i}{C_i}{i\in I}$ if there exists $i\neq j\in I$ such that $C_i\land C_j$ is true, then $\phi$ is well-defined iff $\phi_i=\phi_j$ and each $\phi_k$ for $k\in I$ is well-defined.
 \end{theorem}
