@@ -7,7 +7,7 @@
 \usepackage{mathtools}
 \usepackage{physics}
 \usepackage{import}
-\usepackage{mdframed}
+\usepackage[framemethod=TikZ]{mdframed}
 
 % yay for proofs
 \usepackage{amsthm}
@@ -32,16 +32,16 @@
 \newmdtheoremenv[%
     outerlinecolor = black, %
     nobreak = true, %
-    linewidth = 1pt, %
-    roundcorner = 8pt, %
+    linewidth = 0.5pt, %
+    roundcorner = 2pt, %
 ]{theorem}{}[section]
 
 \theoremstyle{definition}
 \newmdtheoremenv[%
     outerlinecolor = black, %
     nobreak = true, %
-    linewidth = 1pt, %
-    roundcorner = 8pt, %
+    linewidth = 0.5pt, %
+    roundcorner = 2pt, %
 ]{example}{}[section]
 
 % my first environment
