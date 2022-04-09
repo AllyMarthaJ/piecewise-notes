@@ -3,4 +3,177 @@
 % at some point, cover combinations of piecewise functions etc. AND/OR/etc
 
 % for algebra, use example f(x)=sin(x) for x>=0 and -x for x<=0 using the substitution method. (max/min examples)
-\newpage{}
+So far we've really only used, rather than having properly introduced, the function $\abs{x}$. In this section we'll define a set of piecewise functions that crop up fairly frequently, in many areas of maths, and how we might apply them to the algebra-related problems we've encountered already.
+
+\subsection{Absolute value function}
+The absolute value function $\abs{x}$ is a real function defined as follows:
+
+$$
+    \abs{x}=\begin{piecewise}
+        x & x\geq 0 \\
+        -x & x\leq 0
+    \end{piecewise}
+$$
+
+Alternatively, you might see $\abs{x}$ notated using $\sqrt{x^2}$ for real $x$ and principal square root. This is something which will be introduced and explained in the next section, although $\sqrt{x^2}$ is only one `representation' of $\abs{x}$.
+
+\subsection{The maximum function}
+The $\max$ of two variables is a function defined as:
+
+$$
+    \max\br{a,b}=\begin{piecewise}
+        a & a\geq b \\
+        b & a\leq b
+    \end{piecewise}
+$$
+
+That is, it is a function whose purpose is two return the larger of two numbers. It can also be written as $\max\br{a,b}=\frac{1}{2}\left(a+b+\abs{a-b}\right)$.
+
+\begin{proof}
+    We can derive this representation of $\max\br{a,b}$ in much the same way as Example \ref{example:algebra_1}:
+    \begin{align*}
+        \max\br{a,b} &=\begin{piecewise}
+            a & a\geq b\\
+            b & a\leq b
+        \end{piecewise} \\
+        &=\begin{piecewise}
+            a-b & a-b\geq 0\\
+            0 & a-b\leq 0
+        \end{piecewise}+b \\
+        &=\frac{1}{2}\left(\begin{piecewise}
+            2(a-b) & a-b\geq 0\\
+            0 & a-b\leq 0
+        \end{piecewise}\right)+b \\
+        &=\frac{1}{2}\left(a-b+\begin{piecewise}
+            a-b & a-b\geq 0\\
+            b-a & a-b\leq 0
+        \end{piecewise}\right)+b \\
+        &=\frac{1}{2}\left(a-b+\abs{a-b}\right)+b \\
+        &=\frac{1}{2}\left(a+b+\abs{a-b}\right) \\
+    \end{align*}
+\end{proof}
+
+Topping this off, we have that $\abs{x}=\max\br{x,-x}$.
+
+We might also define an extension of the $\max$ function that takes in a finite set; let $\max\br{a}=a$. Then, for a set $S$, we have that:
+
+$$
+    \max(S)=\pwobj{x}{x\geq\max(S\setminus\br{x})}{x\in S}
+$$
+
+This helps us to derive formulas for $\max\br{a,b,c}$ and so on. Really, in full generality (and slightly out of scope), the max function can be defined as $\sup(S)$ if and only if $\sup(S)\in S$ (otherwise it does not exist at all).
+
+\begin{theorem}
+    The union property of the max function is as follows:
+
+    $$
+        \max(U\cup V)=\max\br{\max(U),\max(V)}
+    $$
+
+    \begin{proof}
+        \label{proof:max}
+        By definition, the right hand side can be written as:
+
+        $$
+            \max\br{\max(U),\max(V)}=\begin{piecewise}
+                \max(U) & \max(U)\geq \max(V) \\
+                \max(V) & \max(V)\geq \max(U)
+            \end{piecewise}
+        $$
+
+        We let $x=\max(U\cup V)$. Therefore, $x\geq\max(U)$ and $x\geq\max(V)$, and so we have two cases:
+
+        \begin{enumerate}
+            \item $x\in U\implies x=\max(U)$. Since this means $x=\max(U)\geq\max(V)$, we have that $\max\br{\max(U),\max(V)}=x$.
+            \item $x\in V\implies x=\max(V)$. Since this means $x=\max(V)\geq\max(U)$, we have that $\max\br{\max(U),\max(V)}=x$.
+        \end{enumerate}
+
+        We therefore have that $x=\max\br{\max(U),\max(V)}$.
+    \end{proof}
+
+    This property means we can explicitly write the following, for example:
+    $$
+        \max\br{a,b,c}=\max\br{\max\br{a,b},c}
+    $$
+    (and hence write it in terms of the absolute value function)
+\end{theorem}
+
+\begin{theorem}
+    It is worth noting that $f(\max(S))\neq \max(f(S))$, where $f(x)$ is a function and $f(S)$ is $f(x)$ applied elementwise over the set $S$. However:
+
+    \begin{enumerate}
+        \item $\max(S)+a=\max(S+a)$ where $S+a$ is elementwise addition by $a$ over $S$.
+        \item $c\cdot\max(S)=\max(c\cdot S)$ where $c\geq 0$ and $c\cdot S$ is elementwise multiplication by $c$ over $S$.
+        \item $c\cdot\max(S)=\min(c\cdot S)$ where $c\leq 0$ and $c\cdot S$ is elementwise multiplication by $c$ over $S$.
+    \end{enumerate}
+
+    Each of these properties can be proven inductively, and such a proof is left to the reader.
+\end{theorem}
+
+\subsection{The minimum function}
+The $\min$ of two variables is a function defined as:
+
+$$
+    \min\br{a,b}=\begin{piecewise}
+        b & a\geq b \\
+        a & a\leq b
+    \end{piecewise}
+$$
+
+That is, it is a function whose purpose is two return the smaller of two numbers. It can also be written as $\max\br{a,b}=\frac{1}{2}\left(a+b-\abs{a-b}\right)$. Such a proof of this is identical to the one given in Proof \ref{proof:max}, and you would be encouraged, as the reader, to attempt it explicitly as a personal exercise.
+
+We might also define an (identically motivated) extension of the $\min$ function that takes in a finite set; let $\min\br{a}=a$. Then, for a set $S$, we have that:
+
+$$
+    \min(S)=\pwobj{x}{x\leq\min(S\setminus\br{x})}{x\in S}
+$$
+
+This helps us to derive formulas for $\min\br{a,b,c}$ and so on. Really, in full generality (and slightly out of scope), the min function can be defined as $\inf(S)$ if and only if $\inf(S)\in S$ (otherwise it does not exist at all).
+
+\begin{theorem}
+    The union property of the min function is as follows:
+
+    $$
+        \min(U\cup V)=\min\br{\min(U),\min(V)}
+    $$
+
+    \begin{proof}
+        \label{proof:min}
+        By definition, the right hand side can be written as:
+
+        $$
+            \min\br{\max(U),\max(V)}=\begin{piecewise}
+                \min(V) & \min(U)\geq \min(V) \\
+                \min(U) & \min(V)\geq \min(U)
+            \end{piecewise}
+        $$
+
+        We let $x=\min(U\cup V)$. Therefore, $x\leq\min(U)$ and $x\leq\min(V)$, and so we have two cases:
+
+        \begin{enumerate}
+            \item $x\in U\implies x=\min(U)$. Since this means $x=\min(U)\leq\min(V)$, we have that $\min\br{\min(U),\min(V)}=x$.
+            \item $x\in V\implies x=\min(V)$. Since this means $x=\min(V)\leq\min(U)$, we have that $\max\br{\min(U),\min(V)}=x$.
+        \end{enumerate}
+
+        We therefore have that $x=\min\br{\min(U),\min(V)}$.
+    \end{proof}
+
+    This property means we can explicitly write the following, for example:
+    $$
+        \min\br{a,b,c}=\min\br{\min\br{a,b},c}
+    $$
+    (and hence write it in terms of the absolute value function)
+\end{theorem}
+
+\begin{theorem}
+    Just as with the $\max$ function, it is worth noting that $f(\min(S))\neq \min(f(S))$, where $f(x)$ is a function and $f(S)$ is $f(x)$ applied elementwise over the set $S$. However:
+
+    \begin{enumerate}
+        \item $\min(S)+a=\min(S+a)$ where $S+a$ is elementwise addition by $a$ over $S$.
+        \item $c\cdot\min(S)=\min(c\cdot S)$ where $c\geq 0$ and $c\cdot S$ is elementwise multiplication by $c$ over $S$.
+        \item $c\cdot\min(S)=\max(c\cdot S)$ where $c\leq 0$ and $c\cdot S$ is elementwise multiplication by $c$ over $S$.
+    \end{enumerate}
+
+    Each of these properties can be proven inductively, and such a proof is left to the reader.
+\end{theorem}
+\newpage
