@@ -176,4 +176,185 @@ This helps us to derive formulas for $\min\br{a,b,c}$ and so on. Really, in full
 
     Each of these properties can be proven inductively, and such a proof is left to the reader.
 \end{theorem}
+
+\newpage
+
+\subsection{Mixed maximum and minimum}
+It is here we note some identities of $\max$ and $\min$ but also extend explicitly our ability to manipulate piecewise functions which would otherwise elude us, per Example \ref{example:algebra_1}.
+
+\begin{example}
+    We wish to represent the following function in terms of functions such as $\max$ and $\min$:
+    $$
+        f(x) = \begin{piecewise}
+            \sin(x) & x\geq\pi \\
+            \pi - x & x\leq\pi
+        \end{piecewise}
+    $$
+
+    Notice that $x\geq\pi\iff\max\br{x,\pi}=x$ and $x\leq\pi\iff\min\br{x,\pi}=x$, and so we can provide substitutions for our conditions as so:
+    $$
+        f(x) = \begin{piecewise}
+            \sin(x) & \max\br{x,\pi}=x \\
+            \pi - x & \min\br{x,\pi}=x
+        \end{piecewise}
+    $$
+
+    Furthermore, we have now have substitutions for $x$ in each piece; in each piece value, we perform this substitution for $x$:
+    $$
+        f(x) = \begin{piecewise}
+            \sin(\max\br{x,\pi}) & \max\br{x,\pi}=x \\
+            \pi - \min\br{x,\pi} & \min\br{x,\pi}=x
+        \end{piecewise}
+    $$
+
+    You may be wondering what the point of this is --- well, now that we've performed these substitutions that are only true under each piece, we can `subtract' each piece out (that is, add and substract using our function property):
+    \begin{align*}
+        f(x) &= \begin{piecewise}
+            0-(\pi - \min\br{x,\pi}) & \max\br{x,\pi}=x \\
+            0-\sin(\max\br{x,\pi})& \min\br{x,\pi}=x
+        \end{piecewise} \\
+        &+\sin(\max\br{x,\pi})+\pi - \min\br{x,\pi}
+    \end{align*}
+
+    Now, we might evaluate each piece; notice that $\min\br{x,\pi}=\pi$ for $x\geq\pi$ and also that $\max\br{x,\pi}=\pi$ for $x\leq\pi$. Therefore we have:
+    \begin{align*}
+        f(x) &= \begin{piecewise}
+            0 & \max\br{x,\pi}=x \\
+            0 & \min\br{x,\pi}=x
+        \end{piecewise} \\
+        &+\sin(\max\br{x,\pi})+\pi - \min\br{x,\pi}
+    \end{align*}
+
+    Finally, simplifying, we're left with:
+    $$
+        f(x) = \sin(\max\br{x,\pi})-\min\br{x,\pi}+\pi
+    $$
+\end{example}
+
+\begin{theorem}
+    We have the following basic identities to work with using $\max$ and $\min$:
+    \begin{enumerate}
+        \item $\max\br{a,b}+\min\br{a,b}=a+b$; this result can be proven by definition, or using the $\max$ and $\min$ formulations in terms of the absolute value function.
+        \item $\max\br{a,b}-\min\br{a,b}=\abs{a-b}$; this result can be similarly proven as above.
+        \item $\abs{x}=\max\br{x,-x}=-\min\br{x,-x}$.
+    \end{enumerate}
+\end{theorem}
+
+\subsubsection{Clamping function}
+The clamping function is a function which restricts a number between an upper and lower bound, as per its definition:
+
+$$
+\ell_{a}^{b}(x)=\begin{piecewise}
+    b & x\geq b \\
+    x & a\leq x\leq b \\
+    a & x\leq a
+\end{piecewise}
+$$
+
+We use this symbol to represent the clamping function as later on it will be given more usage, so it will be useful to have a quick and easy tool (also, this is LaTeX; my hboxes aren't infinite).
+
+\begin{theorem}
+    We first provide some properties of the clamping function:
+    \begin{enumerate}
+        \item $\ell_{a}^{\infty}(x)=\displaystyle\lim_{t\to\infty}\ell_{a}^{t}(x)=\min(x,a)$
+        \item $\ell_{-\infty}^{b}(x)=\displaystyle\lim_{t\to\infty}\ell_{-t}^{b}=\max(x,b)$
+        \item $-\ell_{a}^{b}(x)=\ell_{-b}^{-a}(-x)$
+        \item $c\cdot\ell_{a}^{b}(x)=\ell_{ac}^{bc}(cx)$, for $c\geq 0$
+        \item $\ell_{a}^{b}(x)+k=\ell_{a+k}^{b+k}(x+k)$
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}
+    This function can be written as any of the following:
+    \begin{enumerate}
+        \item   $\ell_{a}^{b}(x)=\min\br{\max\br{x,a},b}$
+        \item   $\ell_{a}^{b}(x)=\max\br{\min\br{x,b},a}$
+        \item   $\ell_{a}^{b}(x)=\frac{1}{2}\left(a+b+\abs{x-a}-\abs{x-b}\right)$
+    \end{enumerate}
+
+    We shall give proofs of the first and last of these formulations:
+    \begin{proof}
+        We begin by using the definition of $\ell_{a}^{b}(x)$:
+        $$
+            \ell_{a}^{b}(x)=\begin{piecewise}
+                b & x\geq b \\
+                x & a\leq x\leq b \\
+                a & x\leq a
+            \end{piecewise}
+        $$
+
+        We nest a piece under the conditions $x\geq a$ and $x\leq a$ in order to simplify the conditions we're working with:
+        \begin{align*}
+            \ell_{a}^{b}(x) &=\begin{piecewise}
+                \begin{piecewise}
+                    b & x\geq b \\
+                    x & x\leq b
+                \end{piecewise} & x\geq a \\
+                a & x\leq a
+            \end{piecewise} \\
+            &= \begin{piecewise}
+                \min\br{x,b} & x\geq a \\
+                a & x\leq a
+            \end{piecewise}
+        \end{align*}
+
+        Now using the definition of $\max\br{x,a}$ we substitute $x\geq a$ with $\max\br{x,a}=x$ and likewise with $x\leq a$, to give:
+        $$
+            \ell_{a}^{b}(x)=\begin{piecewise}
+                \min\br{x,b} & \max\br{x,a}=x \\
+                a & \max\br{x,a}=a
+            \end{piecewise}
+        $$
+
+        We then use the first piece's condition to substitute the value of $x$ with $\max\br{x,a}$,
+        $$
+            \ell_{a}^{b}(x)=\begin{piecewise}
+                \min\br{\max\br{x,a},b} & \max\br{x,a}=x \\
+                a & \max\br{x,a}=a
+            \end{piecewise}
+        $$
+
+        Substracting out $\min\br{\max\br{x,a},b}$ gives us
+        $$
+            \ell_{a}^{b}(x)=\begin{piecewise}
+                0 & x\geq a \\
+                a-\min\br{\max\br{x,a},b} & x\leq a
+            \end{piecewise}+\min\br{\max\br{x,a},b}
+        $$
+
+        And evaluating the second piece (since $x\leq a\leq b$) gives us $0$, leaving us with
+        $$
+            \ell_{a}^{b}(x)=\min\br{\max\br{x,a},b}
+        $$
+    \end{proof}
+    \addtocounter{theorem}{-1}
+\end{theorem}
+
+\begin{theorem}[continued]
+    \begin{proof}
+        We now set out to prove the last representation of $\ell_{a}^{b}(x)$.
+
+        Using our previous derivation, we apply the addition property of $\min$ to give us:
+        $$
+            \min\br{\max\br{x,a},b}=\min\br{0,b-\max\br{x,a}}+\max\br{x,a}
+        $$
+
+        Which simplifies to:
+        \begin{align*}
+            \ell_{a}^{b}(x) &= \min\br{0,\min\br{b-x,b-a}}+\max\br{x,a} \\
+                            &=\min\br{0,b-x,b-a}+\max\br{x,a}
+        \end{align*}
+
+        Since $b-a\geq 0$, we're left with:
+        $$
+            \ell_{a}^{b}(x)=\min\br{b-x,0}+\max\br{x,a}
+        $$
+
+        Using the absolute-value representations of $\max$ and $\min$ and simplifying, we get that
+        $$
+            \ell_{a}^{b}(x)=\frac{1}{2}\left(a+b+\abs{x-a}-\abs{x-b}\right)
+        $$
+    \end{proof}
+\end{theorem}
+
+
 \newpage
