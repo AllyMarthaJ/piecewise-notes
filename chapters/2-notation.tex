@@ -1,12 +1,12 @@
 \label{section:notation}
 \section{Notation}
 \subsection{Single variable piecewise functions}
-A piecewise \textit{function} is a function defined over several pieces. 
+A piecewise \textit{function} is a function defined over several pieces.
 
 Let us consider some function $f:\mathbb{R}\to\mathbb{R}$ and some intervals ${D_1,D_2,\dots,D_n\subseteq\mathbb{R}}$ such that ${D_1\cap D_2\cap \dots\cap D_n=\varnothing}$. That is, we have some number real intervals which do not overlap. Suppose we have some functions $f_1: D_1\to\mathbb{R}$ and so on. We describe this function using the following notation:
 
 $$
-    f(x) = \begin{piecewise} 
+    f(x) = \begin{piecewise}
                 f_1(x) & x\in D_1 \\
                 f_2(x) & x\in D_2 \\
                 \vdots & \vdots \\
@@ -56,11 +56,11 @@ Piecewise functions needn't be restricted to a single variable. More generally, 
 In general, we can notate such a more general piecewise function like the following:
 
 $$
-f(x) = \begin{piecewise} 
-            f_1(x) & C_{1,1} & C_{1,2} & \dots & C_{1,m} \\ 
-            f_2(x) & C_{2,1} & C_{2,2} & \dots & C_{2,m} \\ 
+f(x) = \begin{piecewise}
+            f_1(x) & C_{1,1} & C_{1,2} & \dots & C_{1,m} \\
+            f_2(x) & C_{2,1} & C_{2,2} & \dots & C_{2,m} \\
             \vdots & \vdots & \vdots & \ddots & \vdots \\
-            f_n(x) & C_{n,1} & C_{n,2} & \dots & C_{n,m} \\ 
+            f_n(x) & C_{n,1} & C_{n,2} & \dots & C_{n,m} \\
         \end{piecewise}
 $$
 
@@ -71,11 +71,11 @@ Such conditions could be anything, and per the section above, we could have $C_{
 Importantly, we note in general this piecewise object is written in a shortened form, without commas or English terms such as `and' or `or', or their respective logical operators. This is a conventional decision in these notes given the number of piecewise objects written. For example, the following is identical to the above:
 
 $$
-f(x) = \begin{piecewise} 
-            f_1(x), & \text{if } C_{1,1}\land C_{1,2}\land \dots\land C_{1,m} \\ 
-            f_2(x), & \text{if } C_{2,1}\land C_{2,2}\land \dots\land C_{2,m} \\ 
+f(x) = \begin{piecewise}
+            f_1(x), & \text{if } C_{1,1}\land C_{1,2}\land \dots\land C_{1,m} \\
+            f_2(x), & \text{if } C_{2,1}\land C_{2,2}\land \dots\land C_{2,m} \\
             \vdots & \vdots \\
-            f_n(x), & \text{if } C_{n,1}\land C_{n,2}\land \dots\land C_{n,m} \\ 
+            f_n(x), & \text{if } C_{n,1}\land C_{n,2}\land \dots\land C_{n,m} \\
         \end{piecewise}
 $$
 
@@ -88,7 +88,7 @@ $$
     \phi = \pwobj{\varphi_i}{C_i}{i\in I}
 $$
 
-Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator), $\phi=\varphi_i$ for when $C_i$ is true. 
+Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator), $\phi=\varphi_i$ for when $C_i$ is true.
 
 \begin{example}
     Suppose we have a set $I=\{1,2,\dots,n\}$ and a piecewise function $f$ such that $f=f_i$ when $C_i$ is true.
@@ -96,7 +96,7 @@ Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator
     We can express this function as:
 
     $$
-        f = \begin{piecewise} 
+        f = \begin{piecewise}
                 f_1 & C_1 \\
                 f_2 & C_2 \\
                 \vdots & \vdots \\
@@ -105,7 +105,7 @@ Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator
     $$
 
     Alternatively, we might express it using the generalised notation:
-    
+
     $$
         f=\pwobj{f_i}{C_i}{i\in\{1,2,\dots,n\}}
     $$
@@ -127,7 +127,7 @@ $$
 \varphi = \varphi_1 \cup \varphi_2 = \left\{\varphi_{1,i},\quad A_i\mid i\in I\right\}\cup\left\{\varphi_{2,j},\quad B_j\mid j\in J\right\}
 $$
 
-This can be interpreted similarly to before, though we now have that $\varphi=\varphi_{1,i}$ if $A_i$ is true for some $i$, or $\varphi=\varphi_{2,j}$ is $B_j$ is true for some $j$. 
+This can be interpreted similarly to before, though we now have that $\varphi=\varphi_{1,i}$ if $A_i$ is true for some $i$, or $\varphi=\varphi_{2,j}$ is $B_j$ is true for some $j$.
 
 Notably, this notation can be used to express individual pieces explicitly in a piecewise object rather than collectively. If such a piece isn't dependent on the iterator, we can ignore that part entirely (keeping in mind we might be able to rewrite it using an iterator later on).
 
@@ -143,4 +143,4 @@ Notably, this notation can be used to express individual pieces explicitly in a 
     $$
 \end{example}
 
-\newpage{}
+\newpage

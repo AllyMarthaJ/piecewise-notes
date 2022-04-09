@@ -1,6 +1,6 @@
 \section{Algebra on Piecewise Objects}
 \subsection{Piece association}
-Operations on piecewise objects are fairly straightforward and behave as any other object in the context you're working in (whether this be with the real numbers, complex numbers, certain algebras, spaces, and so on). 
+Operations on piecewise objects are fairly straightforward and behave as any other object in the context you're working in (whether this be with the real numbers, complex numbers, certain algebras, spaces, and so on).
 
 What this section aims to do is not to teach you directly how to perform exactly the operations you want to on each piecewise object, but instead provide a basis for which you can base your ideas: no piece of a piecewise object is independent of another. Equivalently, each piece is dependent on each other piece. There is an intuitive reason for this: you are evaluating an object not conditionally, but in full generality; each piece exists, in some sense, `simultaneously'.
 
@@ -57,7 +57,7 @@ Arguably one of the most fundamental property of piecewise objects is the relati
 
     $$
         \phi=\pwobj{\varphi_i}{D_i}{i\in I}
-    $$ 
+    $$
 
     That is, we've substituted the set of our conditions for another set of conditions (and again, we may not have substituted all of them). For example, we know that $x=5$ when $(x-5)^2\leq 0$, and so these two conditions are interchangeable.
 \end{theorem}
@@ -114,7 +114,7 @@ Finally, depending on the context of the problem, function or object, we can rew
     The reason for this is that for all $x\in(-6,5)$ we have that $x<5$, despite the contrary not being always true. The reason the contrary needn't always be true for all $\mathbb{R}$ is because our function $f$ is defined on the interval $(-6,6)$. This same argument can also be applied to $x\in(5,6)\implies x>5$.
 \end{example}
 
-A strong note on functions which are not well-defined: Piecewise objects can easily define not well-defined functions. In these cases, care must be taken when working with pieces in general, values or conditions. 
+A strong note on functions which are not well-defined: Piecewise objects can easily define not well-defined functions. In these cases, care must be taken when working with pieces in general, values or conditions.
 
 \begin{theorem}
     A piecewise function is only well-defined if all of its piece values denote well-defined functions, and in places where two conditions in separate pieces are true, their respective values must be equal.
@@ -131,7 +131,7 @@ A strong note on functions which are not well-defined: Piecewise objects can eas
     $$
 
     This is because the latter piece is $0$ for all real numbers that aren't integers, and the first piece is $1$ for all rational numbers; these include non-integers. There are a few ways we could change this function to be well-defined:
-    
+
     $$
         f(x) = \begin{piecewise}
             1 & x\in\mathbb{Q} \\
@@ -157,10 +157,10 @@ The third of several special operations on piecewise objects involves the nestin
 
 \begin{example}
     Consider the following piecewise object:
-    
+
     $$
         \phi = \begin{piecewise}
-            \varphi_1 & C_1 \\ 
+            \varphi_1 & C_1 \\
             \varphi_2 & C_2 \\
             \vdots & \vdots \\
             \varphi_n & C_n
@@ -172,7 +172,7 @@ The third of several special operations on piecewise objects involves the nestin
     $$
         \varphi_1 = \begin{piecewise}
             \mu_1 & D_1 \\
-            \mu_2 & D_2 
+            \mu_2 & D_2
         \end{piecewise}
     $$
 
@@ -183,7 +183,7 @@ The third of several special operations on piecewise objects involves the nestin
             \begin{piecewise}
                 \mu_1 & D_1 \\
                 \mu_2 & D_2
-            \end{piecewise} & C_1 \\ 
+            \end{piecewise} & C_1 \\
             \varphi_2 & C_2 \\
             \vdots & \vdots \\
             \varphi_n & C_n
@@ -209,11 +209,11 @@ In general, if we have common, and multiple, conditions for pieces, we should be
 
 \begin{theorem}
     Given the following piecewise object:
-    
+
     $$
         \phi=\pwobj{\varphi_i}{C_i}{i\in I}
     $$
-    
+
     If we have that $C_i\leftrightarrow A_i\land B_i$ for some conditions $A_i$, $B_i$, then
 
     $$
@@ -280,21 +280,32 @@ Finally, we'll look at explicit logical `or' in piece conditions at a basic leve
     The reason for this comes down to our well-definition argument as before (equal values).
 \end{theorem}
 \subsection{Functions on piecewise objects}
-Finally! The fun begins.
+Arguably the most important property of piecewise objects is the following:
 \begin{theorem}
     Given the following piecewise object:
-    
+
     $$
         \phi = \pwobj{\varphi_i}{C_i}{i\in I}
     $$
 
-    We have that:
+    We have that (when applicable):
 
     $$
         f(\phi) = \pwobj{f(\varphi_i)}{C_i}{i\in I}
     $$
-    
-    A quick intuition/proof is as follows: For all $i\in I$ suppose that at least one $C_i$ is true. Then we have that $\phi=\varphi_i\implies f(\phi)=f(\varphi_i)$. By definition that means $f(\phi)$ is as above.
+
+    A quick intuition is as follows: For all $i\in I$ suppose that at least one $C_i$ is true. Then we have that $\phi=\varphi_i\implies f(\phi)=f(\varphi_i)$. Then, since $C_i\rightarrow f(\phi)=f(\varphi_i)$, we have by definition the above.
 \end{theorem}
-% f(\phi)=yeah; also, explicitly note that a+\phi = ... , a*\phi = ...
-\newpage{}
+
+\begin{theorem}
+    Let $\phi=\pwobj{\varphi_i}{C_i}{i\in I}$ and let $a$ be some element in the appropriate domain. We have that:
+
+    \begin{enumerate}
+        \item $\phi+a=\pwobj{\varphi_i+a}{C_i}{i\in I}$ (if $\varphi_i+a$ is defined for $i\in I$)
+        \item $a\cdot\phi=\pwobj{a\cdot\varphi_i}{C_i}{i\in I}$ (if $a\cdot\varphi_i$ is defined for $i\in I$)
+    \end{enumerate}
+
+    And so on, so forth, where applicable.
+\end{theorem}
+
+\newpage
