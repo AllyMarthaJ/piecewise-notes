@@ -308,4 +308,85 @@ Arguably the most important property of piecewise objects is the following:
     And so on, so forth, where applicable.
 \end{theorem}
 
+\begin{example}
+    Let us define the following function:
+
+    $$
+        f(x)=\begin{piecewise}
+            3x+2 & x\geq 1 \\
+            5 & x\leq 1
+        \end{piecewise}
+    $$
+
+    We should establish that this function is, in fact, continuous (although this is implied by conditions $x\geq 1$ and $x\leq 1$). For $x\geq 1$ we have that $f(x)=3x+2$ and so $x=1\implies f(1)=5$. Likewise for $x\leq 1$ we have $x=1\implies f(1)=5$.
+
+    We want to rewrite this function as a linear combination (and transformation) of the following function:
+    $$
+        \abs{x}=\begin{piecewise}
+            x & x\geq 0 \\
+            -x & x\leq 0
+        \end{piecewise}
+    $$
+
+    Note that $f(x)$ has conditions $x\geq 1$ and $x\leq 1$, which differs from the conditions in $\abs{x}$. Therefore, we might rewrite these conditions, namely that $x\geq 1\implies x-1\geq 0$ and $x\leq 1\implies x-1\leq 0$. From here, let us define $y=x-1\implies x=y+1$ and substitute into $f(x)$:
+
+    $$
+        f(y)=\begin{piecewise}
+            3(y+1)+2 & y\geq 0\\
+            5 & y\leq 0
+        \end{piecewise}
+    $$
+
+    From here, we should focus on the piece values themselves: Since they differ from the form we want, we should manipulate them until we achieve something that looks like $\abs{y}$. Namely:
+
+    Let us expand the first piece of $f(y)$:
+    $$
+        f(y) = \begin{piecewise}
+            3y+5 & y\geq 0\\
+            5 & y\leq 0
+        \end{piecewise}
+    $$
+
+    Noting that we have $+5$ as a constant term in each piece, let us `extract' that using our function property:
+    $$
+        f(y) = \begin{piecewise}
+            3y & y\geq 0\\
+            0 & y\leq 0
+        \end{piecewise}+5
+    $$
+
+    We're not sure what to do here - we want $y$ in the first piece and $-y$ in the latter, so let us `extract' the coefficient of $y$ again by the same property:
+    $$
+        f(y) = 3\begin{piecewise}
+            y & y\geq 0\\
+            0 & y\leq 0
+        \end{piecewise}+5
+    $$
+    \addtocounter{example}{-1}
+\end{example}
+\begin{example}[continued]
+    Nearly there. Notice that $y$ is the same as $2y-y$ -- that is, multiply by 2, then subtract a $y$. If we apply this process to the latter piece as well (as is important) we notice that $2\cdot 0-y=-y$, which is what we want. Therefore:
+    \begin{align*}
+        f(y) &= 3\begin{piecewise}
+            \frac{1}{2}2y & y\geq 0\\
+            0 & y\leq 0
+        \end{piecewise}+5\\
+        &= \frac{3}{2}\begin{piecewise}
+            y+y & y\geq 0\\
+            -y+y & y\leq 0
+        \end{piecewise}+5 \\
+        &= \frac{3}{2}\left(\begin{piecewise}
+            y & y\geq 0\\
+            -y & y\leq 0
+        \end{piecewise}+y\right)+5
+    \end{align*}
+
+    Notice now that we have $f(y)=\frac{3}{2}\left(\abs{y}+y\right)+5$. Substituting $y=x-1$ back in, we have:
+
+    $$
+        f(x)=\frac{3}{2}\left(\abs{x-1}+x-1\right)+5
+    $$
+\end{example}
+
+As a final remark on the above example: This is not the easiest method of rewriting such piecewise functions, nor is it even remotely scalable. But I would advise you to come up with your own problem with 2 linear functions such as the above (e.g. $4x+10$ for $x\leq -2$ and $2$ for $x\geq -2$) and perform the same process, thinking about why this works, and what sort of linear functions work in this way. Also, consider attempting an example with non-linear functions (and see what the result is). Such examples will help you garner an intuition for manipulating multiple pieces at once.
 \newpage
