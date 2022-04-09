@@ -124,7 +124,7 @@ Where $\phi$ describes the piecewise object, and for each $i\in I$ (the iterator
 If a single iterator (e.g. $i\in I$) isn't sufficient to describe the piecewise object we desire, we might consider using several; $i\in I$, $j\in J$ for example). Alternatively, we might consider joining two piecewise objects together using $\cup$:
 
 $$
-\varphi = \varphi_1 \cup \varphi_2 = \left\{\varphi_{1,i},\quad A_i\mid i\in I\right\}\cup\left\{\varphi_{2,j},\quad B_j\mid j\in J\right\}
+    \varphi = \varphi_1 \cup \varphi_2 = \left\{\varphi_{1,i},\quad A_i\mid i\in I\right\}\cup\left\{\varphi_{2,j},\quad B_j\mid j\in J\right\}
 $$
 
 This can be interpreted similarly to before, though we now have that $\varphi=\varphi_{1,i}$ if $A_i$ is true for some $i$, or $\varphi=\varphi_{2,j}$ is $B_j$ is true for some $j$.
@@ -142,5 +142,23 @@ Notably, this notation can be used to express individual pieces explicitly in a 
         \abs{x} = \pwarg{x}{x\geq 0}\cup\pwarg{-x}{x\leq 0}
     $$
 \end{example}
+
+\begin{theorem}
+    Using our notation, we can also explicitly define unions:
+
+    Suppose $I=U\cup V$, then the following piecewise object
+
+    $$
+        \phi=\pwobj{\varphi_i}{C_i}{i\in I}
+    $$
+
+    is equivalent to:
+
+    $$
+        \phi=\pwobj{\varphi_u}{C_u}{u\in U}\cup\pwobj{\varphi_v}{C_v}{v\in V}
+    $$
+
+    (There is no intersection equivalent.)
+\end{theorem}
 
 \newpage
