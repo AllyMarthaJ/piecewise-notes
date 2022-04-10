@@ -340,7 +340,8 @@ We use this symbol to represent the clamping function as later on it will be giv
 
         Which simplifies to:
         \begin{align*}
-            \ell_{a}^{b}(x) &= \min\br{0,\min\br{b-x,b-a}}+\max\br{x,a} \\
+            \ell_{a}^{b}(x) &= \min\br{0,b+\min\br{-x,-a}}+\max\br{x,a} \\
+                            &= \min\br{0,\min\br{b-x,b-a}}+\max\br{x,a} \\
                             &=\min\br{0,b-x,b-a}+\max\br{x,a}
         \end{align*}
 
@@ -349,12 +350,318 @@ We use this symbol to represent the clamping function as later on it will be giv
             \ell_{a}^{b}(x)=\min\br{b-x,0}+\max\br{x,a}
         $$
 
-        Using the absolute-value representations of $\max$ and $\min$ and simplifying, we get that
+        Using the absolute value representations of $\max$ and $\min$ and simplifying, we get that
         $$
             \ell_{a}^{b}(x)=\frac{1}{2}\left(a+b+\abs{x-a}-\abs{x-b}\right)
         $$
     \end{proof}
 \end{theorem}
 
+\begin{example}
+    \label{example:algebra_clamping}
+    We want to consider the following function, rewriting it in terms of $\max$, $\min$:
 
+    $$
+        f(x) = \begin{piecewise}
+            x & x>1 \\
+            1 & -1\leq x\leq 1 \\
+            -x & x<-1
+        \end{piecewise}
+    $$
+
+    This is not in the form we want in order to manipulate it, so we consider that this function is, in fact, continuous. It stands to reason, therefore, that $x>1\iff x\geq 1$ and $x<-1\iff x\leq -1$. Therefore:
+
+    $$
+        f(x) = \begin{piecewise}
+            x & x\geq 1 \\
+            1 & -1\leq x\leq 1 \\
+            -x & x\leq-1
+        \end{piecewise}
+    $$
+
+    Now, we note that $x\geq 1$ is equivalent to $\ell_{1}^{\infty}(x)=x$, $-1\leq x\leq 1$ is equivalent to $\ell_{-1}^{1}(x)=x$ and $x\leq -1$ is equivalent to $\ell_{-\infty}^{-1}(x)=x$.
+    \addtocounter{example}{-1}
+\end{example}
+
+\begin{example}[continued]
+    With our equivalences, we can now make the respective substitutions in both the conditions and piece values, as with previous examples (although we needn't really keep the conditions in this form):
+
+    $$
+        f(x) = \begin{piecewise}
+            \ell_{1}^{\infty}(x) & \ell_{1}^{\infty}(x)=x \\
+            1 & \ell_{-1}^{1}(x)=x \\
+            -\ell_{-\infty}^{-1}(x) & \ell_{-\infty}^{-1}(x)=x
+        \end{piecewise}
+    $$
+
+    Now we `extract' our piece values by addition:
+    $$
+        f(x) = \paren*{\begin{piecewise}
+            -(1-\ell_{-\infty}^{-1}(x)) & x\geq 1 \\
+            -(\ell_{1}^{\infty}(x)-\ell_{-\infty}^{-1}(x)) & -1\leq x\leq 1 \\
+            -(\ell_{1}^{\infty}(x)+1) & x\leq -1
+        \end{piecewise}}+\paren*{\ell_{1}^{\infty}(x)+1-\ell_{-\infty}^{-1}(x)}
+    $$
+
+    Evaluting each piece value using the definition of the clamping function gives us:
+    $$
+        f(x) = \paren*{\begin{piecewise}
+            -2 & x\geq 1 \\
+            -2 & -1\leq x\leq 1 \\
+            -2 & x\leq -1
+        \end{piecewise}}+\paren*{\ell_{1}^{\infty}(x)+1-\ell_{-\infty}^{-1}(x)}
+    $$
+
+    Finally simplifying, we have:
+    $$
+        f(x) = \ell_{1}^{\infty}(x)-\ell_{-\infty}^{-1}(x)-1
+    $$
+
+    Notice that, in this example, we don't have any $\ell_{-1}^{1}(x)$ because, in fact, $1$ is a constant function. Rewriting our clamping functions in terms of $\max$ and $\min$ per the limit identities gives us:
+    $$
+        f(x) = \max\br{x,1}-\min\br{x,-1}-1
+    $$
+\end{example}
+
+The clamping function is useful for formulating single expressions for continuous piecewise functions as we've seen above. If the function is not continuous, we may not actually have much luck in using it. In fact, we'll derive the general `Gluing Formula' soon within these notes.
+
+\subsection{The sign function}
+The sign function is an interesting function in that it doesn't have a single explicit definition, but instead satisfies the following relation:
+$$
+    x\cdot\sgn{x}=\abs{x}
+$$
+
+This can be true for some domain $D\subseteq\mathbb{R}$, such as $\mathbb{R}\setminus\br{0}$. For the purposes of these notes, however, we shall define $\sgn{x}$ as the following:
+$$
+    \sgn{x}=\begin{piecewise}
+        1 & x>0 \\
+        0 & x=0 \\
+        -1 & x<0
+    \end{piecewise}
+$$
+
+This definition does indeed satisfy the definition of $\abs{x}$, noting that we can write $\abs{x}$ in the following explicit form\footnotemark:
+$$
+    \abs{x}=\begin{piecewise}
+        x & x>0 \\
+        0 & x=0 \\
+        -x & x<0
+    \end{piecewise}
+$$
+
+\footnotetext{It is a good exercise to reconcile this form of $\abs{x}$ with the previous forms displayed in these notes, using piecewise function properties (and when and why each form may be useful to us).}
+
+It is useful to note that the sign function is discontinuous; we can express discontinuous piecewise functions in terms of the sign function, although this is not common (we instead opt for step functions there, although step functions are just transformations of the sign function).
+
+\subsection{Step functions}
+Step functions are useful functions which, usually in calculus at higher levels, allow us to provide a form in which to express a piecewise function regardless of continuity or not. We look at the Heaviside step function, which, like the sign function, doesn't have a single explicit formulation, but instead satisfies:
+$$
+    x\cdot\step{x}=\frac{1}{2}\paren*{x+\abs{x}}
+$$
+
+The right hand side of this relation is known as the ramp function and can be expressed as $\max\br{x,0}$.
+
+For the purposes of these notes we might define the Heaviside step function as the following:
+$$
+    \step{x}=\begin{piecewise}
+        1 & x>0 \\
+        0 & x<0
+    \end{piecewise}
+$$
+
+\begin{theorem}
+    We can express $\step{x}$ in terms of $\sgn{x}$;
+
+    $$
+        \step{x}=\frac{1}{2}\paren{1+\sgn{x}}
+    $$
+
+    This can be shown using the same techniques found in Example \ref{example:algebra_1}.
+\end{theorem}
+
+\begin{example}
+    We wish to express the following function (similar to that found in \ref{example:algebra_clamping}) in terms of step functions:
+    $$
+        f(x) = \begin{piecewise}
+            x & x>1 \\
+            1 & -1<x<1 \\
+            -x & x<-1
+        \end{piecewise}
+    $$
+
+    In order to simplify this down, let us nest piecewise functions on the conditions $x>-1$ and $x<-1$:
+    $$
+        f(x) = \begin{piecewise}
+            \begin{piecewise}
+                x & x>1 \\
+                1 & x<1
+            \end{piecewise} & x>-1 \\
+            -x & x<-1
+        \end{piecewise}
+    $$
+
+    We now wish to write the inner piecewise function in terms of the step function: to do so, we `subtract' our second piece, $1$ out and then factor out $x-1$, as follows:
+    $$
+        f(x) = \begin{piecewise}
+            (x-1)\begin{piecewise}
+                1 & x>1 \\
+                0 & x<1
+            \end{piecewise}+1 & x>-1 \\
+            -x & x<-1
+        \end{piecewise}
+    $$
+
+    Therefore, the inner piecewise function is equivalent to $\step{x-1}$:
+    $$
+        f(x) = \begin{piecewise}
+            (x-1)\step{x-1}+1 & x>-1 \\
+            -x & x<-1
+        \end{piecewise}
+    $$
+
+    Instead of repeating this process with the outer piecewise function, we should instead subtract out the first piece, since we have a step function inside that:
+    $$
+        f(x) = (x-1)\step{x-1}+1+\begin{piecewise}
+            0 & x>-1 \\
+            -x-(x-1)\step{x-1}-1 & x<-1
+        \end{piecewise}
+    $$
+
+    And from there, evaluate the second piece (wherein $\step{x-1}=0$ since $x<-1$):
+    $$
+        f(x) = (x-1)\step{x-1}+1+\begin{piecewise}
+            0 & x>-1 \\
+            -x-1 & x<-1
+        \end{piecewise}
+    $$
+
+    We can factor out $(-x-1)$ again and rewrite $x<-1$ as $-x-1>0$:
+    $$
+        f(x) = (x-1)\step{x-1}+1+(-x-1)\begin{piecewise}
+            0 & -x-1<0 \\
+            1 & -x-1>0
+        \end{piecewise}
+    $$
+    \addtocounter{example}{-1}
+\end{example}
+
+\begin{example}[continued]
+    We therefore have that:
+    $$
+        f(x) = (x-1)\step{x-1}+(-x-1)\step{-x-1}+1
+    $$
+
+    The astute may have noticed that, in fact, this function can be rewritten directly as a result of the definition of the step function:
+    $$
+        f(x) = \max\br{x-1,0}+\max\br{-x-1,0}+1
+    $$
+
+    We have, as a result, that $f(x)$ is continuous (which we already knew from the previous example), as the $\max$ function is continuous. Note however that unlike the previous example, even though we can write this function in this form, that $f(-1)$ and $f(1)$ are not defined.
+
+    Explicitly, we write $f:\mathbb{R}\setminus\br{-1,1}\to\mathbb{R}$.
+\end{example}
+
+This process is generalisable as with our continuous gluing function (i.e. through repeating nesting). I will, however, leave this process up to the reader.
+
+\subsection{The floor and ceiling functions}
+We've already introduced the floor function once previously, however we shall do so again here for the sake of completeness:
+$$
+\floor{x}=\pwobj{n}{x\in[n,n+1)}{n\in\mathbb{Z}}
+$$
+
+We can alternatively write the floor function using the $\max$ function of an infinite set:
+$$
+\floor{x}=\max\br{n\in\mathbb{Z}\mid n\leq x}
+$$
+
+That is, the floor function is the greatest integer $n$ such that $n$ is less than or equal to $x$.
+
+The ceiling function is similarly defined piecewise;
+$$
+\ceil{x}=\pwobj{n}{x\in(n-1,n]}{n\in\mathbb{Z}}
+$$
+
+or alternatively using the min function:
+$$
+\ceil{x}=\min\br{n\in\mathbb{Z}\mid n\geq x}
+$$
+
+That is, the ceiling function is the smallest integer $n$ such that $n$ is larger than or equal to $x$.
+
+\subsection{Characteristic functions and Iverson brackets}
+Briefly, a characteristic (or indicator) function for a set $S$ is a function defined such that:
+$$
+    \mathbf{1}_{S}(x)=\begin{piecewise}
+        1 & x\in S\\
+        0 & x\not\in S
+    \end{piecewise}
+$$
+
+\begin{theorem}
+    The characteristic function for the integers is given by:
+    $$
+        \mathbf{1}_{\mathbb{Z}}(x)=1-(\ceil{x}-\floor{x})
+    $$
+
+    \begin{proof}
+        We use our piecewise notation for the ceiling and floor functions for convenience (where for the ceiling function we've just reindexed $n\to n+1$ in order to match the conditions):
+        $$
+            \ceil{x}-\floor{x}=\pwobj{n+1}{x\in(n,n+1]}{n\in\mathbb{Z}}-\pwobj{n}{x\in[n,n+1)}{n\in\mathbb{Z}}
+        $$
+
+        We can separate out the $x=n$ and $x=n+1$ pieces in each:
+        \begin{align*}
+            \ceil{x}-\floor{x} = &\pwobj{n+1}{x\in(n,n+1)}{n\in\mathbb{Z}}\cup\\
+                                    &\pwobj{n+1}{x=n+1}{n\in\mathbb{Z}}\\
+                               &-\pwobj{n}{x\in(n,n+1)}{n\in\mathbb{Z}}\cup\pwobj{n}{x=n}{n\in\mathbb{Z}}
+        \end{align*}
+
+        Reindexing the $x=n+1$ pieces with $n+1\to n$, and then combining all pieces for $x\in(n,n+1)$, we have that:
+        \begin{align*}
+            \ceil{x}-\floor{x} &= &\pwobj{1}{x\in(n,n+1)}{n\in\mathbb{Z}}\cup\pwobj{n}{x=n}{n\in\mathbb{Z}}\\
+                               &&-\pwobj{n}{x=n}{n\in\mathbb{Z}} \\
+                               &= &\pwobj{1}{x\in(n,n+1)}{n\in\mathbb{Z}}\cup\pwobj{0}{x=n}{n\in\mathbb{Z}}\\
+        \end{align*}
+
+        That is, for all integers $n$, if $x=n$ (i.e. $x$ is an integer) we have $\ceil{x}-\floor{x}=0$. Otherwise, for all non-integer $x$, we have $\ceil{x}-\floor{x}=1$. We therefore have that:
+        \begin{align*}
+            \ceil{x}-\floor{x} &=\begin{piecewise}
+                1 & x\not\in\mathbb{Z} \\
+                0 & x\in\mathbb{Z}
+            \end{piecewise} \\
+            &=-\begin{piecewise}
+                -1 & x\not\in\mathbb{Z} \\
+                0 & x\in\mathbb{Z}
+            \end{piecewise} \\
+            &=1-\begin{piecewise}
+                0 & x\not\in\mathbb{Z} \\
+                1 & x\in\mathbb{Z}
+            \end{piecewise} \\
+            &=1-\mathbf{1}_{\mathbb{Z}}(x)
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+Iverson bracket notation is almost a generalisation to these characteristic or indicator functions, except instead of using a set and variable, they are provided with any sort of predicate, condition, etc.:
+$$
+    [S]=\begin{piecewise}
+        1 & S \\
+        0 & \lnot S
+    \end{piecewise}
+$$
+
+Essentially all piecewise functions we work with in these notes (to a point) are able to be written in terms of Iverson brackets. In tern, certain Iverson brackets can be written in terms of elementary functions or functions we've already seen.
+\begin{theorem}
+    We can write several of the previous functions in this section in terms of Iverson brackets:
+    \begin{enumerate}
+        \item $\mathbf{1}_{S}(x)=[x\in S]$ (noting that the complement of $x\in S$ is $x\in\mathbb{R}\setminus S$, for example)
+        \item $\step{x}=[x>0]$
+        \item $\sgn{x}=[x>0]-[x<0]$
+        \item $\abs{x}=x[x>0]-x[x<0]$
+        \item $\max\br{a,b}=a[a\geq b]+b[a<b]$
+        \item $\min\br{a,b}=b[a\geq b]+a[a<b]$
+    \end{enumerate}
+
+    Proofs of these equivalences are left specifically for the reader to practice.
+\end{theorem}
 \newpage
