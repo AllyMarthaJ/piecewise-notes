@@ -664,4 +664,38 @@ Essentially all piecewise functions we work with in these notes (to a point) are
 
     Proofs of these equivalences are left specifically for the reader to practice.
 \end{theorem}
+
+\begin{theorem}
+    Even more generally, let us denote the piecewise object:
+    $$
+        \phi=\pwobj{\varphi_i}{C_i}{i\in I}
+    $$
+
+    Such that $C_i\land C_j\leftrightarrow\bot$ for all $i\neq j$ and $i,j\in I$. Then $\phi$ can be expressed using Iverson bracket notation:
+    $$
+        \phi=\sum_{i\in I}{\varphi_i[C_i]}
+    $$
+
+    \begin{proof}
+        Let us begin by splitting up the piecewise object $\phi$ into separate piecewise objects such that all but 1 piece is equal to $0$, in each:
+        $$
+            \pwobj{\varphi_i}{C_i}{i\in I}=\sum_{i\in I}{\pwobj{\varphi_m}{C_m}{m=i}\cup\pwobj{0}{C_n}{n\in I\setminus\br{i}}}
+        $$
+
+        Since each $C_n$ is distinct, then $C_n\leftrightarrow\lnot C_i$ for $n\neq i$. Therefore:
+        $$
+            \pwobj{\varphi_i}{C_i}{i\in I}=\sum_{i\in I}{\pwobj{\varphi_m}{C_m}{m=i}\cup\pwobj{0}{\lnot C_i}{n\in I\setminus\br{i}}}
+        $$
+
+        Since each piecewise object has two cases only, we can rewrite this as:
+        $$
+            \pwobj{\varphi_i}{C_i}{i\in I}=\sum_{i\in I}{\begin{piecewise}
+                \varphi_i & C_i \\
+                0 & \lnot C_i
+            \end{piecewise}}
+        $$
+
+        Then, factoring $\varphi_i$ and writing in terms of Iverson brackets, we have our result.
+    \end{proof}
+\end{theorem}
 \newpage
