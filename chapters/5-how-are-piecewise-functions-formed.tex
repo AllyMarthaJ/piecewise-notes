@@ -1,5 +1,145 @@
 % function composition; `inverse'
 % limits
 \section{Forming Piecewise Functions}
+So far, we've discussed the properties of piecewise functions independently of anything else, except with a few examples as to how we might rewrite certain piecewise functions in terms of other piecewise functions. This is a topic that we'll get back to soon, as well. However, one of the interesting, but more incomplete, parts which constitute piecewise objects as a whole is how exactly they come about in mathematics.
 
+Piecewise functions, particularly, have some interesting ways they come about.
+
+\subsection{Function composition}
+Piecewise functions can themselves be created from the composition of two (or so) functions. These piecewise functions are themselves elementary and continuous if the functions being composed are themselves elementary and continuous (in fact, this is why $\abs{x}$ is an elementary function... more on that later).
+
+\begin{theorem}
+    Let us define sets $U, V, D\subseteq\mathbb{R}$ and function $F:D\to V$. We then define $f=F\bigr\rvert_{U}$ (i.e. $f$ is the restriction of $F$ to $U$) such that there exists a function $g:V\to U$ satisfying:
+    $$
+    \begin{aligned}
+        (g\circ f)(x)&=x, &x\in U\\
+        (f\circ g)(x)&=x, &x\in V
+    \end{aligned}
+    $$
+    That is, $f$ is bijective. We now wish to define $(g\circ F)(x)$ (noting that $(F\circ g)(x)=x$ for $x\in V$); this will be, in effect, an extension of the left inverse of $f$ over the reals.
+
+    We let $p:D\to U$, $p(x)=(g\circ F)(x)$. Noting that $(F\circ g)(x)=x$ we have that $(F\circ p)(x)=F(x)$. Therefore, if this equation can be solved for $p(x)$, we have that:
+    $$
+        p(x) = \pwobj{p_i(x)}{U_i}{i\in I}
+    $$
+
+    Where $p_i(x)$ is a solution of the above equation on some domain, and $U_i$ is the condition that defines that domain. To find $U_i$, we can reason that $p(x)\in U\implies p_i(x)\in U\iff U_i$. Therefore:
+
+    $$
+        p(x)=\pwobj{p_i(x)}{p_i(x)\in U}{i\in I}
+    $$
+
+    Which is our piecewise function.
+\end{theorem}
+
+\begin{theorem}
+    The absolute value function is a function which can be created by composing any (well-behaved) even function with range $[0,\infty)$ and its principal inverse.
+
+    \begin{proof}
+        Let $F:\mathbb{R}\to[0,\infty)$ be an even function. Then we let $f=F\bigr\rvert_{[0,\infty)}$ be a function for which there exists $g:[0,\infty)\to[0,\infty)$ such that $(g\circ f)(x)=x$ and $(f\circ g)(x)=x$ for $x\in[0,\infty)$.
+
+        Let $p(x)=(g\circ F)(x)$, then $F(p(x))=F(x)$. For $x\geq 0$, we have that $f(p(x))=f(x)\iff p(x)=x$, by bijectivity of $f$. For $x\leq 0$, by the evenness of $F$ we have $F(p(x))=F(-x)$ and by the same argument gives $p(x)=-x$. Therefore:
+
+        $$
+            p(x)=(g\circ F)(x)=\begin{piecewise}
+                x & x\geq 0\\
+                -x & x\leq 0
+            \end{piecewise}=\abs{x}
+        $$
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    We've built bottom-up in terms of theory; now we want to put this to practice. Let us prove that $\abs{x}=\sqrt[2n]{x^{2n}}$ for any positive integer $n$ by deriving it ourselves.
+
+    Suppose $f(x)=\sqrt[2n]{x^{2n}}$; then we have $f(x)^{2n}=x^{2n}$. By difference of perfect squares, we have that:
+    $$
+        (f(x)^n-x^n)(f(x)^n+x^n)=0
+    $$
+
+    If $n$ is even, then the second factor itself has no real factors, but also that we can repeat difference of squares on the first factor (until reduced to an odd power, $m$).
+
+    If $m$ is odd, then by observation, $f(x)=x$ and $f(x)=-x$ are solutions to each respective factor (we shall disregard complex factors until a later time).
+
+    Therefore:
+    $$
+        f(x) = \begin{piecewise}
+            x & C_1 \\
+            -x & C_2
+        \end{piecewise}
+    $$
+
+    Remember that the range of $f(x)$ is $[0,\infty)$; therefore, when $f(x)=x$ we have $x\in[0,\infty)$. Likewise when $f(x)=-x$ we have $-x\in[0,\infty)\implies x\in(-\infty,0]$. Therefore:
+
+    $$
+        f(x) = \begin{piecewise}
+            x & x\geq 0 \\
+            -x & x\leq 0
+        \end{piecewise}=\abs{x}
+    $$
+
+    And we're done.
+\end{example}
+
+It is important to realise that piecewise functions do not strictly have a single representation in terms of elementary functions. Therefore, it is important to consider that non-trivial operations should be done piecewise instead with existing fundamental ideas and theorems, rather than on the representation/expression. A common example of this is using $\sqrt{x^2}=\abs{x}$ to find $\dv{}{x}{\abs{x}}$.
+
+\subsection{Piecewise functions as results of limits}
+Perhaps an arguably more natural way that piecewise functions can appear is through the parameterisation of limits.
+
+\begin{theorem}
+    \label{theorem:sign_approx}
+    The function $\tanh\paren{x}$ approximates $\sgn{x}$.
+
+    \begin{proof}
+        What do we mean by `approximates'? In terms of behaviour, $\tanh$ is a smooth, odd function. For positive large $x$ we have $\tanh\paren{x}=1$ and for negative large $x$ we have $\tanh\paren{x}=-1$.
+
+        We begin by noting $\tanh\paren{x}$ is odd; therefore, $\tanh\paren{x}=\tanh\paren{x}\sgn{x}$ by \ref{theorem:odd_sign}.
+
+        We can then rewrite this using the definition of $\tanh$:
+        \begin{align*}
+            \tanh\paren{x} &= \frac{e^x-e^{-x}}{e^x+e^{-x}}\sgn{x} \\
+                           &= \frac{e^{2x}-1}{e^{2x}+1}\sgn{x} \\
+                           &= \paren*{1-\frac{2}{e^{2x}+1}}\sgn{x}
+        \end{align*}
+
+        For positive or negative large $x$, we have that $\paren*{1-\frac{2}{e^{2x}+1}}\approx 1$. Therefore:
+        $$
+            \tanh\paren{x} \approx 1\cdot\sgn{x}
+        $$
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    It stands to reason that an approximation such as \ref{theorem:sign_approx} can lead to limits which not only approximate, but equal $\sgn{x}$. For example, $\tanh\paren{2x}$ would be a better approximation, and so on. Therefore:
+
+    $$
+        \sgn{x}=\lim_{n\to\infty}{\tanh\paren{nx}}
+    $$
+\end{theorem}
+
+\begin{theorem}
+    The function $[x=0]$ can be given by the following:
+
+    $$
+        [x=0]=\lim_{n\to\infty}{e^{-nx^2}}
+    $$
+\end{theorem}
+
+With all of this in mind, it also stands to reason we might be able to construct our own discontinuous functions using limits and existing piecewise functions; this is something that will be covered later on in the notes. For example,
+$$
+    \step{x}=\lim_{\varepsilon\to0}{\frac{1}{2}\cdot\ell_{-1}^{1}\paren*{\frac{x}{\varepsilon^2}}+\frac{1}{2}}
+$$
+
+\begin{theorem}
+    The Dirichlet function is an example of a piecewise function that can be constructed using limit(s):
+    $$
+        \mathbf{1}_{\mathbb{Q}}\paren{x}=\lim_{m\to\infty}{\lim_{n\to\infty}{\cos(m!\pi x)^{2n}}}
+    $$
+
+    It's quite an astonishing result.
+\end{theorem}
+
+% todo; i REALLY want to investigate this section. i want to learn how to work with
+% all of these functions in a systematic way and make it really make sense, not just
+% jagged distinct examples
 \newpage

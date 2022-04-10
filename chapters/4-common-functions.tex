@@ -445,6 +445,66 @@ $$
 
 It is useful to note that the sign function is discontinuous; we can express discontinuous piecewise functions in terms of the sign function, although this is not common (we instead opt for step functions there, although step functions are just transformations of the sign function).
 
+\begin{theorem}
+    \label{theorem:odd_sign}
+    Given an odd function $f:A\to\mathbb{R}$ where $A=-A$, we have that $f(x)\sgn{x}=f(\abs{x})$ and $f(\abs{x})\sgn{x}=f(x)$.
+
+    \begin{proof}
+        We begin with the left hand side of the first property and perform the usual steps:
+        \begin{align*}
+            f(x)\sgn{x} &= f(x)\begin{piecewise}
+                -1 & x<0 \\
+                0 & x=0 \\
+                1 & x>0
+            \end{piecewise}\\
+            &= \begin{piecewise}
+                -f(x) & x<0 \\
+                0 & x=0 \\
+                f(x) & x>0
+            \end{piecewise}\\
+            &= \begin{piecewise}
+                f(-x) & x<0 \\
+                0 & x=0 \\
+                f(x) & x>0
+            \end{piecewise}\\
+            &= f\paren*{\begin{piecewise}
+                -x & x<0 \\
+                0 & x=0 \\
+                x & x>0
+            \end{piecewise}}\\
+            &= f(\abs{x})
+        \end{align*}
+    \end{proof}
+
+    The third and fourth steps of this proof follows from $f(x)$ being odd; that is, $f(0)=0$ and $f(-x)=-f(x)$.
+
+    \begin{proof}
+        The second property is similar to the first:
+        \begin{align*}
+            f(\abs{x})\sgn{x} &=\begin{piecewise}
+                f(-x) & x<0 \\
+                f(0) & x=0 \\
+                f(x) & x>0
+            \end{piecewise}\cdot\begin{piecewise}
+                -1 & x<0 \\
+                0 & x=0 \\
+                1 & x>0
+            \end{piecewise} \\
+            &= \begin{piecewise}
+                -f(-x) & x<0 \\
+                0 & x=0 \\
+                f(x) & x>0
+            \end{piecewise} \\
+            &= \begin{piecewise}
+                f(x) & x<0 \\
+                f(x) & x=0 \\
+                f(x) & x>0
+            \end{piecewise} \\
+            &= f(x)
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
 \subsection{Step functions}
 Step functions are useful functions which, usually in calculus at higher levels, allow us to provide a form in which to express a piecewise function regardless of continuity or not. We look at the Heaviside step function, which, like the sign function, doesn't have a single explicit formulation, but instead satisfies:
 $$
