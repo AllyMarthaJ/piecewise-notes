@@ -177,8 +177,6 @@ This helps us to derive formulas for $\min\br{a,b,c}$ and so on. Really, in full
     Each of these properties can be proven inductively, and such a proof is left to the reader.
 \end{theorem}
 
-\newpage
-
 \subsection{Mixed maximum and minimum}
 It is here we note some identities of $\max$ and $\min$ but also extend explicitly our ability to manipulate piecewise functions which would otherwise elude us, per Example \ref{example:algebra_1}.
 
@@ -326,10 +324,7 @@ We use this symbol to represent the clamping function as later on it will be giv
             \ell_{a}^{b}(x)=\min\br{\max\br{x,a},b}
         $$
     \end{proof}
-    \addtocounter{theorem}{-1}
-\end{theorem}
 
-\begin{theorem}[continued]
     \begin{proof}
         We now set out to prove the last representation of $\ell_{a}^{b}(x)$.
 
@@ -380,10 +375,7 @@ We use this symbol to represent the clamping function as later on it will be giv
     $$
 
     Now, we note that $x\geq 1$ is equivalent to $\ell_{1}^{\infty}(x)=x$, $-1\leq x\leq 1$ is equivalent to $\ell_{-1}^{1}(x)=x$ and $x\leq -1$ is equivalent to $\ell_{-\infty}^{-1}(x)=x$.
-    \addtocounter{example}{-1}
-\end{example}
 
-\begin{example}[continued]
     With our equivalences, we can now make the respective substitutions in both the conditions and piece values, as with previous examples (although we needn't really keep the conditions in this form):
 
     $$
@@ -543,9 +535,7 @@ $$
         \end{piecewise}
     $$
     \addtocounter{example}{-1}
-\end{example}
 
-\begin{example}[continued]
     We therefore have that:
     $$
         f(x) = (x-1)\step{x-1}+(-x-1)\step{-x-1}+1
@@ -650,7 +640,7 @@ $$
     \end{piecewise}
 $$
 
-Essentially all piecewise functions we work with in these notes (to a point) are able to be written in terms of Iverson brackets. In tern, certain Iverson brackets can be written in terms of elementary functions or functions we've already seen.
+Essentially all piecewise functions we work with in these notes (to a point) are able to be written in terms of Iverson brackets. In turn, certain Iverson brackets can be written in terms of elementary functions or functions we've already seen.
 \begin{theorem}
     We can write several of the previous functions in this section in terms of Iverson brackets:
     \begin{enumerate}

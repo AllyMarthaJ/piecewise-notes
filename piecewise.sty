@@ -7,41 +7,43 @@
 \usepackage{mathtools}
 \usepackage{physics}
 \usepackage{import}
+\usepackage{hyperref}
 \usepackage[framemethod=TikZ]{mdframed}
 
 % yay for proofs
 \usepackage{amsthm}
-
 % fixing up typographic things
 \usepackage{microtype}
-
 % really conflicted on this: i like indentation on paragraphs,
 % but having no space between them makes the content *really* dense.
 \usepackage{parskip}
-
-\usepackage{hyperref}
 
 % doc info
 \title{Piecewise Notes}
 \author{Ally Macdonald}
 \date{}
 
-
 % theorems and things
 \theoremstyle{definition}
 \newmdtheoremenv[%
     outerlinecolor = black, %
-    nobreak = true, %
+    splittopskip=2\baselineskip,
     linewidth = 0.5pt, %
     roundcorner = 2pt, %
+    everyline=true, % frame split across pages
+    middleextra={\node[anchor=north west,inner xsep=0pt,xshift=10pt] at (P-|O) {\bfseries{\thetheorem}\ \mdseries{(continued)}\bfseries{.}};},
+    secondextra={\node[anchor=north west,inner xsep=0pt,xshift=10pt] at (P-|O) {\bfseries{\thetheorem}\ \mdseries{(continued)}\bfseries{.}};}
 ]{theorem}{}[subsection]
 
 \theoremstyle{definition}
 \newmdtheoremenv[%
     outerlinecolor = black, %
-    nobreak = true, %
     linewidth = 0.5pt, %
     roundcorner = 2pt, %
+    splittopskip=2\baselineskip,
+    everyline=true, % frame split across pages
+    middleextra={\node[anchor=north west,inner xsep=0pt,xshift=10pt] at (P-|O) {\bfseries{Example~\theexample}\ \mdseries{(continued)}\bfseries{.}};},
+    secondextra={\node[anchor=north west,inner xsep=0pt,xshift=10pt] at (P-|O) {\bfseries{Example~\theexample}\ \mdseries{(continued)}\bfseries{.}};}
 ]{example}{Example}[subsection]
 
 % my first environment
