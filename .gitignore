@@ -6,6 +6,8 @@
 *.toc
 /*.pdf
 *.fdb*
+*.thm
+*.out
 
 # prefs
 .vscode
