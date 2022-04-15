@@ -86,12 +86,12 @@ It is important to realise that piecewise functions do not strictly have a singl
 \subsection{Piecewise functions as results of limits}
 Perhaps an arguably more natural way that piecewise functions can appear is through the parameterisation of limits.
 
-\begin{theorem}
-    \label{theorem:sign_approx}
+\begin{example}
+    \label{example:sign_approx}
     The function $\tanh\paren{x}$ approximates $\sgn{x}$.
 
     \begin{proof}
-        What do we mean by `approximates'? In terms of behaviour, $\tanh$ is a smooth, odd function. For positive large $x$ we have $\tanh\paren{x}=1$ and for negative large $x$ we have $\tanh\paren{x}=-1$.
+        What do we mean by `approximates'? In terms of behaviour, $\tanh$ is a smooth, bounded, odd function with asymptotes per the following: For positive large $x$ we have $\tanh\paren{x}=1$ and for negative large $x$ we have $\tanh\paren{x}=-1$.
 
         We begin by noting $\tanh\paren{x}$ is odd; therefore, $\tanh\paren{x}=\tanh\paren{x}\sgn{x}$ by \ref{theorem:odd_sign}.
 
@@ -107,28 +107,15 @@ Perhaps an arguably more natural way that piecewise functions can appear is thro
             \tanh\paren{x} \approx 1\cdot\sgn{x}
         $$
     \end{proof}
-\end{theorem}
+\end{example}
 
 \begin{theorem}
-    It stands to reason that an approximation such as \ref{theorem:sign_approx} can lead to limits which not only approximate, but equal $\sgn{x}$. For example, $\tanh\paren{2x}$ would be a better approximation, and so on. Therefore:
-
-    $$
-        \sgn{x}=\lim_{n\to\infty}{\tanh\paren{nx}}
-    $$
+    There are some examples of limits we can use to represent certain piecewise functions:
+    \begin{enumerate}
+        \item $\sgn{x}=\displaystyle\lim_{n\to\infty}{\tanh\paren*{nx}}$
+        \item $[x=0]=\displaystyle\lim_{n\to\infty}{\exp\paren*{-nx^2}}$
+    \end{enumerate}
 \end{theorem}
-
-\begin{theorem}
-    The function $[x=0]$ can be given by the following:
-
-    $$
-        [x=0]=\lim_{n\to\infty}{e^{-nx^2}}
-    $$
-\end{theorem}
-
-With all of this in mind, it also stands to reason we might be able to construct our own discontinuous functions using limits and existing piecewise functions; this is something that will be covered later on in the notes. For example,
-$$
-    \step{x}=\lim_{\varepsilon\to0}{\frac{1}{2}\cdot\ell_{-1}^{1}\paren*{\frac{x}{\varepsilon^2}}+\frac{1}{2}}
-$$
 
 \begin{theorem}
     The Dirichlet function is an example of a piecewise function that can be constructed using limit(s):
