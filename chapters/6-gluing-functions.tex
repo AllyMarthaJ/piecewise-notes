@@ -1,0 +1,70 @@
+\section{Gluing Functions}
+Until now, we've discussed piecewise concepts in the more abstract sense, with explicit examples permeating the paradigm behind them as previously discussed. From here, we'll begin introducing new concepts with a heavier focus on explicit constructions. This begins with our gluing functions.
+
+\subsection{Continuous gluing function}
+Let us define intervals $D_1,D_2,\dots,D_n$ such that for $m\in\br{1,2,\dots,n-1}$ we have $\max\paren{D_m}=\min\paren{D_{m+1}}$. Then we define all respective functions to be glued $f_m:D_m\to\mathbb{R}$. To `glue' such functions together sequentially in a function $F(x)$ we write:
+$$
+    F(x)=\sum_{m=1}^{n}{f_m\paren*{\ell_{a_m}^{b_m}\paren{x}}}-\sum_{m=2}^{n}{f_m\paren*{a_m}}
+$$
+Where $a_m=\min\paren{D_m}$ if it exists, or $-\infty$ otherwise. Likewise $b_m=\max\paren{D_m}$ if it exists, or $\infty$ otherwise.
+
+\begin{proof}
+    This derivation actually follows as an extension of Example \ref{example:gluing_basic}. We begin by letting $F:\mathbb{R}\to\mathbb{R}$ be a function such that:
+    $$
+        F(x) = \pwobj{f_m\paren{x}}{x\in D_m}{m\in\br{1,2,\dots,n}}
+    $$
+
+    Let us define the following:
+    \begin{align*}
+        a_m &= \begin{piecewise}
+            \min\paren{D_m} & \text{if $\min\paren{D_m}$ exists} \\
+            -\infty & \text{otherwise}
+        \end{piecewise} \\
+        b_m &= \begin{piecewise}
+            \max\paren{D_m} & \text{if $\max\paren{D_m}$ exists} \\
+            \infty & \text{otherwise}
+        \end{piecewise}
+    \end{align*}
+
+    Therefore $x\in D_m\iff \ell_{a_m}^{b_m}\paren{x}=x$ (note, per the definition of the clamping function, this skips the nuances of having closed/open intervals, etc.). We can accordingly rewrite $F(x)$:
+    $$
+        F(x) = \pwobj{f_m\paren{x}}{\ell_{a_m}^{b_m}\paren{x}=x}{m\in\br{1,2,\dots,n}}
+    $$
+
+    Substituting the respective conditions where $x=\ell_{a_m}^{b_m}\paren{x}$, we have that:
+    $$
+        F(x) = \pwobj{f_m\paren*{\ell_{a_m}^{b_m}\paren{x}}}{\ell_{a_m}^{b_m}\paren{x}=x}{m\in\br{1,2,\dots,n}}
+    $$
+
+    And then we can `subtract' each piece out:
+    $$
+        F(x) = \sum_{l=1}^{n}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}}+\pwobj{-\sum_{\substack{l=1\\l\neq m}}^{n}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}}}{\ell_{a_m}^{b_m}\paren{x}=x}{m\in\br{1,2,\dots,n}}
+    $$
+
+    Focusing on the sum in the piecewise function, we have:
+    $$
+        \sum_{\substack{l=1\\l\neq m}}^{n}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}} = \sum_{l=1}^{m-1}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}}+\sum_{l=m+1}^{n}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}}
+    $$
+
+    Since $x\in D_m$ we know that for the first partial sum, we have $f_l(b_l)$ for each term. Likewise in the second sum, we have $f_l(a_l)$ for each term. Noting that $f_{l+1}(a_{l+1})=f_l(b_l)$ by our continuity property, we can rewrite the sums respectively:
+    $$
+        \sum_{\substack{l=1\\l\neq m}}^{n}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}} = \sum_{l=1}^{m-1}{f_{l+1}\paren*{a_{l+1}}}+\sum_{l=m+1}^{n}{f_l\paren*{a_l}}
+    $$
+
+    In the first sum, we write $l\to l-1$ and so we have, for each $m\in\br{1,2,\dots,n}$:
+    $$
+        \sum_{\substack{l=1\\l\neq m}}^{n}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}} = \sum_{l=2}^{n}{f_{l}\paren*{a_{l}}}
+    $$
+
+    Therefore, $F(x)$ is given by:
+    $$
+        F(x) = \sum_{l=1}^{n}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}}+\pwobj{-\sum_{l=2}^{n}{f_{l}\paren*{a_{l}}}}{\ell_{a_m}^{b_m}\paren{x}=x}{m\in\br{1,2,\dots,n}}
+    $$
+
+    Since each piece is identical, we can reduce our piecewise object:
+    $$
+        F(x) = \sum_{l=1}^{n}{f_l\paren*{\ell_{a_l}^{b_l}\paren{x}}}-\sum_{l=2}^{n}{f_{l}\paren*{a_{l}}}
+    $$
+\end{proof}
+
+\newpage
