@@ -93,16 +93,16 @@ Perhaps an arguably more natural way that piecewise functions can appear is thro
     \begin{proof}
         What do we mean by `approximates'? In terms of behaviour, $\tanh$ is a smooth, bounded, odd function with asymptotes per the following: For positive large $x$ we have $\tanh\paren{x}=1$ and for negative large $x$ we have $\tanh\paren{x}=-1$.
 
-        We begin by noting $\tanh\paren{x}$ is odd; therefore, $\tanh\paren{x}=\tanh\paren{x}\sgn{x}$ by \ref{theorem:odd_sign}.
+        We begin by noting $\tanh\paren{x}$ is odd; therefore, $\tanh\paren{x}=\tanh\paren{\abs{x}}\sgn{x}$ by \ref{theorem:odd_sign}.
 
         We can then rewrite this using the definition of $\tanh$:
         \begin{align*}
-            \tanh\paren{x} &= \frac{e^x-e^{-x}}{e^x+e^{-x}}\sgn{x} \\
-                           &= \frac{e^{2x}-1}{e^{2x}+1}\sgn{x} \\
-                           &= \paren*{1-\frac{2}{e^{2x}+1}}\sgn{x}
+            \tanh\paren{\abs{x}} &= \frac{e^{\abs{x}}-e^{-\abs{x}}}{e^{\abs{x}}+e^{-\abs{x}}}\sgn{x} \\
+                           &= \frac{e^{2\abs{x}}-1}{e^{2\abs{x}}+1}\sgn{x} \\
+                           &= \paren*{1-\frac{2}{e^{2\abs{x}}+1}}\sgn{x}
         \end{align*}
 
-        For positive or negative large $x$, we have that $\paren*{1-\frac{2}{e^{2x}+1}}\approx 1$. Therefore:
+        For positive or negative large $x$, we have that $\paren*{1-\frac{2}{e^{2\abs{x}}+1}}\approx 1$. Therefore:
         $$
             \tanh\paren{x} \approx 1\cdot\sgn{x}
         $$
