@@ -640,6 +640,39 @@ $$
 
 That is, the ceiling function is the smallest integer $n$ such that $n$ is larger than or equal to $x$.
 
+\subsection{The modulo operation/function}
+The modulo operation is an operation used when computing the remainder in division. As such it has several ambiguities regarding the sign of the divisor and remainder. With that being said, for the purposes of these notes we shall define it per the following, for $y>0$:
+$$
+    x\bmod y = \pwobj{x-ny}{x\in[ny,(n+1)y)}{n\in\mathbb{Z}}
+$$
+Which gives the positive remainder for positive divisors.
+
+\begin{theorem}
+    The modulo operation as defined in these notes can be written as:
+    $$
+        x\bmod y = x-y\floor*{\frac{x}{y}}
+    $$
+
+    \begin{proof}
+        We begin by using the definition of $x\bmod y$, and subsequently applying the function property to our piece values to write them in terms of $n$:
+        $$
+            x\bmod y = x-y\pwobj{n}{x\in[ny,(n+1)y)}{n\in\mathbb{Z}}
+        $$
+
+        Notice the piecewise function is close to the definition of the floor function. We rewrite our conditions accordingly:
+        $$
+            x\bmod y = x-y\pwobj{n}{\frac{x}{y}\in[n,n+1)}{n\in\mathbb{Z}}
+        $$
+
+        The piecewise object now matches the definition for $\floor*{\frac{x}{y}}$ and therefore we have:
+        $$
+            x\bmod y = x-y\floor*{\frac{x}{y}}
+        $$
+
+        (If we like, we can also use this definition for modulo a negative number.)
+    \end{proof}
+\end{theorem}
+
 \subsection{Characteristic functions and Iverson brackets}
 Briefly, a characteristic (or indicator) function for a set $S$ is a function defined such that:
 $$

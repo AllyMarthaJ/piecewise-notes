@@ -71,7 +71,7 @@ As a corollary, if all of $f_1,f_2,\dots,f_n$ are elementary functions, then $F(
 
 The derivation of the gluing function above doesn't actually do the function, nor the piecewise techniques involved, much justice. With this being said, it was derived with full generality, and other such derivations may need to deal with nuances more directly on a case-by-case basis (such as when $\min\paren{D_1}$ doesn't exist). Following this, I leave it as an exercise to the reader to derive this formula using, perhaps, induction, where each interval is finite (bounded above/below). This article \href{https://piecewise.org/exploration/gluing-functions}{Gluing Functions} can be used for inspiration.
 
-\subsection{Generalised gluing function}
+\subsection{Generalised gluing function in one dimension}
 Recall that in \ref{theorem:iverson_form} we explored the Iverson bracket form of a piecewise object when each condition was `disjoint'. That is, the following are equivalent:
 \begin{align*}
     \phi &= \pwobj{\varphi_i}{C_i}{i\in I} \\
@@ -98,5 +98,44 @@ $$
 $$
 
 In fact, we can reach our continuous gluing function formula if what we have is continuous, per our usual techniques (although since our sets are disjoint, we resort to using $\sup$ and $\inf$ rather than $\max$ and $\min$, respectively).
+
+\subsection{The triangle wave}
+Let us consider the function $f(x)=\arcsin\paren{\sin\paren{x}}$ (a similar function is $g(x)=\arccos\paren{\cos{x}}$ though we won't derive it here). This function, is, in fact, piecewise, and can be written as:
+$$
+    f(x) = \frac{\pi}{2}-\abs{x-\frac{\pi}{2}\paren*{1+4\floor*{\frac{x}{2\pi}+\frac{1}{4}}}}
+$$
+
+\begin{proof}
+    We use the techniques established in \ref{section:function_composition} to derive the above formula. Using the definition of $f(x)$ we have that:
+    \begin{align*}
+        f(x)=\arcsin\paren{\sin\paren{x}} &\implies \sin\paren{f(x)}=\sin\paren{x} \\
+        &\implies \sin\paren{f(x)}-\sin\paren{x}=0
+    \end{align*}
+
+    Recall the identity $\sin\paren{a}-\sin\paren{b}=2\sin\paren*{\frac{a-b}{2}}\cos\paren*{\frac{a+b}{2}}$, and so the above is equivalent to:
+    $$
+        2\sin\paren*{\frac{f(x)-x}{2}}\cos\paren*{\frac{f(x)+x}{2}}=0
+    $$
+
+    The solutions to this equation are as follows\footnotemark:
+    \begin{align}
+        \sin\paren*{\frac{f(x)-x}{2}}=0 &\implies f(x)=2m\pi+x & m\in\mathbb{Z} \\
+        \cos\paren*{\frac{f(x)+x}{2}}=0 &\implies f(x)=(2n+1)\pi-x & n\in\mathbb{Z}
+    \end{align}
+
+    \footnotetext{Note, if you're not familiar with how these identities and solutions have come about, while not necessary, it is a fun exercise to recognise how they have. I found that abusing Euler's formula to derive the formulas is pretty fun.}
+
+    From here, we use the fact that $f(x)\in\brak*{-\frac{\pi}{2},\frac{\pi}{2}}$ to establish respective domains for our solutions:
+    \begin{align}
+        2m\pi+x\in\brak*{-\frac{\pi}{2},\frac{\pi}{2}} &\implies x\in\brak*{-\frac{\pi}{2}(4m+1),-\frac{\pi}{2}(4m-1)} \\
+        (2n+1)\pi-x\in\brak*{-\frac{\pi}{2},\frac{\pi}{2}} &\implies x\in\brak*{\frac{\pi}{2}(4n+1),\frac{\pi}{2}(4n+3)}
+    \end{align}
+
+    From here, we write $f(x)$ in piecewise form (noting that it is a continuous function as both $\arcsin$, $\sin$ are elementary, continuous functions on $\mathbb{R}$), and also noting that we can rewrite $m\to-n$:
+    \begin{align*}
+        f(x) &= \pwobj{-2n\pi+x}{x\in\brak*{\frac{\pi}{2}(4n-1),\frac{\pi}{2}(4n+1)}}{n\in\mathbb{Z}} \\
+             &\cup \pwobj{(2n+1)\pi-x}{x\in\brak*{\frac{\pi}{2}(4n+1),\frac{\pi}{2}(4n+3)}}{n\in\mathbb{Z}}
+    \end{align*}
+\end{proof}
 
 \newpage
