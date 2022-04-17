@@ -1,5 +1,119 @@
 \section{Further Piecewise}
-Until now, we've been focusing on ways we can use existing functions to motivate forms for our own constructions.
+Until now, we've been focusing on ways we can use existing functions to motivate forms for our own constructions. It turns out there are far simpler methods of deriving what we have before using an interpolation-style approach with piecewise notation (which do in fact yield two important interpolation polynomials; Newton polynomials and Lagrange polynomials).
 
+\subsection{Anonymous piecewise objects}
+The name anonymous piecewise object is more or less misleading, but we use these objects as a basis for extending the definition of a piecewise object where not defined. Namely, given a piecewise object, we can formulate an expression which defines the behaviour of the piecewise object overall.
 
+When we describe an anonymous piecewise object, we're actually describing a (very infinite) set of possible objects which we can use to represent an existing piecewise object. We simply denote this by $\star$ inside a piecewise object for either conditions, pieces or both (though when in a condition, it's effectively equivalent to the condition `otherwise').
+
+\begin{example}
+    \label{example:anonymous_piecewise_1}
+    We wish to denote a function $f:\mathbb{R}\to\mathbb{R}$ such that $f(0)=0$ and $f(1)=1$ using an anonymous piecewise function. We do so by writing the following:
+
+    $$
+        f(x) = \begin{piecewise}
+            0 & x=0 \\
+            1 & x=1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    This represents a set of functions $f$ such that the above is satisfied. Also, by observation, a function $f(x)=x$ would satisfy this.
+
+    We can define, explicitly, $f(x)\in S$ where $S=\br*{f\in \mathcal{F}\mid f(0)=0\land f(1)=1}$ where $\mathcal{F}$ is the set of all functions from $\mathbb{R}$ to $\mathbb{R}$.
+\end{example}
+Any time we start manipulating such objects as will be discussed in this section, we reduce the number of functions that satisfy the piecewise definition provided. Generally, anonymous piecewise objects will be denoted (if the respective piecewise object is $\phi$) $\phi^\star$.
+
+\subsection{Polynomial extraction}
+We should distinguish initially between the sort of `extractions' we can perform on piecewise objects. The first of which is polynomial extraction, as we rely on the roots of a polynomial. In our case, these roots are formed by the pieces of our piecewise objects.
+
+The premise of this extraction is as follows: We can reduce the number of pieces of a piecewise object by vanishing any number of those pieces, and `extracting'. This extraction is done by means of multiplication and addition on the respective piece conditions.
+\begin{example}
+    Let us use the logical NOT function; that is, $f:\br{0,1}\to\br{0,1}$:
+    $$
+        f(x) = \begin{piecewise}
+            1 & x = 0 \\
+            0 & x = 1
+        \end{piecewise}
+    $$
+
+    Recall that previously we would have manipulated the piece values to match the conditions so as to simplify this piecewise function. Instead, we're going to `extract' the root corresponding to $x=1$; $x-1$ (since that piece is $0$):
+    $$
+        f(x) = (x-1)\begin{piecewise}
+            \frac{1}{x-1} & x=0 \\
+            0 & x=1
+        \end{piecewise}
+    $$
+
+    Since the entire expression is $0$ when $x=1$ outside of the piecewise object, we can remove the case when $x=1$ inside the piecewise object (adding in $\star$ to denote all other cases), thereby leaving us with:
+    $$
+        f(x) = (x-1)\begin{piecewise}
+            \frac{1}{x-1} & x=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Evaluating the piece value for when $x=0$ (using a substitution for $x$), we now have:
+    $$
+        f(x) = (x-1)\begin{piecewise}
+            -1 & x=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Since there's only one case we can use left, we reduce:
+    $$
+        f(x) = (x-1)(-1)
+    $$
+
+    And so $f(x)=1-x$. Or rather, $1-x\in S$ where $S$ is the set of all functions from $\br{0,1}\to\br{0,1}$ (though for simplicity we shall just say the former going forward).
+
+    As a disclaimer, this is only one possible function that can satisfy the above conditions. The reason we don't have all possible relevant functions as the result is because when we reduced our cases (not when we extracted the root, because they are equivalent forms), we eliminated the $x=1$ case explicitly. Likewise, when we reduced the final piecewise object down to a constant, we eliminated any remaining cases.
+\end{example}
+
+\begin{example}
+    We revisit the absolute value formula for $\max$ once again. Recall the piecewise definition of this function per \ref{section:max}.
+
+    We wish to derive the absolute value formula for $\max$:
+    $$
+        \max\br{a,b}=\begin{piecewise}
+            a & a\geq b \\
+            b & a\leq b
+        \end{piecewise}
+    $$
+
+    Recall that $a\geq b\iff \abs{a-b}=a-b$ and $a\leq b\iff \abs{a-b}=b-a$. We perform this substitution on these conditions, leaving us with:
+    $$
+        \max\br{a,b}=\begin{piecewise}
+            a & \abs{a-b}=a-b \\
+            b & \abs{a-b}=b-a
+        \end{piecewise}
+    $$
+
+    Subtracting $b$ out and `extracting' the second piece, we get:
+    $$
+        \max\br{a,b}=b+\paren*{\abs{a-b}+a-b}\begin{piecewise}
+            \frac{a-b}{\abs{a-b}+a-b} & \abs{a-b}=a-b \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Evaluating the remaining piece value, we have:
+    $$
+        \max\br{a,b}=b+\paren*{\abs{a-b}+a-b}\begin{piecewise}
+            \frac{a-b}{2(a-b)} & \abs{a-b}=a-b \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Simplifying:
+    \begin{align*}
+        \max\br{a,b} &= b+\frac{1}{2}\paren*{\abs{a-b}+a-b} \\
+        &= \frac{1}{2}\paren*{a+b+\abs{a-b}}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Let us revisit the Heaviside step function
+\end{example}
 \newpage
