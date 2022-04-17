@@ -131,11 +131,39 @@ $$
         (2n+1)\pi-x\in\brak*{-\frac{\pi}{2},\frac{\pi}{2}} &\implies x\in\brak*{\frac{\pi}{2}(4n+1),\frac{\pi}{2}(4n+3)}
     \end{align}
 
-    From here, we write $f(x)$ in piecewise form (noting that it is a continuous function as both $\arcsin$, $\sin$ are elementary, continuous functions on $\mathbb{R}$), and also noting that we can rewrite $m\to-n$:
+    From here, we write $f(x)$ in piecewise form (noting that it is a continuous function), and also rewriting $m\to-n$:
     \begin{align*}
         f(x) &= \pwobj{-2n\pi+x}{x\in\brak*{\frac{\pi}{2}(4n-1),\frac{\pi}{2}(4n+1)}}{n\in\mathbb{Z}} \\
              &\cup \pwobj{(2n+1)\pi-x}{x\in\brak*{\frac{\pi}{2}(4n+1),\frac{\pi}{2}(4n+3)}}{n\in\mathbb{Z}}
     \end{align*}
-\end{proof}
 
+    From here, let us define $g_n:x\in\brak*{\frac{\pi}{2}(4n-1),\frac{\pi}{2}(4n+3)}\to\mathbb{R}$ such that $g_n(x)=f(x)$. Therefore, we can write $g_n(x)$ as the following:
+    \begin{align*}
+        g_n(x) &= \begin{piecewise}
+            -2n\pi + x & x\leq \frac{\pi}{2}(4n+1) \\
+            (2n+1)\pi - x & x\geq \frac{\pi}{2}(4n+1)
+        \end{piecewise} \\
+        &= -2n\pi+\ell_{-\infty}^{\frac{\pi}{2}(4n+1)}\paren*{x}+(2n+1)\pi-\ell_{\frac{\pi}{2}(4n+1)}^{\infty}\paren*{x}-\frac{\pi}{2} \\
+        &= \frac{\pi}{2}-\paren*{\max\br*{x,\frac{\pi}{2}(4n+1)}-\min\br*{x,\frac{\pi}{2}(4n+1)}} \\
+        &= \frac{\pi}{2}-\abs{x-\frac{\pi}{2}(4n+1)}
+    \end{align*}
+
+    We can now rewrite $f(x)$ using $g_n(x)$:
+    $$
+        f(x) = \pwobj{\frac{\pi}{2}-\abs{x-\frac{\pi}{2}(4n+1)}}{x\in\brak*{\frac{\pi}{2}(4n-1),\frac{\pi}{2}(4n+3)}}{n\in\mathbb{Z}}
+    $$
+
+    Since we know this function is continuous, we can rewrite the conditions of $f(x)$ to match the floor function, and simplify from there:
+    \begin{align*}
+        f(x) &= \pwobj{\frac{\pi}{2}-\abs{x-\frac{\pi}{2}(4n+1)}}{\frac{x}{2\pi}+\frac{1}{4}\in\brakp*{n,n+1}}{n\in\mathbb{Z}} \\
+        &= \frac{\pi}{2}-\abs{\pwobj{x-\frac{\pi}{2}(4n+1)}{\frac{x}{2\pi}+\frac{1}{4}\in\brakp*{n,n+1}}{n\in\mathbb{Z}}} \\
+        &= \frac{\pi}{2}-\abs{x-\frac{\pi}{2}\paren*{1+4\pwobj{n}{\frac{x}{2\pi}+\frac{1}{4}\in\brakp*{n,n+1}}{n\in\mathbb{Z}}}} \\
+        &= \frac{\pi}{2}-\abs{x-\frac{\pi}{2}\paren*{1+4\floor*{\frac{x}{2\pi}+\frac{1}{4}}}}
+    \end{align*}
+\end{proof}
+This function can also be represented using the gluing formula we derived earlier and after simplification ends up being:
+\begin{align*}
+    f(x) &= \lim_{n\to\infty}{f_n(x)}, \\
+    f_n(x) &= n\pi+\frac{1}{2}\sum_{k=-n}^{n}{\paren*{\pi-\abs{\abs{x-\frac{\pi}{2}(4k-1)}-\abs{x-\frac{\pi}{2}(4k+3)}}}}
+\end{align*}
 \newpage
