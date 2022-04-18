@@ -74,6 +74,7 @@ The premise of this extraction is as follows: We can reduce the number of pieces
 \end{example}
 
 \begin{example}
+    \label{example:max_further}
     We revisit the absolute value formula for $\max$ once again. Recall the piecewise definition of this function per \ref{section:max}.
 
     We wish to derive the absolute value formula for $\max$:
@@ -116,6 +117,7 @@ The premise of this extraction is as follows: We can reduce the number of pieces
 \end{example}
 
 \begin{example}
+    \label{example:heaviside_further}
     Let us revisit the Heaviside step function:
     $$
         \step{x} = \begin{piecewise}
@@ -444,7 +446,62 @@ Where $\mu$ is some solution to the problem, $[\phi]$ is an object which vanishe
         In any case, suppose that two polynomials $p(x)$ and $q(x)$ minimally interpolate $n+1$ points (of degree $n$). Let us define a polynomial $r(x)=p(x)-q(x)$. For each point being interpolated we have $r(x)=0$; namely, $r(x)$ has $n+1$ distinct zeroes. However, since $\deg{r(x)}\leq n$, the fundamental theorem of algebra states that $r(x)$ can have at most $n$ zeroes unless $r(x)=0$. It therefore follows that $p(x)=q(x)$.
     \end{proof}
 \end{theorem}
+
 \subsection{Non-trivial piece conditions}
-\subsection{Further extraction}
+As per our regular piecewise properties, we can perform substitutions on piece conditions of a piecewise object. This is no different for anonymous piecewise objects, or even just piecewise objects when performing extractions as we have so far. With this being said, there are caveats.
+
+As we've observed with Examples \ref{example:max_further} and \ref{example:heaviside_further}, particularly with $\abs{x}$, overlapping conditions produce discontinuities and ambiguities. Sometimes, like in the former example, the resultant discontinuities are removable, but most times (such as in the latter example), they are not. Ultimately, operations on piecewise objects are only `nice' when these piecewise objects are well defined; it is important, therefore, to keep this in mind when performing piece condition substitution.
+
+\begin{theorem}
+    Given some piecewise object $\phi$ as defined below:
+    $$
+        \phi=\pwobj{\phi_i}{C_i}{i\in I}
+    $$
+
+    If there exists a substitution $C_i\leftrightarrow x_i=y_i$, then not only can we write $\phi$ as the following:
+    $$
+        \phi=\pwobj{\phi_i}{x_i=y_i}{i\in I}
+    $$
+
+    But we can also perform our extraction techniques on the piecewise object. For example, $x\geq y\iff \abs{x-y}=x-y$. This has previously been demonstrated, but we now make explicit this as a general technique.
+\end{theorem}
+
+This also means that when we interpolate a set of points, we needn't produce a polynomial in the variable being given.
+
+\begin{example}
+    We wish to produce a function, not strictly a polynomial, $f(x)$ such that $f(0)=0$, $f(1)=1$ and $f(\frac{\pi}{2})=1$.
+
+    We can do so, for example, per the following:
+    $$
+        f(x) = \begin{piecewise}
+            0 & x=0 \\
+            1 & x=1 \\
+            1 & x=\frac{\pi}{2} \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Let us substitute the condition $x=\frac{\pi}{2}\implies \sin\paren{x}=1$, noting that $f(x)$ remains well-defined:
+    $$
+        f(x) = \begin{piecewise}
+            0 & x=0 \\
+            1 & x=1 \\
+            1 & \sin\paren{x}=1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    From here, we'll subtract $1$ from the piecewise object so that we can extract the latter two pieces:
+    $$
+        f(x) = 1+(x-1)(\sin\paren{x}-1)\begin{piecewise}
+            \frac{-1}{(x-1)(\sin\paren{x}-1)} & x=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    This yields $f(x)=1-(x-1)(\sin\paren{x}-1)$.
+\end{example}
+
 \subsection{Equalities as conditions, and multiple conditions}
+\subsection{Further extraction}
 \newpage
