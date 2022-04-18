@@ -160,7 +160,7 @@ While we can continue to extract pieces progressively and do the appropriate man
 \subsubsection{Newton polynomials}
 Let $f:\mathbb{R}\to\mathbb{R}$ be a function such that $f(x_m)=y_m$ for $m\in\br{0,1,2,\dots,n}$. Then $f$ can be given by a Newton polynomial:
 $$
-    f(x) = \sum_{m=0}^{n}{[y_0,\dots,y_m]\prod_{l=0}^{m-1}{x-x_l}}
+    f(x) = \sum_{m=0}^{n}{[y_0,\dots,y_m]\prod_{l=0}^{m-1}{(x-x_l)}}
 $$
 
 Where $[y_0,\dots,y_m]$ denotes divided differences. That is, $[y_0]=y_0$, $[y_0,y_1]=\frac{y_1-y_0}{x_1-x_0}$, $[y_0,y_1,y_2]=\frac{[y_1,y_2]-[y_0,y_1]}{x_2-x_0}$, and so on.
@@ -499,9 +499,89 @@ This also means that when we interpolate a set of points, we needn't produce a p
         \end{piecewise}
     $$
 
-    This yields $f(x)=1-(x-1)(\sin\paren{x}-1)$.
+    This yields $f(x)=1-(x-1)(\sin\paren{x}-1)=x-x\sin\paren{x}+\sin\paren{x}$.
 \end{example}
+\subsection{Multiple conditions}
+Up until this point we've been dealing with piecewise objects whose pieces only have one condition (or objects whose conditions can't particularly be simplified by nesting); dealing with multiple conditions is far more difficult. With this being said, there are multiple strategies which we can employ to deal with various situations, including formulations for logical OR and logical AND.
 
-\subsection{Equalities as conditions, and multiple conditions}
+We begin by dealing with the cases wherein each condition is an equality of some kind.
+\begin{theorem}
+    Suppose $x\in S$ where $S$ is some nicely-defined set. If the following expression exists, we can describe $x$ in a single equality using the following:
+    $$
+        \prod_{s\in S}{(x-s)}=0
+    $$
+    This is sometimes known as the null factor law.
+
+    \begin{proof}
+        \label{theorem:set_variable}
+        Let $x\in S$ denote the following piecewise object which is not well-defined:
+        $$
+            x = \pwobj{s}{x=s}{s\in S}
+        $$
+        That is, $x$ is equal to all elements in the set it is itself an element of. Using this, we have that:
+        $$
+            \pwobj{x-s}{x=s}{s\in S}=0
+        $$
+
+        Since $x=s$ in each piece, we have $x-s=0$ and so simplifying each piece we get:
+        $$
+            \pwobj{0}{x=s}{s\in S}=0
+        $$
+
+        Extracting each piece yields:
+        $$
+            \prod_{s\in S}{(x-s)}=0
+        $$
+    \end{proof}
+\end{theorem}
+\begin{theorem}
+    \label{theorem:logical_or_equality}
+    The following is a logical OR simplification for equalities.
+
+    Suppose we have a condition $A\leftrightarrow \displaystyle\bigvee_{i\in I}{A_i}$ such that $A_i\leftrightarrow(x_i=y_i)$. Then we have that $A$ can be given by the following:
+    $$
+        A\leftrightarrow\prod_{i\in I}{(x_i-y_i)}=0
+    $$
+
+    \begin{proof}
+        For all $i\in I$ we have that $x_i=y_i\implies x_i-y_i=0$. It therefore stands to reason that $0\in\br*{x_i-y_i\mid i\in I}\leftrightarrow A$.
+
+        By \ref{theorem:set_variable} we have that $A\leftrightarrow \prod_{i\in I}{(x_i-y_i)}=0$.
+    \end{proof}
+\end{theorem}
+\begin{theorem}
+    The following is a logical AND simplification for equalities.
+
+    Suppose we have a condition $A\leftrightarrow \displaystyle\bigwedge_{i\in I}{A_i}$ such that $A_i\leftrightarrow(x_i=y_i)$. Then we have that $A$ can be given by the following:
+    $$
+        A\leftrightarrow\sum_{i\in I}{p_i(x_i-y_i)}=0
+    $$
+    Where $p_i$ is some function such that $p_i(x)=0\iff x=0$, and $p_i(x)\geq 0$.
+
+    \begin{proof}
+        Let $\vec{v}$ be a vector with components $p_i(x_i-y_i)$ for $i\in I$. Consider that the following are equivalent statements:
+        \begin{align*}
+            \vec{v} &= \mathbf{0} \\
+            \bigwedge_{i\in I}{p_i(x_i-y_i)} &= 0
+        \end{align*}
+
+        We can take the norm of the latter statement, giving us:
+        $$
+            \sum_{i\in I}{\abs{p_i(x_i-y_i)}}=0
+        $$
+
+        Since $p_i\geq 0$, we have that:
+        $$
+            \sum_{i\in I}{p_i(x_i-y_i)}=0
+        $$
+
+        To prove that this is an iff relationship, let $j\in I$. Using the above statement, we have:
+        $$
+            p_j(x_j-y_j)=-\sum_{\substack{i\in I\\i\neq j}}{p_i(x_i-y_i)}\leq 0
+        $$
+
+        But since $p_j(x_j-y_j)\geq 0$, we have that $p_j(x_j-y_j)=0$ for all $j\in I$.
+    \end{proof}
+\end{theorem}
 \subsection{Further extraction}
 \newpage
