@@ -4,7 +4,7 @@ Until now, we've been focusing on ways we can use existing functions to motivate
 \subsection{Anonymous piecewise objects}
 The name anonymous piecewise object is more or less misleading, but we use these objects as a basis for extending the definition of a piecewise object where not defined. Namely, given a piecewise object, we can formulate an expression which defines the behaviour of the piecewise object overall.
 
-When we describe an anonymous piecewise object, we're actually describing a (very infinite) set of possible objects which we can use to represent an existing piecewise object. We simply denote this by $\star$ inside a piecewise object for either conditions, pieces or both (though when in a condition, it's effectively equivalent to the condition `otherwise').
+When we describe an anonymous piecewise object, we're actually describing a (very infinite) set of possible objects which we can use to represent an existing piecewise object. We simply denote this by $\star$ inside a piecewise object for either conditions, piece values or both (though when in a condition, it's effectively equivalent to the condition `otherwise').
 
 \begin{example}
     \label{example:anonymous_piecewise_1}
@@ -21,6 +21,8 @@ When we describe an anonymous piecewise object, we're actually describing a (ver
     This represents a set of functions $f$ such that the above is satisfied. Also, by observation, a function $f(x)=x$ would satisfy this.
 
     We can define, explicitly, $f(x)\in S$ where $S=\br*{f\in \mathcal{F}\mid f(0)=0\land f(1)=1}$ where $\mathcal{F}$ is the set of all functions from $\mathbb{R}$ to $\mathbb{R}$.
+
+    For the purposes of most of the working here, we \textit{minimally} interpolate (namely we don't consider more general solutions unless explicitly stated, though this will be explored).
 \end{example}
 Any time we start manipulating such objects as will be discussed in this section, we reduce the number of functions that satisfy the piecewise definition provided. Generally, anonymous piecewise objects will be denoted (if the respective piecewise object is $\phi$) $\phi^\star$.
 
@@ -45,7 +47,7 @@ The premise of this extraction is as follows: We can reduce the number of pieces
         \end{piecewise}
     $$
 
-    Since the entire expression is $0$ when $x=1$ outside of the piecewise object, we can remove the case when $x=1$ inside the piecewise object (adding in $\star$ to denote all other cases), thereby leaving us with:
+    Since the entire expression is $0$ when $x=1$ outside of the piecewise object, we can remove the piece when $x=1$ inside the piecewise object (adding in $\star$ to denote all other pieces), thereby leaving us with:
     $$
         f(x) = (x-1)\begin{piecewise}
             \frac{1}{x-1} & x=0 \\
@@ -61,14 +63,14 @@ The premise of this extraction is as follows: We can reduce the number of pieces
         \end{piecewise}
     $$
 
-    Since there's only one case we can use left, we reduce:
+    Since there's only one piece we can use left, we reduce:
     $$
         f(x) = (x-1)(-1)
     $$
 
     And so $f(x)=1-x$. Or rather, $1-x\in S$ where $S$ is the set of all functions from $\br{0,1}\to\br{0,1}$ (though for simplicity we shall just say the former going forward).
 
-    As a disclaimer, this is only one possible function that can satisfy the above conditions. The reason we don't have all possible relevant functions as the result is because when we reduced our cases (not when we extracted the root, because they are equivalent forms), we eliminated the $x=1$ case explicitly. Likewise, when we reduced the final piecewise object down to a constant, we eliminated any remaining cases.
+    As a disclaimer, this is only one possible function that can satisfy the above conditions. The reason we don't have all possible relevant functions as the result is because when we reduced our pieces (not when we extracted the root, because they are equivalent forms), we eliminated the $x=1$ piece explicitly. Likewise, when we reduced the final piecewise object down to a constant, we eliminated any remaining cases.
 \end{example}
 
 \begin{example}
@@ -114,6 +116,325 @@ The premise of this extraction is as follows: We can reduce the number of pieces
 \end{example}
 
 \begin{example}
-    Let us revisit the Heaviside step function
+    Let us revisit the Heaviside step function:
+    $$
+        \step{x} = \begin{piecewise}
+            1 & x > 0 \\
+            0 & x < 0
+        \end{piecewise}
+    $$
+
+    To rewrite this function in terms of $\sgn{x}$, recall that $x>0\iff \sgn{x}=1$ and likewise $x<0\iff \sgn{x}=-1$:
+    $$
+        \step{x} = \begin{piecewise}
+            1 & \sgn{x}=1 \\
+            0 & \sgn{x}=-1
+        \end{piecewise}
+    $$
+
+    Extracting the second piece, we have:
+    $$
+        \step{x} = (\sgn{x}+1)\begin{piecewise}
+            \frac{1}{\sgn{x}+1} & \sgn{x} = 1\\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Evaluating the remaining piece and simplifying gives:
+    $$
+        \step{x} = \frac{\sgn{x}+1}{2}
+    $$
+
+    An interesting byproduct of this is that should $\step{0}$ be defined, this interpolation would give $\step{0}=\frac{1}{2}$.
+
+    Furthermore if $\abs{x}$ were used instead of $\sgn{x}$ we would have that:
+    $$
+        \step{x} = \frac{\abs{x}+x}{2x}
+    $$
 \end{example}
+
+While we can continue to extract pieces progressively and do the appropriate manipulation to simplify, there are 2 slightly different processes we can perform which yield Newton and Lagrange polynomials.
+
+\subsubsection{Newton polynomials}
+Let $f:\mathbb{R}\to\mathbb{R}$ be a function such that $f(x_m)=y_m$ for $m\in\br{0,1,2,\dots,n}$. Then $f$ can be given by a Newton polynomial:
+$$
+    f(x) = \sum_{m=0}^{n}{[y_0,\dots,y_m]\prod_{l=0}^{m-1}{x-x_l}}
+$$
+
+Where $[y_0,\dots,y_m]$ denotes divided differences. That is, $[y_0]=y_0$, $[y_0,y_1]=\frac{y_1-y_0}{x_1-x_0}$, $[y_0,y_1,y_2]=\frac{[y_1,y_2]-[y_0,y_1]}{x_2-x_0}$, and so on.
+
+\begin{theorem}
+    A Newton polynomial is formed by nesting pieces inside a piecewise object and recursively interpolating. Setting up the interpolation problem, we have:
+    $$
+        f(x) = \begin{piecewise}
+            y_0 & x=x_0 \\
+            y_1 & x=x_1 \\
+            \vdots & \vdots \\
+            y_n & x=x_n \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Let us denote $f(x)=f_{n}(x)$ and then nest pieces $x=x_0,x_2,\dots,x_{n-1}$:
+    $$
+        f(x) = \begin{piecewise}
+            \begin{piecewise}
+                y_0 & x=x_0 \\
+                y_1 & x=x_1 \\
+                \vdots & \vdots \\
+                y_{n-1} & x=x_{n-1} \\
+                \star & \star
+            \end{piecewise} & (x-x_0)(x-x_1)\dots(x-x_{n-1})=0\\
+            y_n & x=x_n \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    How we achieved the condition on the nested piecewise function will be discussed later. Let us denote the nested piecewise function $f_{n-1}(x)$ such that:
+    $$
+        f_{n}(x) = \begin{piecewise}
+            f_{n-1}(x) & (x-x_0)(x-x_1)\dots(x-x_{n-1})=0 \\
+            y_{n} & x=x_n \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Now, we have a recurrence relation in $f_{n}(x)$, given that $f_{0}(x)=y_0$ (since we a constant function satisfies the definition in this case). Extracting the first piece, containing the recurrence, we have:
+    $$
+        f_{n}(x)=f_{n-1}(x)+\paren*{\prod_{m=0}^{n-1}{(x-x_m)}}\begin{piecewise}
+            \frac{y_{n}-f_{n-1}(x)}{\prod_{m=0}^{n-1}{(x-x_m)}} & x=x_{n} \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Evaluating the last piece value and simplifying, we get:
+    \begin{align*}
+        f_{n}(x) &=f_{n-1}(x)+\frac{y_{n}-f_{n-1}(x_{n})}{\prod_{m=0}^{n-1}{(x_{n}-x_m)}}\prod_{m=0}^{n-1}{(x-x_m)} \\
+        f_{0}(x) &= y_0
+    \end{align*}
+\end{theorem}
+
+\begin{example}
+    We wish to find a Newton polynomial $f$ corresponding to $f(0)=0$, $f(1)=1$ and $f(2)=4$.
+
+    We begin by writing this problem piecewise:
+    $$
+        f(x) = \begin{piecewise}
+            0 & x=0 \\
+            1 & x=1 \\
+            4 & x=2 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    We now nest:
+    $$
+        f(x) = \begin{piecewise}
+            0 & x=0 \\
+            \begin{piecewise}
+                1 & x=1 \\
+                4 & x=2 \\
+                \star & \star
+            \end{piecewise} & (x-1)(x-2)=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    We needn't do this again for our nested piecewise object, but we should instead focus on finding a Newton polynomial form of it:
+    $$
+        \begin{piecewise}
+            1 & x=1 \\
+            4 & x=2 \\
+            \star & \star
+        \end{piecewise} = 1+(x-1)\begin{piecewise}
+            \frac{3}{1} & x=2 \\
+            \star & \star
+        \end{piecewise} = 1+3(x-1)
+    $$
+
+    Substituting this into $f(x)$ we have:
+    $$
+        f(x) = \begin{piecewise}
+            0 & x=0 \\
+            1+3(x-1) & (x-1)(x-2)=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Performing an extraction on the second piece once again we get:
+    $$
+        f(x) = 1+3(x-1)+(x-1)(x-2)\begin{piecewise}
+            \frac{-(1+3(x-1))}{(x-1)(x-2)} & x=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    We now evaluate the remaining piece, $x=0$ gives $1$, and simplify:
+    $$
+        f(x) = 1+3(x-1)+(x-1)(x-2)
+    $$
+
+    And this gives us a solution for our initial interpolation problem. Also notice that if $f(x)$ is simplified, it gives $x^2$.
+\end{example}
+
+\subsubsection{Lagrange polynomials}
+Let $f:\mathbb{R}\to\mathbb{R}$ be a function such that $f(x_m)=y_m$ for $m\in\br{0,1,2,\dots,n}$. Then $f$ can be given by a Lagrange polynomial:
+$$
+    f(x) = \sum_{m=0}^{n}{y_m\prod_{l=0}^{n}{\frac{x-x_l}{x_m-x_l}}}
+$$
+
+This form might seem familiar; recall \ref{theorem:iverson_form}. The form of this sum looks similar to the Iverson form of a piecewise object, except that each polynomial term in the sum approximates the Iverson bracket $[x=x_m]$ for some $m$. This is not, in fact, coincidence (and will be covered soon).
+
+\begin{theorem}
+    Lagrange polynomials can be formed by separating each piece into its own piecewise object with roots at every other piece, and then interpolating. Setting up our interpolation problem, we have:
+    $$
+        f(x) = \begin{piecewise}
+            y_0 & x=x_0 \\
+            y_1 & x=x_1 \\
+            \vdots & \vdots \\
+            y_n & x=x_n
+        \end{piecewise}
+    $$
+
+    We can now separate our pieces, similarly to $\ref{theorem:iverson_form}$:
+    $$
+        f(x) = \begin{piecewise}
+            y_0 & x=x_0 \\
+            0 & x=x_1 \\
+            \vdots & \vdots \\
+            0 & x=x_n \\
+            \star & \star
+        \end{piecewise} + \begin{piecewise}
+            0 & x=x_0 \\
+            y_1 & x=x_1 \\
+            \vdots & \vdots \\
+            0 & x=x_n \\
+            \star & \star
+        \end{piecewise} + \dots + \begin{piecewise}
+            0 & x=x_0 \\
+            0 & x=x_1 \\
+            \vdots & \vdots \\
+            y_n & x=x_n \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    From here, we can interpolate each anonymous piecewise object independently, by extracting each zero piece and simplifying, giving us the Lagrange polynomial as needed.
+\end{theorem}
+
+\subsubsection{General solutions}
+As we've seen so far, we've only been producing one solution of a polynomial kind for a set of values for which we wish to interpolate or create an expression for. In general, when we interpolate or perform these extractions, we produce an object in simplified form akin to the following:
+$$
+    \phi^\star = \mu + [\phi]\cdot r
+$$
+Where $\mu$ is some solution to the problem, $[\phi]$ is an object which vanishes at the conditions given to us, called a decider (i.e. when those conditions are true), and $r$ is some arbitrary object which generalises our single solution.
+
+\begin{theorem}
+    For a polynomial extraction-based anonymous piecewise object problem, we define $\phi^\star$ as the following:
+    $$
+        \phi^\star = \begin{piecewise}
+            \phi & \text{$\phi$ is defined} \\
+            \star & \text{$\phi$ is not defined}
+        \end{piecewise}
+    $$
+
+    There are an infinite number of ways to interpret this, however let us define $\mu$ such that $\mu$ is a `solution' to $\phi^\star$ (that is, it satisfies the definition as above):
+    $$
+        \mu = \begin{piecewise}
+            \phi & \text{$\phi$ is defined} \\
+            \star & \text{$\phi$ is not defined}
+        \end{piecewise}
+    $$
+
+    Therefore, since $\mu=\phi$ for when $\phi$ is defined, we can write $\phi^\star$ as:
+    $$
+        \phi^\star = \mu + \begin{piecewise}
+            0 & \text{$\phi$ is defined} \\
+            \star & \text{$\phi$ is not defined}
+        \end{piecewise}
+    $$
+
+    Let $[\phi]$ be a `decider' object of this problem (that is, it vanishes where $\phi$ is defined). Then we're left with, for some arbitrary $r$:
+    $$
+        \phi^\star = \mu + [\phi]\cdot r
+    $$
+\end{theorem}
+
+\begin{theorem}
+    The decider of a polynomial interpolation problem with points $\br{(x_0,y_0),(x_1,y_1),\dots,(x_n,y_n)}$ can be given by $\prod_{m=0}^{n}{(x-x_m)}$.
+
+    \begin{proof}
+        We denote the corresponding function $F$ as per the following:
+        $$
+            F(x) = \begin{piecewise}
+                y_0 & x=x_0 \\
+                y_1 & x=x_1 \\
+                \vdots & \vdots \\
+                y_n & x=x_n
+            \end{piecewise}
+        $$
+
+        We can rewrite this function as the following:
+        $$
+            F(x) = \begin{piecewise}
+                y_0 & x=x_0 \\
+                y_1 & x=x_1 \\
+                \vdots & \vdots \\
+                y_n & x=x_n \\
+                \star & \star
+            \end{piecewise} + \begin{piecewise}
+                0 & x=x_0 \\
+                0 & x=x_1 \\
+                \vdots & \vdots \\
+                0 & x=x_n \\
+                \star & \star
+            \end{piecewise}
+        $$
+
+        Extracting the pieces from the second piecewise function, we have:
+        $$
+            F(x) = \begin{piecewise}
+                y_0 & x=x_0 \\
+                y_1 & x=x_1 \\
+                \vdots & \vdots \\
+                y_n & x=x_n \\
+                \star & \star
+            \end{piecewise} + \begin{piecewise}
+                \star & \star
+            \end{piecewise}\cdot\prod_{m=0}^{n}{(x-x_m)}
+        $$
+
+        Noting that the first piecewise object can be considered a solution, $f$, to the original problem, and the latter piecewise object is arbitrary, e.g. $r$, we have:
+        $$
+            F(x) = f(x)+r(x)\cdot\prod_{m=0}^{n}{(x-x_m)}
+        $$
+
+        Per our definition, we have $\prod_{m=0}^{n}{(x-x_m)}$ as our decider.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let us define a polynomial interpolation problem with the points $\br{(x_0,y_0),(x_1,y_1),\dots,(x_n,y_n)}$. Then we have that the function $F(x)=f(x)+r(x)\prod_{m=0}^{n}{(x-x_m)}$ describes all possible solutions to this problem, where $r(x)$ is an arbitrary polynomial.
+
+    \begin{proof}
+        While not relevant to the proof, note that the function $F(x)=f(x)+r(x)\prod_{m=0}^{n}{(x-x_m)}$ comes from our general solution form for $\phi^\star$, where the decider of this function is $\prod_{m=0}^{n}{(x-x_m)}$.
+
+        Let us denote the function $P(x)=F(x)-f(x)$
+
+        Since $P(x_m)=0$ by definition for $m\in\br{0,1,\dots,n}$, we have that each $(x-x_m)$ is a root of $P(x)$ by the factor theorem. Therefore, the following is a polynomial:
+        $$
+            Q(x)=\frac{P(x)}{\prod_{m=0}^{n}{(x-x_m)}}\implies P(x)=Q(x)\prod_{m=0}^{n}{(x-x_m)}
+        $$
+
+        Using the definition of $P(x)$ we therefore have that:
+        $$
+            F(x)=f(x)+Q(x)\prod_{m=0}^{n}{(x-x_m)}
+        $$
+
+        Noting that $Q(x)$ is still some arbitrary polynomial as given.
+    \end{proof}
+\end{theorem}
+\subsection{Non-trivial piece conditions}
+\subsection{Further extraction}
+\subsection{Equalities as conditions, and multiple conditions}
 \newpage
