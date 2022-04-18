@@ -2,12 +2,17 @@
 
 \usepackage{piecewise}
 
+% prepare glossary
+\input{glossary.tex}
+
 \begin{document}
 
+% pre-body stuff
 \maketitle
 \tableofcontents
 \newpage
 
+% body stuff
 \part{Foundations}
 \import{chapters/}{1-introduction.tex}
 \import{chapters/}{2-notation.tex}
@@ -18,5 +23,11 @@
 \part{Constructions}
 \import{chapters/}{6-gluing-functions.tex}
 \import{chapters/}{7-furthering-techniques.tex}
+
+% appendix stuff
+\part{Appendix}
+\setglossarystyle{altlist}
+\printglossary[title=Glossary, toctitle=Glossary]
+\glsaddallunused
 
 \end{document}
