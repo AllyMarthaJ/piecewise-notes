@@ -280,7 +280,7 @@ Where $[y_0,\dots,y_m]$ denotes divided differences. That is, $[y_0]=y_0$, $[y_0
 \subsubsection{Lagrange polynomials}
 Let $f:\mathbb{R}\to\mathbb{R}$ be a function such that $f(x_m)=y_m$ for $m\in\br{0,1,2,\dots,n}$. Then $f$ can be given by a Lagrange polynomial:
 $$
-    f(x) = \sum_{m=0}^{n}{y_m\prod_{l=0}^{n}{\frac{x-x_l}{x_m-x_l}}}
+    f(x) = \sum_{m=0}^{n}{y_m\prod_{\substack{l=0\\l\neq m}}^{n}{\frac{x-x_l}{x_m-x_l}}}
 $$
 
 This form might seem familiar; recall \ref{theorem:iverson_form}. The form of this sum looks similar to the Iverson form of a piecewise object, except that each polynomial term in the sum approximates the Iverson bracket $[x=x_m]$ for some $m$. This is not, in fact, coincidence (and will be covered soon).
@@ -432,6 +432,16 @@ Where $\mu$ is some solution to the problem, $[\phi]$ is an object which vanishe
         $$
 
         Noting that $Q(x)$ is still some arbitrary polynomial as given.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    A polynomial of degree $n$ can be minimally interpolated using $n+1$ distinct points, and such polynomials are unique.
+
+    \begin{proof}
+        Convince yourself that a Lagrange or Newton polynomial as derived above with $n+1$ points produces a polynomial of degree $n$ (without a general solution). Since we've derived these formulas piecewise, it is straightforward to do so: count the number of extractions, corresponding to the number of roots.
+
+        In any case, suppose that two polynomials $p(x)$ and $q(x)$ minimally interpolate $n+1$ points (of degree $n$). Let us define a polynomial $r(x)=p(x)-q(x)$. For each point being interpolated we have $r(x)=0$; namely, $r(x)$ has $n+1$ distinct zeroes. However, since $\deg{r(x)}\leq n$, the fundamental theorem of algebra states that $r(x)$ can have at most $n$ zeroes unless $r(x)=0$. It therefore follows that $p(x)=q(x)$.
     \end{proof}
 \end{theorem}
 \subsection{Non-trivial piece conditions}
