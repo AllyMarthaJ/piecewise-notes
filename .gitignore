@@ -9,5 +9,9 @@
 *.thm
 *.out
 
+# glossaries
+*.gl*
+*.ist
+
 # prefs
 .vscode
