@@ -129,7 +129,7 @@ $$
 
 This can be interpreted similarly to before, though we now have that $\varphi=\varphi_{1,i}$ if $A_i$ is true for some $i$, or $\varphi=\varphi_{2,j}$ is $B_j$ is true for some $j$.
 
-Notably, this notation can be used to express individual pieces explicitly in a piecewise object rather than collectively. If such a piece isn't dependent on the iterator, we can ignore that part entirely (keeping in mind we might be able to rewrite it using an iterator later on).
+Notably, this notation can be used to express individual pieces explicitly in a piecewise object rather than collectively.
 
 \begin{example}
     \label{example:abs_2}
@@ -137,9 +137,8 @@ Notably, this notation can be used to express individual pieces explicitly in a 
     Recall the absolute value function; see Example \ref{example:abs_1}.
 
     We can then express $\abs{x}$ as:
-
     $$
-        \abs{x} = \pwarg{x}{x\geq 0}\cup\pwarg{-x}{x\leq 0}
+        \abs{x} = \pwobj{mx}{mx\geq 0}{m\in\br{-1,1}}
     $$
 \end{example}
 

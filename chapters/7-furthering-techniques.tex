@@ -502,13 +502,13 @@ This also means that when we interpolate a set of points, we needn't produce a p
     This yields $f(x)=1-(x-1)(\sin\paren{x}-1)=x-x\sin\paren{x}+\sin\paren{x}$.
 \end{example}
 \subsection{Multiple conditions}
-Up until this point we've been dealing with piecewise objects whose pieces only have one condition (or objects whose conditions can't particularly be simplified by nesting); dealing with multiple conditions is far more difficult. With this being said, there are multiple strategies which we can employ to deal with various situations, including formulations for logical OR and logical AND.
+Up until this point we've been dealing with piecewise objects whose pieces only have one condition (or objects whose conditions can't particularly be simplified by nesting); dealing with multiple conditions is far more difficult. With this being said, there are multiple strategies which we can employ to deal with various situations, including formulations for logical `or' and logical `and'.
 
 We begin by dealing with the cases wherein each condition is an equality of some kind.
 \begin{theorem}
     Suppose $x\in S$ where $S$ is some nicely-defined set. If the following expression exists, we can describe $x$ in a single equality using the following:
     $$
-        \prod_{s\in S}{(x-s)}=0
+        x\in S\iff \prod_{s\in S}{(x-s)}=0
     $$
     This is sometimes known as the null factor law.
 
@@ -536,7 +536,7 @@ We begin by dealing with the cases wherein each condition is an equality of some
 \end{theorem}
 \begin{theorem}
     \label{theorem:logical_or_equality}
-    The following is a logical OR simplification for equalities.
+    The following is a logical `or' simplification for equalities.
 
     Suppose we have a condition $A\leftrightarrow \displaystyle\bigvee_{i\in I}{A_i}$ such that $A_i\leftrightarrow(x_i=y_i)$. Then we have that $A$ can be given by the following:
     $$
@@ -550,7 +550,7 @@ We begin by dealing with the cases wherein each condition is an equality of some
     \end{proof}
 \end{theorem}
 \begin{theorem}
-    The following is a logical AND simplification for equalities.
+    The following is a logical `or' simplification for equalities.
 
     Suppose we have a condition $A\leftrightarrow \displaystyle\bigwedge_{i\in I}{A_i}$ such that $A_i\leftrightarrow(x_i=y_i)$. Then we have that $A$ can be given by the following:
     $$
