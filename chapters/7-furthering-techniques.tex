@@ -508,7 +508,7 @@ We begin by dealing with the cases wherein each condition is an equality of some
 \begin{theorem}
     Suppose $x\in S$ where $S$ is some nicely-defined set. If the following expression exists, we can describe $x$ in a single equality using the following:
     $$
-        x\in S\iff \prod_{s\in S}{(x-s)}=0
+        x\in S\leftrightarrow \prod_{s\in S}{(x-s)}=0
     $$
     This is sometimes known as the null factor law.
 
@@ -561,8 +561,8 @@ We begin by dealing with the cases wherein each condition is an equality of some
     \begin{proof}
         Let $\vec{v}$ be a vector with components $p_i(x_i-y_i)$ for $i\in I$. Consider that the following are equivalent statements:
         \begin{align*}
-            \vec{v} &= \mathbf{0} \\
-            \bigwedge_{i\in I}{p_i(x_i-y_i)} &= 0
+            &\vec{v} = \mathbf{0} \\
+            &\bigwedge_{i\in I}{\paren*{p_i(x_i-y_i) = 0}}
         \end{align*}
 
         We can take the norm of the latter statement, giving us:
@@ -583,5 +583,90 @@ We begin by dealing with the cases wherein each condition is an equality of some
         But since $p_j(x_j-y_j)\geq 0$, we have that $p_j(x_j-y_j)=0$ for all $j\in I$.
     \end{proof}
 \end{theorem}
+
 \subsection{Further extraction}
+\textit{Note, this is very much a section I wish to work on further and requires more knowledge in abstract algebra than I currently possess. As it stands I'm missing terminology, concepts and whatever else.}
+
+So far, we've been doing what I call in these notes `polynomial extraction'. Really, this is a process of two major steps: addition and multiplication, and then their respective inverses. That is, for each piece, we've vanished the piece value by adding (and subtracting), and then by reducing by multiplying the corresponding root (and dividing in each other piece), given by the piece condition. As it turns out, this process is not restricted to these operations.
+
+Let $S$ be a set such that we have binary operations $f:S^2\to S$, $g:S^2\to S$, $f^{-1}:S^2\to S$, $g^{-1}:S^2\to S$ with the properties (for all $x,y\in S$):
+\begin{align*}
+    f(f^{-1}(x,y),y) &= x \\
+    \exists a\in S\ni f^{-1}(x,x) &= a \\
+    f(a,x) &= x & \textit{(by the first two properties)} \\
+    g(g^{-1}(x,y),y) &= x \\
+    \exists b\in S\ni g(x,b) &= a
+\end{align*}
+Where $a,b$ are special elements of $S$ (and $\ni$ refers to `such that').
+
+Then, our polynomial extraction processes uses the operations: $f(x,y)=x+y$, $f^{-1}(x,y)=x-y$, $g(x,y)=x\cdot y$ and $g^{-1}(x,y)=\frac{x}{y}$.
+
+There is, in fact, another: exponential extraction. That is we define $f(x,y)=x\cdot y$, $f^{-1}(x,y)=\frac{x}{y}$, $g(x,y)=x^y$ and $g^{-1}(x,y)=x^\frac{1}{y}$.
+
+A few notes to be made here: firstly, we don't strictly have to define our operations in such a way (there are other ways to do so, such as changing the order of inverses and whatnot). Furthermore, our substitution property holds regardless of extraction method, where appropriate or applicable. In any case, we can actually derive these properties from an `ideal' process such as with the polynomial or exponential extractions.
+
+\begin{example}
+    Let us motivate these properties using an interpolation problem for points $(0,u)$ and $(1,v)$.
+
+    \par\textbf{Polynomial interpolation.}
+    \begin{align*}
+        F(x) &= \begin{piecewise}
+            u & x=0 \\
+            v & x=1 \\
+            \star & \star
+        \end{piecewise} \\
+        &= \begin{piecewise}
+            0 & x=0 \\
+            v-u & x=1 \\
+            \star & \star
+        \end{piecewise}+u \\
+        &= \begin{piecewise}
+            \frac{v-u}{x} & x=1
+        \end{piecewise}\cdot x+u \\
+        &= (v-u)x+u
+    \end{align*}
+
+    \par\textbf{Generalised interpolation.}
+    Let $g:S\to S$ be a function such that $G(0)=b$.
+    \begin{align*}
+        F(x) &= \begin{piecewise}
+            u & x=0 \\
+            v & x=1 \\
+            \star & \star
+        \end{piecewise} \\
+        &= f\paren*{\begin{piecewise}
+            f^{-1}(u,u) & x=0 \\
+            f^{-1}(v,u) & x=1 \\
+            \star & \star
+        \end{piecewise},u} \\
+        &= f\paren*{\begin{piecewise}
+            a & G(x)=b \\
+            f^{-1}(v,u) & G(x)=G(1) \\
+            \star & \star
+        \end{piecewise},u} \\
+        &= f\paren*{g\paren*{\begin{piecewise}
+            g^{-1}\paren*{f^{-1}(v,u),G(x)} & G(x)=G(1) \\
+            \star & \star
+        \end{piecewise},G(x)},u} \\
+        &= f\paren*{g\paren*{g^{-1}\paren*{f^{-1}(v,u),G(1)},G(x)},u}
+    \end{align*}
+\end{example}
+
+\begin{theorem}
+    An Anonymous Piecewise Object is given by the following:
+    $$
+        \phi^\star = \begin{piecewise}
+            \phi & \text{$\phi$ is defined} \\
+            \star & \text{$\phi$ is not defined}
+        \end{piecewise}
+    $$
+
+    Let $\mu$ be a solution to $\phi^\star$ given our operations. Then we can write $\phi^\star$ as:
+    $$
+        \phi^\star = f\paren*{g\paren*{r,[\phi]},\mu}
+    $$
+    Where $r$ is some arbitrary object, $[\phi]$ is the decider object (i.e. $[\phi]=b$ when $\phi$ is defined) and $\mu$ is a solution to $\phi^\star$.
+\end{theorem}
+
+
 \newpage
