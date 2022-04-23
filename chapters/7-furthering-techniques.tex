@@ -416,7 +416,9 @@ Where $\mu$ is some solution to the problem, $[\phi]$ is an object which vanishe
 \end{theorem}
 
 \begin{theorem}
-    Let us define a polynomial interpolation problem with the points $\br{(x_0,y_0),(x_1,y_1),\dots,(x_n,y_n)}$. Then we have that the function $F(x)=f(x)+r(x)\prod_{m=0}^{n}{(x-x_m)}$ describes all possible solutions to this problem, where $r(x)$ is an arbitrary polynomial.
+    Let us define a polynomial interpolation problem with the points $\br{(x_0,y_0),\dots,(x_n,y_n)}$.
+
+    Then we have that the function $F(x)=f(x)+r(x)\prod_{m=0}^{n}{(x-x_m)}$ describes all possible solutions to this problem, where $r(x)$ is an arbitrary polynomial.
 
     \begin{proof}
         While not relevant to the proof, note that the function $F(x)=f(x)+r(x)\prod_{m=0}^{n}{(x-x_m)}$ comes from our general solution form for $\phi^\star$, where the decider of this function is $\prod_{m=0}^{n}{(x-x_m)}$.
@@ -653,7 +655,7 @@ A few notes to be made here: firstly, we don't strictly have to define our opera
 \end{example}
 
 \begin{theorem}
-    An Anonymous Piecewise Object is given by the following:
+    An anonymous piecewise object is given by the following:
     $$
         \phi^\star = \begin{piecewise}
             \phi & \text{$\phi$ is defined} \\
@@ -667,6 +669,5 @@ A few notes to be made here: firstly, we don't strictly have to define our opera
     $$
     Where $r$ is some arbitrary object, $[\phi]$ is the decider object (i.e. $[\phi]=b$ when $\phi$ is defined) and $\mu$ is a solution to $\phi^\star$.
 \end{theorem}
-
 
 \newpage
