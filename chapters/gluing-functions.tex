@@ -2,6 +2,7 @@
 Until now, we've discussed piecewise concepts in the more abstract sense, with explicit examples permeating the paradigm behind them as previously discussed. From here, we'll begin introducing new concepts with a heavier focus on explicit constructions. This begins with our gluing functions.
 
 \subsection{Continuous gluing function}
+\label{section:gluing}
 Let us define intervals $D_1,D_2,\dots,D_n$ such that for $m\in\br{1,2,\dots,n-1}$ we have $\max\paren{D_m}=\min\paren{D_{m+1}}$. Then we define all respective functions to be glued $f_m:D_m\to\mathbb{R}$. To `glue' such functions together sequentially in a function $F(x)$ we write:
 $$
     F(x)=\sum_{m=1}^{n}{f_m\paren*{\ell_{a_m}^{b_m}\paren{x}}}-\sum_{m=2}^{n}{f_m\paren*{a_m}}
@@ -166,4 +167,113 @@ This function can also be represented using the gluing formula we derived earlie
     f(x) &= \lim_{n\to\infty}{f_n(x)}, \\
     f_n(x) &= n\pi+\frac{1}{2}\sum_{k=-n}^{n}{\paren*{\pi-\abs{\abs{x-\frac{\pi}{2}(4k-1)}-\abs{x-\frac{\pi}{2}(4k+3)}}}}
 \end{align*}
+
+\subsection{Representing periodic functions}
+There an infinite number of ways to represent periodic functions on $\mathbb{R}$, perhaps the most famous being the Fourier series. However, we can derive several representations here.
+
+\begin{theorem}
+    Consider the function $f:[a,b]$ (or $f:[a,b)$, $f:(a,b]$, where appropriate). We define $F$ such that $f$ is repeated on $\mathbb{R}$; $b-a$-periodic. Then $F$ can be given by:
+    $$
+        F(x) = f\paren*{x-\floor*{\frac{x-a}{b-a}}(b-a)}
+    $$
+
+    \begin{proof}
+        \label{proof:periodic_proof}
+        We shall derive this formula by letting $f_0(x)=f(x)$ for $x\in [a,b]$. Then we we want some function, $f_1:[a+(b-a),b+(b-a)]$ such that:
+        $$
+            f_1(x) = \begin{piecewise}
+                f(a) & x=a+(b-a) \\
+                f(b) & x=b+(b-a) \\
+                \star & \star
+            \end{piecewise}
+        $$
+
+        In the first piece, we have that $a=x-(b-a)$. Likewise in the second piece, $b=x-(b-a)$. Therefore:
+        $$
+            f_1(x) = \begin{piecewise}
+                f(x-(b-a)) & x=a+(b-a) \\
+                f(x-(b-a)) & x=b+(b-a) \\
+                \star & \star
+            \end{piecewise} = f(x-(b-a))
+        $$
+
+        Continuing this process, forward and backward for $n\in\mathbb{Z}$, we have that:
+        $$
+            f_n:[a+n(b-a),b+n(b-a)],\quad f_n(x) = f(x-n(b-a))
+        $$
+
+        Then constructing $F$ by definition we have that:
+        $$
+            F(x) = \pwobj{f_n(x)}{x\in[a+n(b-a),b+n(b-a)]}{n\in\mathbb{Z}}
+        $$
+
+        Note that this condition will change based on the continuitiy of the function in general. Going forward, we instead write:
+        $$
+            F(x) = \pwobj{f_n(x)}{x\in[a+n(b-a),b+n(b-a))}{n\in\mathbb{Z}}
+        $$
+
+        We wish to find some transformation of $x$, $x'$ such that (to match the floor function):
+        $$
+            x' = \begin{piecewise}
+                n & x=a+n(b-a) \\
+                n+1 & x=b+n(b-a)
+            \end{piecewise}
+        $$
+
+        We'll leave this interpolation problem to the reader. However, we get:
+        $$
+            x'=\frac{x-a}{b-a}
+        $$
+
+        This allows us to rewrite $F(x)$:
+        $$
+            F(x) = \pwobj{f_n(x)}{\frac{x-a}{b-a}\in[n,n+1)}{n\in\mathbb{Z}}
+        $$
+
+        Applying our function property of piecewise objects, this is equivalent to:
+        $$
+            F(x) = f_{\pwobj{n}{\frac{x-a}{b-a}\in[n,n+1)}{n\in\mathbb{Z}}}(x)
+        $$
+
+        Finally, we're left with:
+        $$
+            F(x) = f_{\floor*{\frac{x-a}{b-a}}}(x)
+        $$
+
+        Using the definition of $f_n(x)$ we have that:
+        $$
+            F(x) = f\paren*{x-\floor*{\frac{x-a}{b-a}}(b-a)}
+        $$
+    \end{proof}
+\end{theorem}
+
+As an alternative to the above, we can represent continuous periodic functions using our gluing formula.
+
+\begin{theorem}
+    We consider a function $f:[a,b]$ such that $f(a)=f(b)=c\in\mathbb{R}$. We define $F$ such that the function $f$ is repeated on $\mathbb{R}$; $b-a$ periodic. Then $F$ can be given by a limit:
+    \begin{align*}
+        & F(x) := \lim_{n\to\infty}{F_N(x)}, \\
+        & F_N(x) = -2Nc +\sum_{n=-N}^{N}{f\paren*{\ell_{a}^{b}(x-n(b-a))}}
+    \end{align*}
+
+    \begin{proof}
+        Let us consider the same functions $f_n$ in Proof \ref{proof:periodic_proof}, that is:
+        $$
+            f_n:[a+n(b-a),b+n(b-a)],\quad f_n(x)=f(x-n(b-a))
+        $$
+
+        Then using the fact that gluing all of $f_n$ sequentially would be continuous, we do so for $n\in\br*{-N,1-N,\dots,N-1,N}$, denoting this using $F_N(x)$:
+        $$
+            F_N(x) = \sum_{n=-N}^{N}{f\paren*{\ell_{a+n(b-a)}^{b+n(b-a)}(x)-n(b-a)}}-\sum_{n=1-N}^{N}{f\paren*{a+n(b-a)-n(b-a)}}
+        $$
+
+        Simplifying:
+        $$
+            F_N(x) = \sum_{n=-N}^{N}{f\paren*{\ell_{a}^{b}(x-n(b-a))}}-\sum_{n=1-N}^{N}{c}
+        $$
+
+        Taking $N\to\infty$, we have our result.
+    \end{proof}
+\end{theorem}
+
 \newpage

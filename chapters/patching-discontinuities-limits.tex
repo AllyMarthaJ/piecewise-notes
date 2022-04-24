@@ -1,5 +1,65 @@
 % yay we revisit non elementary functions
 % step functions for example, approximations
 \section{Discontinuous Piecewise Functions as Limits}
+We've already explored some elementary functions which can approximate piecewise functions (continuous or not). Some functions, however aren't covered, and, moreover, there is no systematic way to derive such approximations except via substitution using existing functions. This is what we cover here, with some extra steps.
+
+Let $f$ be some discontinuous piecewise function. Then we shall define $f$ using a limit. For all real $x$, let us define the following:
+$$
+    \lim_{\varepsilon\to0}{F(x,\abs{\varepsilon})}=f(x)
+$$
+
+That is, there exists some function $F$ which is exactly $f$ everywhere except around its discontinuities. In order to formulate such a function, we have the properties below. For some small $\varepsilon$ we have the following:
+
+\begin{enumerate}
+    \item If $\lim_{x\to a^+}{f(x)}=b$ then $f(a+\varepsilon)\approx b$.
+    \item If $\lim_{x\to a^-}{f(x)}=b$ then $f(a-\varepsilon)\approx b$.
+    \item If $\lim_{x\to a}{f(x)}=b$ then $f(a)\approx b$ (if $f(a)$ exists).
+\end{enumerate}
+
+This should look familiar; we're given a set of individual points, which means can interpolate these points where appropriately. Furthermore, since we interpolate only in the region of the discontinuity, we can then apply our gluing formula to the rest of the domain, as derived in Section \ref{section:gluing}.
+
+\begin{example}
+    Let us find a function $F$ as per the above which approximates $\sgn{x}$. Recall that $\sgn{x}$ is defined as the following:
+    $$
+        \sgn{x} = \begin{piecewise}
+            1 & x > 0 \\
+            0 & x = 0 \\
+            -1 & x < 0
+        \end{piecewise}
+    $$
+
+    For some small $x\in [-\varepsilon, \varepsilon]$ for $\varepsilon >0$, therefore, we have that:
+    $$
+        F(x,\varepsilon) = \begin{piecewise}
+            1 & x = \varepsilon \\
+            0 & x = 0 \\
+            -1 & x = -\varepsilon \\
+        \end{piecewise}
+    $$
+
+    If we view this as an interpolation problem, this gives $F(x,\varepsilon)=\frac{x}{\varepsilon}$. Combining this with the remainder of the domain, $\mathbb{R}$, we have that:
+    $$
+        F(x,\varepsilon) = \begin{piecewise}
+            1 & x\geq\varepsilon \\
+            \frac{x}{\varepsilon} & -\varepsilon\leq x\leq \varepsilon \\
+            -1 & x\leq-\varepsilon
+        \end{piecewise}
+    $$
+
+    Applying our gluing formula, we get:
+    $$
+        F(x,\varepsilon) = \paren*{1 + \frac{\ell_{-\varepsilon}^{\varepsilon}(x)}{\varepsilon} + (-1)} - \paren*{1 + (-1)}
+    $$
+
+    Fully simplifying using the properties of the clamping function given in \ref{section:clamping_function}, this leaves:
+    $$
+        F(x,\varepsilon) = \ell_{-1}^{1}\paren*{\frac{x}{\varepsilon}}
+    $$
+
+    It therefore stands to reason that:
+    $$
+        \lim_{\varepsilon\to 0}{\ell_{-1}^{1}\paren*{\frac{x}{\abs{\varepsilon}}}}=\sgn{x}
+    $$
+\end{example}
 
 \newpage
