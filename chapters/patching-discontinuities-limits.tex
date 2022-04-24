@@ -34,6 +34,7 @@ This should look familiar; we're given a set of individual points, which means c
             1 & x = \varepsilon \\
             0 & x = 0 \\
             -1 & x = -\varepsilon \\
+            \star & \star
         \end{piecewise}
     $$
 
@@ -60,6 +61,68 @@ This should look familiar; we're given a set of individual points, which means c
     $$
         \lim_{\varepsilon\to 0}{\ell_{-1}^{1}\paren*{\frac{x}{\abs{\varepsilon}}}}=\sgn{x}
     $$
+\end{example}
+
+\begin{example}
+    Recall that the floor function is defined as the following:
+    $$
+        \floor{x} = \pwobj{n}{x\in[n,n+1)]}{n\in\mathbb{Z}}
+    $$
+
+    Using our patching method, we can also define $\floor{x}$ using the following:
+    $$
+        \floor{x} = \lim_{N\to\infty}{\paren*{N+\sum_{n=-N}^{N}{\lim_{\varepsilon\to0}{\ell_{-1}^{0}\paren*{\frac{x-n}{\abs{\varepsilon}}}}}}}
+    $$
+
+    \begin{proof}
+        The floor function is handled differently to other functions in that it has infinitely many discontinuities. So instead of trying to handle it for each integer section, let us consider, for all $n\in\mathbb{Z}$ the interval $x\in\brak*{n-\frac{1}{2},n+\frac{1}{2}}$:
+        $$
+            \floor{x} = \begin{piecewise}
+                n-1 & x<n \\
+                n & x\geq n
+            \end{piecewise}
+        $$
+
+        We can therefore construct $F_n(x,\varepsilon)$ as follows:
+        $$
+            F_n(x,\varepsilon) = \begin{piecewise}
+                n-1 & x=n-\varepsilon \\
+                n & x=n \\
+                \star & \star
+            \end{piecewise}
+        $$
+
+        Which gives:
+        $$
+            F_n(x,\varepsilon) = n+\frac{x-n}{\varepsilon}
+        $$
+
+        Gluing, we have:
+        $$
+            F_n(x,\varepsilon)= \ell_{n-1}^{n}\paren*{n+\frac{x-n}{\varepsilon}}
+        $$
+
+        We therefore have that our `total' function is given by:
+        $$
+            \floor{x} = \pwobj{\lim_{\varepsilon\to0}{\ell_{n-1}^{n}\paren*{n+\frac{x-n}{\abs{\varepsilon}}}}}{x\in\brak*{n-\frac{1}{2},n+\frac{1}{2}}}{n\in\mathbb{Z}}
+        $$
+
+        Now that this function is continuous at the endpoints of each interval, we can glue using partial sums:
+        $$
+            f_N(x) = \sum_{n=-N}^{N}{\lim_{\varepsilon\to0}{\ell_{n-1}^{n}\paren*{n+\frac{\ell_{n-\frac{1}{2}}^{n+\frac{1}{2}}(x)-n}{\abs{\varepsilon}}}}}-\sum_{n=1-N}^{N}{\paren*{n-1}}
+        $$
+
+        Note that the latter sum is equal to $-N$ (left as an exercise to the reader). Simplifying the inside of the former sum (and doing the same with the $n$ term which sums to $0$), however, we get:
+        $$
+            f_N(x) = N+\sum_{n=-N}^{N}{\lim_{\varepsilon\to0}{\ell_{-1}^{0}\paren*{\ell_{-\frac{1}{2\abs{\varepsilon}}}^{\frac{1}{2\abs{\varepsilon}}}\paren*{\frac{x-n}{\abs{\varepsilon}}}}}}
+        $$
+
+        Since $\varepsilon\to 0$ the inner clamping function is unbounded (i.e. $\ell_{-\infty}^{\infty}(x)=x$), so we have:
+        \begin{align*}
+            f_N(x) &= N+\sum_{n=-N}^{N}{\lim_{\varepsilon\to0}{\ell_{-1}^{0}\paren*{\frac{x-n}{\abs{\varepsilon}}}}}\\
+            \floor{x} &= \lim_{N\to\infty}{f_N(x)}
+        \end{align*}
+    \end{proof}
 \end{example}
 
 \newpage
