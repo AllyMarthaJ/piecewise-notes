@@ -5,5 +5,122 @@
 % could eventually reach a point we can interpolate using derivatives, would be very cool
 % MUST rename -- this is a really generic annoying name
 \section{Further Operations on Piecewise Functions}
+\subsection{Differentiation}
+The differentiability of piecewise functions has been covered frequently in calculus courses, as both practice for differentiation and its applications, as well as for general awareness of piecewise functions (although these are introduced usually in a pre-calculus setting). The nuances of differentiating a piecewise function exceed the number of pages I wish to put in these notes, so I suggest sticking to your typical calculus or analysis book for all of that.
+
+With this being said, we can apply differentiation to interpolated functions (anonymous piecewise functions).
+
+\begin{example}
+    Let us find a polynomial function $f(x)$ such that $f(0)=0$, $f(1)=1$ and $f'(0)=0$, $f'(1)=0$.
+
+    Recall the general solution of the APO using a polynomial extraction as per \ref{section:polynomial_general}:
+    $$
+        f^\star(x) = f(x) + [f(x)]\cdot r(x)
+    $$
+
+    In our problem, we note the solution to the first derivative problem is $f(x)=x$; the general solution is therefore:
+    $$
+        f^\star(x) = x + x(x-1)r(x)
+    $$
+
+    Differentiating $f^\star(x)$ we have that:
+    $$
+        \dv{f^\star}{x} = 1 + (2x-1)r(x) + x(x-1)r'(x)
+    $$
+
+    Using the definition of $f'(x)$ and the above equation, we substitute $x=0$ and $x=1$:
+    \begin{align*}
+        \dv{f^\star}{x}(0) = 1-r(0) &= 0 \implies r(0) =1 \\
+        \dv{f^\star}{x}(1) = 1+r(1) &= 0 \implies r(1) =-1
+    \end{align*}
+
+    Regard, now, that we have an interpolation problem in $r(x)$:
+    $$
+        r(x) = \begin{piecewise}
+            1 & x = 0 \\
+            -1 & x = 1
+        \end{piecewise}
+    $$
+
+    Note that one could have solved for $r(x)$ directly, making use of the interpolation problem of $f'(x)$, with $r'(x)$ terms (as the term vanishes), and then substituted in the appropriate values accordingly. Furthermore, one solution to this problem is $r(x)=1-2x$ (the corresponding general solution is $r^\star(x)=1-2x+x(x-1)s(x)$).
+
+    Using this, we have a solution given by:
+    $$
+        f(x) = x + x(x-1)(1-2x)
+    $$
+\end{example}
+
+\begin{example}
+    Let us find a polynomial function which corresponds to the following table (that is, for values of $x$ we have the corresponding values of $f(x)$, and so forth):
+
+    \par{}
+
+    \begin{center}
+        \begin{tabular}{c|ccc}
+            $x$ & $f(x)$ & $f'(x)$ & $f''(x)$ \\
+            \hline
+            $1$ & $1$ & $0$ & $1$ \\
+            $2$ & $2$ & $0$ & $2$
+        \end{tabular}
+    \end{center}
+
+    Interpolating $f(x)$, we have the following general solution:
+    $$
+        f(x) = x + (x-1)(x-2)r_0(x)
+    $$
+
+    We can now get the first and second derivative:
+    \begin{align*}
+        f'(x) &= 1 + (2x-3)r_0(x) + (x-1)(x-2)r'_0(x) \\
+        f''(x) &= 2r_0(x) + 2(2x-3)r'_0(x) + (x-1)(x-2)r''_0(x)
+    \end{align*}
+
+    Using our first derivative, we obtain the following:
+    \begin{align*}
+        f'(1) = 1 - r_0(1) &= 0 \implies r_0(1) = 1 \\
+        f'(2) = 1 + r_0(2) &= 0 \implies r_0(2) = -1
+    \end{align*}
+
+    Subsequently, we have the general solution to $r_0(x)$ (note that we are now repeating the process for $r_0$ instead of $f$):
+    $$
+        r_0(x) = 3-2x + (x-1)(x-2)r_1(x)
+    $$
+
+    Using these values, we can now obtain $r'_0(x)$:
+    \begin{align*}
+        f''(1) = 2r_0(1) - 2r'_0(1) &= 0 \implies r'_0(1)=\frac{1}{2} \\
+        f''(2) = 2r_0(2) + 2r'_0(2) &= 0 \implies r'_0(2)=2
+    \end{align*}
+
+    Taking the derivative of $r_0(x)$ we have that:
+    $$
+        r'_0(x) = -2 + (2x-3)r_1(x) + (x-1)(x-2)r'_1(x)
+    $$
+
+    And repeating the process as before for the values of $r_1(x)$:
+    \begin{align*}
+        r'_0(1) = -2 - r_1(1) &= \frac{1}{2} \implies r_1(1) = -\frac{5}{2} \\
+        r'_0(2) = -2 + r_1(2) &= 2 \implies r_1(2) = 4
+    \end{align*}
+
+    We therefore have a solution to $r_1$; $r_1(x)=-\frac{5}{2}+\frac{13}{2}(x-1)$. Therefore we have for $r_0$:
+    $$
+        r_0(x) = 3-2x + (x-1)(x-2)\paren*{-\frac{5}{2}+\frac{13}{2}(x-1)}
+    $$
+
+    And therefore $f(x)$:
+    $$
+        f(x) = x + (x-1)(x-2)\paren*{3-2x + (x-1)(x-2)\paren*{-\frac{5}{2}+\frac{13}{2}(x-1)}}
+    $$
+\end{example}
+
+As given by the examples above, the process of interpolating with respect to not only points, but derivatives at those points, is given by iterating through functions until we've satisfied all of our general solutions. This is the process which gives rise to the derivation of the Taylor polynomial (and series).
+
+\begin{theorem}
+
+\end{theorem}
+
+% see also: hermite interpolation. is there ANY way we can do this systematically using only piecewise notation no solving????
+% **really** really want to do it
 
 \newpage
