@@ -8,7 +8,7 @@ $$
     \lim_{\varepsilon\to0}{F(x,\abs{\varepsilon})}=f(x)
 $$
 
-That is, there exists some function $F$ which is exactly $f$ everywhere except around its discontinuities. In order to formulate such a function, we have the properties below. For some small $\varepsilon$ we have the following:
+That is, there exists some function $F$ which is exactly $f$ everywhere except around its discontinuities. In order to formulate such a function, we have the properties below. For some small $\varepsilon>0$ we have the following:
 
 \begin{enumerate}
     \item If $\lim_{x\to a^+}{f(x)}=b$ then $f(a+\varepsilon)\approx b$.
@@ -64,6 +64,7 @@ This should look familiar; we're given a set of individual points, which means c
 \end{example}
 
 \begin{example}
+    \label{example:floor_sum}
     Recall that the floor function is defined as the following:
     $$
         \floor{x} = \pwobj{n}{x\in[n,n+1)]}{n\in\mathbb{Z}}
@@ -124,5 +125,29 @@ This should look familiar; we're given a set of individual points, which means c
         \end{align*}
     \end{proof}
 \end{example}
+
+\begin{theorem}
+    Using the floor function per Example \ref{example:floor_sum}, we can restate our proposition as the following:
+
+    For all $\abs{x}\leq N\in\mathbb{Z}^+$ we have that:
+    $$
+        \floor{x} = N+\sum_{n=-N}^{N}{\lim_{\varepsilon\to0}{\ell_{-1}^{0}\paren*{\frac{x-n}{\abs{\varepsilon}}}}}
+    $$
+
+    \begin{proof}
+        For all $\abs{x}\leq N$, we know that $\exists m\in\br{-N,\dots,N-1}$ such that $m\leq x< m+1$. Then:
+
+        $$
+            \floor{x} = N+\sum_{n=-N}^{m}{\lim_{\varepsilon\to0}{\ell_{-1}^{0}\paren*{\frac{x-n}{\abs{\varepsilon}}}}}+\sum_{n=m+1}^{N}{\lim_{\varepsilon\to0}{\ell_{-1}^{0}\paren*{\frac{x-n}{\abs{\varepsilon}}}}}
+        $$
+
+        Then for all $n\leq m$ we have $x\geq n\implies\frac{x-n}{\abs{\varepsilon}}\geq 0$. Using the definition of the clamping function, therefore, we have that the summand of the first sum is 0 (after each limit is taken). Likewise for the second sum, we have $m\leq n$ which means $\frac{x-n}{\abs{\varepsilon}}\leq 0$. Taking the limits, this means we have $-1$ for all terms, giving us:
+        $$
+            \floor{x} = N+\sum_{n=m+1}^{N}{(-1)}
+        $$
+
+        This gives $\floor{x}=N-(N-m)=m$.
+    \end{proof}
+\end{theorem}
 
 \newpage
