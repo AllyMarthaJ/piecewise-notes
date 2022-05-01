@@ -117,7 +117,163 @@ With this being said, we can apply differentiation to interpolated functions (an
 As given by the examples above, the process of interpolating with respect to not only points, but derivatives at those points, is given by iterating through functions until we've satisfied all of our general solutions. This is the process which gives rise to the derivation of the Taylor polynomial (and series).
 
 \begin{theorem}
+    \label{theorem:shared_derivatives_theorem}
+    All polynomials which share a finite number of points and up to the $n^\text{th}$ derivatives at those points can be written in the form:
+    $$
+        \phi^\star(x) = \mu(x) + [\phi(x)]^{n+1}\cdot r(x)
+    $$
 
+    Where $[\phi(x)]$ is the decider function, $\mu(x)$ is a solution to the original interpolation problem and $r(x)$ is some arbitrary polynomial.
+
+    \begin{proof}
+        We begin by considering all polynomials of the form $\phi^\star(x)=\mu(x)+[\phi(x)]\cdot r(x)$.
+
+        Differentiating $n$ times, we get:
+        $$
+            \phi^{\star(n)}(x) = \phi^{(n)}(x) + \sum_{m=0}^{n}{\begin{pmatrix} n \\ m \end{pmatrix}r(x)^{(n-m)}\cdot [\phi(x)]^{(m)}}
+        $$
+
+        By definition, we require that $\phi^{\star(n)}(x)=\phi^{(n)}(x)$ when each $[\phi(x)]^{(m)}$ vanish, for $m\in\br{0,1,\dots,n-1}$. That is, we want $\phi^{(n)}(x)$ to be a solution to $\phi^{\star(n)}(x)$ for all of our appropriate points (so we satisfy the $n^\text{th}$ derivative requirement when each of the derivatives before the $n^\text{th}$ derivative, of the decider, vanish; almost like induction).
+
+        Using the above, we're left with the problem:
+        $$
+            [\phi(x)]^{(n)}\cdot r(x)=0
+        $$
+
+        The case where $[\phi(x)]^{(n)}$ vanishes yields a differential equation (or set of) which yields the trivial solution, so we'll focus on the other case: where $r(x)$ is a non-zero polynomial which vanishes.
+
+        Using the fact given before, where each decider vanishes, we know that $r(x)$ should at least vanish where the deciders vanish; that is, $r(x)$ can be given by, for some arbitrary polynomial $p(x)$:
+        $$
+            r(x) = p(x)\prod_{m=0}^{n-1}{[\phi(x)]^{(m)}}
+        $$
+
+        Furthermore, regard that for all $m\in\br{0,1,\dots,n-1}$ we have that $[\phi(x)]^{(m)}$ vanishes when $[\phi(x)]$ does. That is, for some arbitrary polynomials $t_m(x)$:
+        $$
+            [\phi(x)]^{(m)}=[\phi(x)]\cdot t_m(x)
+        $$
+
+        Therefore:
+        $$
+            r(x) = p(x)\prod_{m=0}^{n-1}{[\phi(x)]\cdot t_{m}(x)} = [\phi(x)]^{n}\cdot p(x)
+        $$
+
+        Using the definition of $r(x)$, therefore, we have that:
+        $$
+            \phi^\star(x) = \mu(x) + [\phi(x)]^{n+1}\cdot p(x)
+        $$
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    \label{theorem:analytic_function_equality}
+    As a corollary to \ref{theorem:shared_derivatives_theorem}, suppose we have two analytic functions which share infinitely many derivatives at an arbitrary non-zero number of points. Then these functions must be identical everywhere.
+
+    \begin{proof}
+        Let $n\in\mathbb{Z}^+$. We denote the functions described above as $\phi^\star(x)$, and respective `solutions' as $\mu(x)$.
+
+        Since $\phi^\star(x)$ and $\mu(x)$ are analytic functions, we have that $\phi^\star(x)=\mu^\star(x)+\cancelto{0}{O(x^n)}$ and $\mu(x)=M(x)+\cancelto{0}{O(x^n)}$ (as $n\to\infty$). We therefore have that:
+        $$
+            \varphi^\star(x) = \lim_{n\to\infty}{M(x) + [\phi(x)]^{n+1}\cdot r(x)}
+        $$
+
+        Then $r(x)$ is necessarily $0$ since $\varphi^\star(x)$ is continuous. Therefore:
+        $$
+            \varphi^\star(x) = M(x) \implies \phi^\star(x) = \phi(x)
+        $$
+    \end{proof}
+\end{theorem}
+
+\subsection{Taylor Polynomials}
+We have now established two theorems which allow us to express the equality of polynomials, and analytic functions, through shared derivatives. We are therefore ready to establish the idea of a Taylor series: a function which encodes an infinite number of derivatives at a single point.
+
+\begin{theorem}
+    \label{theorem:taylor_polynomial}
+    Let $\br{a_n}$ be a sequence such that for some analytic function $f$ and $a\in\mathbb{R}$ we have that $f^{(n)}(a)=a_n$. Then $f(x)$ can be given by:
+    $$
+        f(x) = \sum_{k=0}^{n}{\frac{a_k}{k!}(x-a)^k}+F(x)(x-a)^{n+1}
+    $$
+
+    \begin{proof}
+        From the above, we have the following system of APOs:
+        \begin{align*}
+            f(x) &= \begin{piecewise}
+                a_0 & x=a \\
+                \star & \star
+            \end{piecewise} = a_0 + (x-a)F_{0,0}(x) \\
+            f'(x) &= \begin{piecewise}
+                a_1 & x=a \\
+                \star & \star
+            \end{piecewise} = a_1 + (x-a)F_{0,1}(x) \\
+            \vdots \\
+            f^{(n)}(x) &= \begin{piecewise}
+                a_n & x=a \\
+                \star & \star
+            \end{piecewise} = a_n + (x-a)F_{0,n}(x) \\
+        \end{align*}
+
+        Explicitly, we write that for $m\geq 0$:
+        \begin{align*}
+            f(x) &= a_0 + (x-a)F_{0,0}(x) \\
+            f^{(m)}(x) &= a_m + (x-a)F_{0,m}(x)
+        \end{align*}
+
+        From the first equation, we can differentiate $m$ times, and so it can be inductively shown that:
+        $$
+            f^{(m)}(x) = mF^{(m-1)}_{0,0}(x)+F^{(m)}_{0,0}(x)
+        $$
+
+        Letting $x=a$ and equating this with the second of our equations, we have that:
+        $$
+            F^{(m-1)}_{0,0}(a)=\frac{a_m}{m}
+        $$
+
+        We now have a set of new functions (similar to our examples), and so repeating the same technique as before gives us:
+        \begin{align*}
+            F_{0,0}(x) &= a_1 + (x-a)F_{1,1}(x) \\
+            F^{(m-1)}_{0,0} &= \frac{a_m}{m} + (x-a)F_{1,m}(x)
+        \end{align*}
+
+        This is nearly identical to the first set of equations, with two noticable differences:
+        \begin{itemize}
+            \item $m\geq 1$, and so there is one less equation in the system than before; fewer derivatives.
+            \item The leading term $\frac{a_m}{m}$ has differed from the original $a_m$ and will be affected by the derivatives (this will, in fact, result in a factorial when this process is repeated).
+        \end{itemize}
+
+        From this setup, we set up an induction (to repeat this process) for which $0\leq k<n$:
+        \begin{align*}
+            F_{k,k}(x) &= \frac{a_{k+1}}{(k+1)!}+(x-a)F_{k+1,k+1}(x) \\
+            F^{(m-k-1)}_{k,k}(x) &= \frac{a_m}{m(m-1)\dots(m-k)}+(x-a)F_{k+1,m}(x)
+        \end{align*}
+
+        Since we know this holds for $k=0$, as this case satisfies the above, let us suppose for $0\leq k<n$ we have the above hold for the $k+1$ case. From the first equation, we can inductively prove that:
+        $$
+            F^{(m-k-1)}_{k,k}(x)=(m-k-1)F^{(m-k-2)}_{k+1,k+1}(x)+(x-a)F^{(m-k-1)}_{k+1,k+1}(x)
+        $$
+
+        Equating with the second equation as before, we have that, for $x=a$:
+        $$
+            F^{(m-k-2)}_{k+1,k+1}(a) = \frac{a_m}{m(m-1)\dots(m-k-1)}
+        $$
+
+        This yields the following:
+        \begin{align*}
+            F^{(m-k-2)}_{k+1,k+1}(x) &= \frac{a_m}{m(m-1)\dots(m-k-1)}+(x-a)F_{k+2,m}(x) \\
+            F_{k+1,k+1}(x) &= \frac{a_{k+2}}{(k+2)!}+(x-a)F_{k+2,k+2}(x)
+        \end{align*}
+
+        Where the latter equation is derived from the former; $m=k+2$. We now have the following relevant formulas:
+        \begin{align*}
+            f(x) &= a_0 + (x-a)F_{0,0}(x) \\
+            f_{k,k}(x) &= \frac{a_{k+1}}{(k+1)!}+(x-a)F_{k+1,k+1}(x)
+        \end{align*}
+
+        Expanding recursively on $F_{0,0}(x)$ gives:
+        $$
+            f(x) = a_0 + \frac{a_1}{1!}(x-a)+\frac{a_2}{2!}(x-a)^2+\dots+\frac{a_n}{n!}(x-a)^n+F_{n,n}(x)(x-a)^{n+1}
+        $$
+    \end{proof}
+
+    For a minimal polynomial with these derivatives, one can let $F_{n,n}(x)=0$.
 \end{theorem}
 
 % see also: hermite interpolation. is there ANY way we can do this systematically using only piecewise notation no solving????

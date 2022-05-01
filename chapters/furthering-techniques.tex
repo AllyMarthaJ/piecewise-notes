@@ -655,6 +655,54 @@ A few notes to be made here: firstly, we don't strictly have to define our opera
     \end{align*}
 \end{example}
 
+\begin{example}
+    A common example of interpolation is the Lerp function. Namely, consider the points $(x_0,y_0)$ and $(x_1,y_1)$ which, which minimally interpolated, forms a linear line. Its resulting equation is:
+    $$
+        f(x) = \begin{piecewise}
+            y_0 & x = x_0 \\
+            y_1 & x = x_1 \\
+            \star & \star
+        \end{piecewise} = y_0 + \frac{y_1-y_0}{x_1-x_0}\paren{x-x_0}
+    $$
+
+    Now, for $y_0,y_1>0$ we can do the same thing using our `exponential' extractions:
+    \begin{align*}
+        f(x) &= \begin{piecewise}
+            y_0 & x=x_0 \\
+            y_1 & x=x_1 \\
+            \star & \star
+        \end{piecewise} \\
+        & = y_0\cdot\begin{piecewise}
+            1 & x=x_0 \\
+            \frac{y_1}{y_0} & x=x_1 \\
+            \star & \star
+        \end{piecewise} \\
+        &= y_0\cdot\paren*{\begin{piecewise}
+            \paren{\frac{y_1}{y_0}}^{\frac{1}{x-x_0}} & x=x_1 \\
+            \star & \star
+        \end{piecewise}}^{x-x_0} \\
+        &= y_0\cdot\paren*{\paren{\frac{y_1}{y_0}}^{\frac{1}{x_1-x_0}}}^{x-x_0} \\
+        &= y_0\cdot\paren*{\frac{y_1}{y_0}}^{\frac{x-x_0}{x_1-x_0}}
+    \end{align*}
+
+    Obviously this function is no longer strictly linear; with this being said, it is linear under a logarithm. That is:
+    $$
+        \ln(f(x)) = \begin{piecewise}
+            \ln(y_0) & x=x_0 \\
+            \ln(y_1) & x=x_1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+    When we use polynomial extractions to interpolate this function. This is because of the properties of the logarithm:
+
+    \begin{align*}
+        \ln(ab) &=\ln(a)+\ln(b) \\
+        \ln(a^b) &= b\ln(a)
+    \end{align*}
+
+    Namely, we have a direct mapping between the operations involved in polynomial and exponential extractions (within the appropriate domains).
+\end{example}
+
 \begin{theorem}
     An anonymous piecewise object is given by the following:
     $$
