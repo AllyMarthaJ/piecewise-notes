@@ -5,6 +5,7 @@
 % could eventually reach a point we can interpolate using derivatives, would be very cool
 % MUST rename -- this is a really generic annoying name
 \section{Further Operations on Piecewise Functions}
+
 \subsection{Differentiation}
 The differentiability of piecewise functions has been covered frequently in calculus courses, as both practice for differentiation and its applications, as well as for general awareness of piecewise functions (although these are introduced usually in a pre-calculus setting). The nuances of differentiating a piecewise function exceed the number of pages I wish to put in these notes, so I suggest sticking to your typical calculus or analysis book for all of that.
 
@@ -281,4 +282,156 @@ If we extend \ref{theorem:taylor_polynomial} to an infinite number of derivative
 % see also: hermite interpolation. is there ANY way we can do this systematically using only piecewise notation no solving????
 % **really** really want to do it
 % yessss we totally can, extended dual numbers! the epsilons :D
+
+\subsection{Dual numbers (and extensions)}
+The dual numbers are a number system in which we have an element, $\varepsilon$, such that $\varepsilon^2=0$. They extend the real numbers in a way we have a real component and a dual number component;
+$$
+w=a+b\varepsilon
+$$
+
+What makes this system very interesting is that we can extend analytic functions to the dual numbers:
+$$
+f(w)=f(a+b\varepsilon)=\sum_{n=0}^{\infty}{\frac{f^{(n)}(a)}{n!}(b\varepsilon)^n}=f(a)+f'(a)b\varepsilon
+$$
+
+That is, we take the Taylor series of $f$ centred at $a$, and evaluate the function at $a+b\varepsilon$. The reason for this being so interesting is that we now have a direct mapping between dual numbers and a function's derivatives.
+
+Circling back in on the idea of interpolation with derivatives, what we'll use is the following fact, in particular:
+$$
+    f(a)=a_0\land f'(a)=a_1\leftrightarrow f(0)=a_0\land f(a+\varepsilon)=a_0+a_1\varepsilon
+$$
+
+This allows us to interpolate functions with values and first derivatives. We do so by taking in function values for $f$, generating a corresponding dual number-valued function $F$ and then extracting our whole solution for $f$.
+
+This above idea is actually closely related to multivariate interpolation: for some values of $x, f'$, we want to find $f$. In some sense, we can think of $f'$ as another argument or dimension, although we don't explicitly want to use it.
+
+\begin{example}
+    We wish to find a polynomial function and an exponential function, $f$, $g$ such that $f(0)=g(0)=1$ and $f'(0)=g'(0)=1$.
+
+    Note that $f(0)=0\land f'(0)=1\iff f(\varepsilon)=1+\varepsilon$. Then, beginning with the polynomial, we have:
+    \begin{align*}
+        F(w) &= \begin{piecewise}
+            1 & w=0 \\
+            1+\varepsilon & w=\varepsilon \\
+            \star & \star
+        \end{piecewise} \\
+        &= 1+w\begin{piecewise}
+            \frac{\varepsilon}{\varepsilon} & w=\varepsilon \\
+            \star & \star
+        \end{piecewise} \\
+        &= 1+w
+    \end{align*}
+
+    Substituting in the appropriate values, we see that is correct. Furthermore, if we take $F(a+b\varepsilon)$, we get the real part is given by $1+a$. Therefore, $f(x)=1+x$.
+
+    We now perform similar to find an exponential function:
+    \begin{align*}
+        G(w) &= \begin{piecewise}
+            1 & w=0 \\
+            1+\varepsilon & w=\varepsilon \\
+            \star & \star
+        \end{piecewise} \\
+        &= \paren*{\begin{piecewise}
+            (1+\varepsilon)^\frac{1}{\varepsilon} & w=\varepsilon \\
+            \star & \star
+        \end{piecewise}}^w \\
+    \end{align*}
+
+    Note that $(1+\varepsilon)^\frac{1}{\varepsilon}\defeq e$, since we might (abusively) write it as $\exp(\frac{1}{\varepsilon}\ln(1+\varepsilon))$, and recursively evaluate. This gives us:
+    $$
+        G(w)=e^w
+    $$
+
+    Since $g(a)=\Re{G(a+b\varepsilon)}$ we have $g(x)=e^x$, after taking the real part.
+\end{example}
+
+As we saw in this example, we actually divided by $\varepsilon$. We can't normally do this. But since we're simply trying to assign a value to various coefficients, it's totally fine, if not a little bit abusive of notation. Though, by argument, we should verify that our answer is correct by substituting in the appropriate values; interestingly, the non-indeterminate values we assign to problematic expressions like $\frac{\varepsilon}{\varepsilon}$ end up being correct for our uses. This becomes a significantly more important idea in the extension of the dual numbers.
+
+On another note, we needn't perform the final substitution $a+b\varepsilon$; we may take the real part directly. This is to do with how $\varepsilon^2$ vanishes anyway, and the we disregard the imaginary part at the end regardless (though if we didn't, we'd observe the derivative and vanishing points).
+
+\subsubsection{Dual number extension}
+When we define $\varepsilon^2=0$ but $\varepsilon\neq 0$, we're actually defining a nilpotent element and an indeterminate. That is, $\varepsilon$ doesn't have any specific value per se, but there exists a power $n$ for which $\varepsilon^n=0$. There exists a matrix representation, or several, rather, for $\varepsilon$:
+$$
+    \varepsilon=\begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix}
+$$
+
+And so, in some sense, we can give $\varepsilon$, and therefore dual numbers, a value. $w=a+b\varepsilon$ ends up being represented by:
+$$
+    w=\begin{pmatrix}
+        a & b \\
+        0 & a
+    \end{pmatrix}
+$$
+This can be given by multiplying a scalar, $a$, by the $2\times 2$ identity matrix. Hooray notation.
+
+But now, a fairly straightforward question emerges: Can we get further derivatives using this idea? Can we embed or encode such a thing by extending the dual numbers? Should such a thing exist? Well, I can't answer the last question, but let us define the following:
+
+\begin{theorem}
+    For some $N\in\mathbb{N}$ and for all $n\in\br{1,2,\dots,N}$, we define some extension of the dual numbers using the elements:
+    $$
+        \varepsilon_{n}^{n+1}=0
+    $$
+
+    Therefore, we can represent all elements in this number system using the following:
+    $$
+        \sum_{n=1}^{N}{\sum_{m=1}^{n-1}{a_{n,m}\cdot\varepsilon_{n}^{m}}}
+    $$
+
+    This is because we haven't defined $\varepsilon_{n}^{n}$ and so on to be $0$.
+\end{theorem}
+
+\begin{theorem}
+    In our $N$-extended dual number system, for all $i,j\in\br{1,2,\dots,N}$ and $i\neq j$, we have that:
+    $$
+        \varepsilon_i\cdot\varepsilon_j=\varepsilon_j\cdot\varepsilon_i=0
+    $$
+
+    \begin{proof}
+        Suppose we have that $A=\varepsilon_i\varepsilon_j$ for some $j\in\br{1,2,\dots,N}$.
+
+        Then $\varepsilon_i^i\cdot A=\varepsilon_i^i\cdot\varepsilon_i\cdot\varepsilon_j=\varepsilon_i^{i+1}\cdot\varepsilon_j$.
+
+        The RHS is $0$ by definition, and so we have that $\varepsilon_i^i\cdot A=0$. Since $\varepsilon_i^i$ is a non-zero element, we must have $A=0$. This argument can be identically repeated for $\varepsilon_j\cdot\varepsilon_i$.
+    \end{proof}
+
+    In other words, we don't care about commutativity under multiplication.
+\end{theorem}
+
+\begin{theorem}
+    A `simple' analytic extension of an analytic function to the $N$-extended dual numbers can be given by:
+    $$
+        f(a+b\varepsilon_m)=\sum_{n=0}^{m}{\frac{f^{(n)}(a)}{n!}\paren{b\varepsilon_m}^n}
+    $$
+
+    These are not the only extensions which are relevant, but the extensions with all possible terms are just messy and so as-needed is perhaps better for those individual cases.
+    \begin{proof}
+        The analytic function $f$ can be represented by its Taylor series centred around $a$:
+        $$
+            f(x) = \sum_{n=0}^{\infty}{\frac{f^{(n)(a)}}{n!}(x-a)^n}
+        $$
+
+        Suppose we evaluate $f(x)$ at $x=a+b\varepsilon_m$, we get that:
+        $$
+            f(a+b\varepsilon_m) = \sum_{n=0}^{\infty}{\frac{f^{(n)(a)}}{n!}(b\varepsilon_m)^n}
+        $$
+
+        Since all terms beyond $n=m$ vanish by $\varepsilon_m^{m+1}=0$, we rewrite the sum as
+        $$
+            f(a+b\varepsilon_m) = \sum_{n=0}^{m}{\frac{f^{(n)(a)}}{n!}(b\varepsilon_m)^n}
+        $$
+    \end{proof}
+\end{theorem}
+
+In order to encode $f(a),f'(a),\dots,f^{(n)}(a)$ as a function, we require a definition for all of $f(a),f(a+b\varepsilon_1),\dots,f(a+b\varepsilon_n)$. Intuitively, this is because the value of the function at each extended point provides several pieces of data (i.e. up to whatever derivative), and so we need to recurse down in order to retrieve each derivative. More or less.
+
+Furthermore, we apply the same technique as in the regular dual numbers in order to interpolate our function. We choose to encode it as:
+$$
+    f(x_1,x_2,\dots,x_n)=\Re{F(x_1+x_2\varepsilon_1+\dots+x_n\varepsilon_{n-1})}
+$$
+
+This is for simplicity more than anything.
+
 \newpage
