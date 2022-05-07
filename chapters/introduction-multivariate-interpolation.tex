@@ -5,7 +5,37 @@
 % - Convert scalars to vectors; namely; x = \vec{x} = (x,x,\dots,x). Then make conditions into vectors; split vector termwise.
 %   then apply termwise
 % - Interpolate by nesting piecewise objects
+% - Splitting up parametrically :P
+% - using the multiple condition technique...
 % this is where im lacking algebra also, clifford algebras would extend complex numbers etc.
+% - nope, we managed to extend dual numbers somehow?? indeterminate variables and nilpotent matrices should be explored
 \section{Introduction to Multivariate Interpolation}
+While we are on the topic of interpolation, let us briefly introduce the concept of multivariate interpolation; interpolation in multiple variables. For example, instead of taking values on the real number line and then mapping them to other real numbers, we may wish, instead, to take values on a plane and map them to real numbers, i.e. some `height', thus producing a surface when graphed. Alternatively, we could instead associate numbers with vectors or coordinates (in fact, this is what a parametric equation is).
 
+\subsection{Return to multiple conditions}
+Recall that we discussed how we might work with multiple conditions in a piecewise object in \ref{section:multiple_conditions}. Suppose we have an interpolation problem with the following APO representation (which can be complex, also):
+$$
+    f(x_1,x_2,\dots,x_n) = \begin{piecewise}
+        y_1 & x_1=x_{1,1} & x_2=x_{1,2} & \dots & x_n=x_{1,n} \\
+        y_2 & x_1=x_{2,1} & x_2=x_{2,2} & \dots & x_n=x_{2,n} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        y_n & x_1=x_{n,1} & x_2=x_{n,2} & \dots & x_n=x_{n,n} \\
+        \star & \star & \star & \dots & \star
+    \end{piecewise}
+$$
+
+Then by the `and' property, we can rewrite this as (for some functions $p_{u,v}$):
+$$
+    f(x_1,x_2,\dots,x_n) = \begin{piecewise}
+        y_1 & \sum_{m=1}^{n}{p_{1,m}(x_m-x_{1,m})}=0 \\
+        y_2 & \sum_{m=1}^{n}{p_{2,m}(x_m-x_{2,m})}=0 \\
+        \vdots & \vdots \\
+        y_n & \sum_{m=1}^{n}{p_{n,m}(x_m-x_{n,m})}=0 \\
+        \star & \star
+    \end{piecewise}
+$$
+
+And so we can return to our standard interpolation techniques. The pitfalls of this method are that we don't necessarily produce the simplest equations which satisfy all of our points, and subsequent calculations may be significantly more difficult than they need be.
+
+Furthermore, it's worth noting that we're not restricted to the iff requirement we originally imposed on our `and' condition (that is, $p$ needn't have the properties described in the section). So, for example, we could have $p_{u,v}(x)=x$, at the risk of losing well-definition in our subsequent function (if another piece satisfies the same condition; we would otherwise end up dividing by 0 by attempting to perform standard interpolation).
 \newpage

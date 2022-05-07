@@ -166,7 +166,7 @@ As given by the examples above, the process of interpolating with respect to not
 
 \begin{theorem}
     \label{theorem:analytic_function_equality}
-    As a corollary to \ref{theorem:shared_derivatives_theorem}, suppose we have two analytic functions which share infinitely many derivatives at an arbitrary non-zero number of points. Then these functions must be identical everywhere.
+    As a corollary to \ref{theorem:shared_derivatives_theorem}, suppose we have two analytic functions which share infinitely many derivatives at an arbitrary non-zero number of points. Then these functions must be identical everywhere (where these functions are analytic).
 
     \begin{proof}
         Let $n\in\mathbb{Z}^+$. We denote the functions described above as $\phi^\star(x)$, and respective `solutions' as $\mu(x)$.
@@ -276,7 +276,9 @@ We have now established two theorems which allow us to express the equality of p
     For a minimal polynomial with these derivatives, one can let $F_{n,n}(x)=0$.
 \end{theorem}
 
+If we extend \ref{theorem:taylor_polynomial} to an infinite number of derivatives, we get a Taylor series. However, we don't have a theorem here which states that knowing an infinite number of derivatives gives us, at least locally, an infinite number of points (equal to a function). This is the property of being real analytic (locally or globally; though actually this definition extends to power series in general). This relates to Taylor's theorem. Furthermore, given the way we've motivated and derived the formula, we nicely move into Borel's theorem too (both of which won't actually be discussed here, but are nice rabbit holes to go down).
+
 % see also: hermite interpolation. is there ANY way we can do this systematically using only piecewise notation no solving????
 % **really** really want to do it
-
+% yessss we totally can, extended dual numbers! the epsilons :D
 \newpage
