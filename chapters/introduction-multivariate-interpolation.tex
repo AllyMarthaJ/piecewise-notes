@@ -4,22 +4,22 @@
 % - Convert everything into complex or hypercomplex and apply univariate interpolation
 % - Convert scalars to vectors; namely; x = \vec{x} = (x,x,\dots,x). Then make conditions into vectors; split vector termwise.
 %   then apply termwise
-% - Interpolate by nesting piecewise objects
-% - Splitting up parametrically :P
-% - using the multiple condition technique...
+% - Interpolate by nesting piecewise objects - done
+% - Splitting up parametrically :P - done
+% - using the multiple condition technique... done
 % this is where im lacking algebra also, clifford algebras would extend complex numbers etc.
 % - nope, we managed to extend dual numbers somehow?? indeterminate variables and nilpotent matrices should be explored
 \section{Introduction to Multivariate Interpolation}
 While we are on the topic of interpolation, let us briefly introduce the concept of multivariate interpolation; interpolation in multiple variables. For example, instead of taking values on the real number line and then mapping them to other real numbers, we may wish, instead, to take values on a plane and map them to real numbers, i.e. some `height', thus producing a surface when graphed. Alternatively, we could instead associate numbers with vectors or coordinates (in fact, this is what a parametric equation is).
 
-\subsection{Return to multiple conditions}
-Recall that we discussed how we might work with multiple conditions in a piecewise object in \ref{section:multiple_conditions}. Suppose we have an interpolation problem with the following APO representation (which can be complex, also):
+\subsection{`And' multiple condition strategy}
+Recall that we discussed how we might work with multiple conditions in a piecewise object in \ref{section:multiple_conditions}. Suppose we have an interpolation problem with the following APO representation (which can be complex, also), for $f:\mathbb{R}^n\to\mathbb{R}$:
 $$
     f(x_1,x_2,\dots,x_n) = \begin{piecewise}
         y_1 & x_1=x_{1,1} & x_2=x_{1,2} & \dots & x_n=x_{1,n} \\
         y_2 & x_1=x_{2,1} & x_2=x_{2,2} & \dots & x_n=x_{2,n} \\
         \vdots & \vdots & \vdots & \ddots & \vdots \\
-        y_n & x_1=x_{n,1} & x_2=x_{n,2} & \dots & x_n=x_{n,n} \\
+        y_k & x_1=x_{k,1} & x_2=x_{k,2} & \dots & x_n=x_{k,n} \\
         \star & \star & \star & \dots & \star
     \end{piecewise}
 $$
@@ -30,7 +30,7 @@ $$
         y_1 & \sum_{m=1}^{n}{p_{1,m}(x_m-x_{1,m})}=0 \\
         y_2 & \sum_{m=1}^{n}{p_{2,m}(x_m-x_{2,m})}=0 \\
         \vdots & \vdots \\
-        y_n & \sum_{m=1}^{n}{p_{n,m}(x_m-x_{n,m})}=0 \\
+        y_k & \sum_{m=1}^{n}{p_{k,m}(x_m-x_{k,m})}=0 \\
         \star & \star
     \end{piecewise}
 $$
@@ -38,4 +38,345 @@ $$
 And so we can return to our standard interpolation techniques. The pitfalls of this method are that we don't necessarily produce the simplest equations which satisfy all of our points, and subsequent calculations may be significantly more difficult than they need be.
 
 Furthermore, it's worth noting that we're not restricted to the iff requirement we originally imposed on our `and' condition (that is, $p$ needn't have the properties described in the section). So, for example, we could have $p_{u,v}(x)=x$, at the risk of losing well-definition in our subsequent function (if another piece satisfies the same condition; we would otherwise end up dividing by 0 by attempting to perform standard interpolation).
+
+\begin{example}
+    Suppose we have a function $f:\mathbb{R}^2\to\mathbb{R}$ such that $f(1,0)=1$, $f(0,1)=1$, $f(0,0)=0$. Then we represent this problem as the following:
+    $$
+        f(x,y) = \begin{piecewise}
+            1 & x=1 & y=0 \\
+            1 & x=0 & y=1 \\
+            0 & x=0 & y=0
+        \end{piecewise}
+    $$
+
+    By our `and' property, we can rewrite this as:
+    $$
+        f(x,y) = \begin{piecewise}
+            1 & p_{1,1}(x-1)+p_{1,2}(y)=0 \\
+            1 & p_{2,1}(x)+p_{2,2}(y-1)=0 \\
+            0 & p_{3,1}(x)+p_{3,2}(y)=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Interestingly, we can let each of our $p$ functions be $p_{u,v}(x)=x$ (interesting because this function remains well-defined) so that we get:
+    $$
+        f(x,y) = \begin{piecewise}
+            1 & x-1 + y = 0 \\
+            1 & x + y-1 = 0 \\
+            0 & x+y = 0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Extracting the final case gives:
+    $$
+        f(x,y) = (x+y)\paren*{\begin{piecewise}
+            1 & x+y=1 \\
+            1 & x+y=1 \\
+            \star & \star
+        \end{piecewise}}=x+y
+    $$
+
+    An oddly coincidental result! Perhaps, instead, we should let all of our $p$ functions be $x^2$:
+    $$
+        f(x,y) = \begin{piecewise}
+            1 & (x-1)^2+y^2=0 \\
+            1 & x^2+(y-1)^2=0 \\
+            0 & x^2+y^2=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Extracting the final piece gives:
+    $$
+        f(x,y)=(x^2+y^2)\begin{piecewise}
+            \frac{1}{x^2+y^2} & (x-1)^2+y^2=0 \\
+            \frac{1}{x^2+y^2} & x^2+(y-1)^2=0 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Recall the first piece corresponds to $x=1$ and $y=0$, and the second corresponds to $x=0$ and $y=1$. This yields:
+    $$
+        f(x,y)=(x^2+y^2)\paren*{\begin{piecewise}
+            1 & (x-1)^2+y^2=0 \\
+            1 & x^2+(y-1)^2=0 \\
+            \star & \star
+        \end{piecewise}}=x^2+y^2
+    $$
+
+    So both $x^2+y^2$ and $x+y$ satisfy our interpolation problem, and these solutions are dependent on how we choose our functions.
+\end{example}
+
+\subsection{Parametric strategy}
+Rather than attempt to solve an interpolation problem $f:\mathbb{R}^n\to\mathbb{R}$, we could attempt to instead solve $f:\mathbb{R}\to\mathbb{R}^{n+1}$ by means of parameterisation. That is, we take the original arguments $x_1,x_2,\dots, x_n$ with the output $f$ and change to instead have some argument $t$ and outputs $x_1,x_2,\dots,x_n,f$. That is, we would write $x_1=x_1(t), x_2=x_2(t),\dots,x_n=x_n(t), f(x_1,\dots,x_n)=f(t)$.
+
+This, obviously, is not an ideal approach. Usually when we want to perform multivariate interpolation, we want a specific form for a reason. However, this technique demonstrates how we can also work with vectors or tuples in piecewise objects. We can represent the above problem as:
+$$
+    (x_1,x_2,\dots,x_n,f)=\begin{piecewise}
+        (x_{1,1},x_{1,2},\dots,x_{1,n},y_1) & t=t_1 \\
+        (x_{2,1},x_{2,2},\dots,x_{2,n},y_2) & t=t_2 \\
+        \vdots & \vdots \\
+        (x_{k,1},x_{k,2},\dots,x_{k,n},y_k) & t=t_k \\
+        \star & \star
+    \end{piecewise}
+$$
+
+If we then distribute the piecewise object across each element in the tuples, we can write:
+$$
+    (x_1,x_2,\dots,x_n,f)=\paren*{
+        \begin{piecewise}
+            x_{1,1} & t=t_1 \\
+            x_{2,1} & t=t_2 \\
+            \vdots & \vdots \\
+            x_{k,1} & t=t_k \\
+            \star & \star
+        \end{piecewise},
+        \begin{piecewise}
+            x_{1,2} & t=t_1 \\
+            x_{2,2} & t=t_2 \\
+            \vdots & \vdots \\
+            x_{k,2} & t=t_k \\
+            \star & \star
+        \end{piecewise},
+        \dots,
+        \begin{piecewise}
+            x_{1,n} & t=t_1 \\
+            x_{2,n} & t=t_2 \\
+            \vdots & \vdots \\
+            x_{k,n} & t=t_k \\
+            \star & \star
+        \end{piecewise}
+    }
+$$
+
+In general, this is one method for handling interpolations problems of the form $f:\mathbb{R}\to\mathbb{R}^n$.
+
+\subsection{Nesting strategy}
+The gist of this strategy is to interpolate in one direction, then in another, and so on, for each of your arguments (or dimensions). For linear problems, this corresponds to multilinear interpolation.
+
+In terms of the piecewise notation, or APOs, this simply means recursively nesting pieces on our arguments, and then treating nested piecewise objects as their own interpolation problems. This is a decent method for finding reasonably simple functions which satisfy our points, but is subject to the order in which we nest piecewise objects. It is furthermore algebraically straightforward to perform.
+
+To resolve this, we can permute all possible orders and make use of the general solution to each nested interpolation problem. This gives a set of solutions. We then use the fact that for all our interpolated points, the arithmetic mean of all solutions is equal to the solution itself. That is, for some function $f$ and solutions $f_1,f_2,\dots,f_n$, we use:
+$$
+        f = \frac{1}{n}(f_1+f_2+\dots+f_n)
+$$
+
+There are alternate ways to formulate this, but they're irrelevant: the idea is that we superimpose the solutions in the way we interpolate. We could use the geometric mean for exponential extraction, and the arithmetic mean for polynomial extraction.
+
+In fact, recall Example \ref{example:truth_table}. This method more or less extends this approach (or, rather, that example was one in a subset of problems we can solve using this strategy now).
+
+\begin{example}
+    Suppose we have a function $f:\mathbb{R}^2\to\mathbb{R}$ such that $f(0,0)=0$, $f(1,0)=1$, $f(0,1)=1$ and $f(1,1)=2$. Then we can represent this problem as the following:
+    $$
+        f(x,y) = \begin{piecewise}
+            0 & x=0 & y=0 \\
+            1 & x=1 & y=0 \\
+            1 & x=0 & y=1 \\
+            2 & x=1 & y=1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Nesting on the $x$ conditions, we have:
+    $$
+        f(x,y) = \begin{piecewise}
+            \begin{piecewise}
+                0 & y=0 \\
+                1 & y=1 \\
+                \star & \star
+            \end{piecewise} & x=0 \\
+            \begin{piecewise}
+                1 & y=0 \\
+                2 & y=1 \\
+                \star & \star
+            \end{piecewise} & x=1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Solving each nested APO problem individually, we have, for arbitrary $A(x,y)$ and $B(x,y)$:
+    $$
+        f(x,y) = \begin{piecewise}
+            y+y(y-1)A(x,y) & x=0 \\
+            y+1+y(y-1)B(x,y) & x=1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Iterating further on this APO, we get:
+    $$
+        f(x,y)=y+x+y(y-1)\begin{piecewise}
+            A(x,y) & x=0 \\
+            B(x,y) & x=1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    And so our general solution (for this order) is:
+    $$
+        f(x)=f_1(x,y)=y+x+A(x,y)y(y-1)+(B(x,y)-A(x,y))xy(y-1)+C(x,y)xy(x-1)(y-1)
+    $$
+
+    Had we instead interpolated `in the other direction', we would have:
+    $$
+        f(x)=f_2(x,y)=y+x+D(x,y)x(x-1)+(E(x,y)-D(x,y))xy(x-1)+F(x,y)xy(x-1)(y-1)
+    $$
+
+    We can more or less superimpose these general solutions using the fact that for our interpolated points:
+    $$
+        f(x,y)=\frac{1}{2}(f_1(x,y)+f_2(x,y))
+    $$
+
+    Since $f(x,y)=f_1(x,y)=f_2(x,y)$ at these points. Therefore, after simplifying all of the arbitrary functions, we get:
+
+    \begin{align*}
+        f(x,y) &= x+y+a(x,y)y(y-1)+b(x,y)x(x-1)+ \\
+        & c(x,y)xy(y-1)+d(x,y)xy(x-1)+e(x,y)xy(x-1)(y-1)
+    \end{align*}
+\end{example}
+
+\subsection{Complex number strategy}
+This strategy works for functions with two arguments only (but can potentially be extended using other hypercomplex number systems). In essence, suppose we have a function $f:\mathbb{R}^2\to\mathbb{R}$, then we find a function $F$ such that:
+$$
+    f(x,y)=\Re{F(x+iy)}
+$$
+
+And for all our points, i.e. for all $k\in\br{1,2,\dots,n}$, $(x_k,y_k)\to z_k$, we set $F(x_k+iy_k)=z_k$.
+
+\begin{example}
+    Let us re-use an example from before, where we have $f:\mathbb{R}^2\to\mathbb{R}$, where $f(1,1)=2$, $f(1,0)=1$ and $f(0,1)=1$. Then we have $F$ such that:
+    $$
+        F(z) = \begin{piecewise}
+            0 & z=0 \\
+            1 & z=1 \\
+            1 & z=i \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Following this through as normal, we have:
+    $$
+        F(z)=1-i(z-1)(z-i)=2-iz^2+(i-1)z
+    $$
+
+    Expanding using $z=x+iy$ and factoring on real and imaginary parts:
+    $$
+        F(x+iy) = (2+2xy-x-y)+i(-x^2+y^2+x-y)
+    $$
+
+    Notice that at all of our given points, the imaginary part vanishes. However, by our definition, we have:
+    $$
+        f(x,y)=2+2xy-x-y
+    $$
+\end{example}
+
+\subsection{Decomposition strategy}
+Recall from the univariate interpolation section with Lagrange polynomials, Section \ref{section:lagrange_polynomials}, we decomposed our APO into a sum of elements which looked a lot like Iverson brackets:
+$$
+    (x)_{x_a}=\begin{piecewise}
+        1 & x=x_a \\
+        0 & x\neq x_a \\
+        \star & \star
+    \end{piecewise}
+$$
+
+Where $x\neq x_a$ is given by $x\in\br{x_1,\dots,x_n}\setminus\br{x_a}$; or, alternatively,
+$$
+    {(x)}_{x_a}=\prod_{\substack{m=1\\m\neq a}}^{n}{\frac{x-x_m}{x_a-x_m}}
+$$
+
+We can extend this idea to higher dimensions or arguments; i.e.,
+$$
+    (x_1,x_2,\dots,x_n)_{(a_{1,j},a_{2,j},\dots,a_{n,j})} = \begin{piecewise}
+        1 & (x_1,x_2,\dots,x_n)=(a_{1,j},a_{2,j},\dots,a_{n,j}) \\
+        0 & (x_1,x_2,\dots,x_n)\neq(a_{1,j},a_{2,j},\dots,a_{n,j}) \\
+        \star & \star
+    \end{piecewise}
+$$
+
+But, of course, we haven't solved our problem. Instead, we realise that, by our `or' property, we can add in pieces to the above in order to decompose (overall) our problem. This is done by the following:
+$$
+\prod_{m=1}^{n}{{(x_m)}_{x_{m,j}}}\subseteq (x_1,x_2,\dots,x_n)_{(a_{1,j},a_{2,j},\dots,a_{n,j})}
+$$
+
+And therefore we can use the left hand side as a substitution for the right hand side.
+
+\begin{example}
+    Let us re-use the example $f:\mathbb{R}^2\to\mathbb{R}$ such that $f(0,0)=0$, $f(1,0)=1$, $f(0,1)=1$ and $f(1,1)=2$. Then we have:
+    $$
+        f(x,y) = \begin{piecewise}
+            0 & x=0 & y=0 \\
+            1 & x=1 & y=0 \\
+            1 & x=0 & y=1 \\
+            2 & x=1 & y=1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    Then we can split this APO up into several, giving us:
+    $$
+        f(x,y) = \begin{piecewise}
+            0 & x=0 & y=0 \\
+            0 & x=1 & y=0 \\
+            0 & x=0 & y=1 \\
+            0 & x=1 & y=1 \\
+            \star & \star
+        \end{piecewise}+\begin{piecewise}
+            0 & x=0 & y=0 \\
+            1 & x=1 & y=0 \\
+            0 & x=0 & y=1 \\
+            0 & x=1 & y=1 \\
+            \star & \star
+        \end{piecewise}+\begin{piecewise}
+            0 & x=0 & y=0 \\
+            0 & x=1 & y=0 \\
+            1 & x=0 & y=1 \\
+            0 & x=1 & y=1 \\
+            \star & \star
+        \end{piecewise}+\begin{piecewise}
+            0 & x=0 & y=0 \\
+            0 & x=1 & y=0 \\
+            0 & x=0 & y=1 \\
+            2 & x=1 & y=1 \\
+            \star & \star
+        \end{piecewise}
+    $$
+
+    As above, this means we have:
+    $$
+        f(x,y)=0\cdot(x,y)_{(0,0)}+1\cdot(x,y)_{(1,0)}+1\cdot(x,y)_{(0,1)}+2\cdot(x,y)_{(1,1)}
+    $$
+
+    Which gives, by our decomposition substitution:
+    $$
+        f(x,y)={(x)}_{1}{(y)}_{0}+{(x)}_{0}{(y)}_{1}+2{(x)}_{1}{(y)}_{1}
+    $$
+
+    We can now evaluate ${(x)}_0$, ${(x)}_1$, ${(y)}_0$ and ${(y)}_1$:
+    \begin{align*}
+        {(x)}_0 &= \begin{piecewise}
+            1 & x=0 \\
+            0 & x=1
+        \end{piecewise} &= 1-x \\
+        {(x)}_1 &= \begin{piecewise}
+            1 & x=1 \\
+            0 & x=0
+        \end{piecewise} &= x \\
+        {(y)}_0 &= \begin{piecewise}
+            1 & y=0 \\
+            0 & y=1
+        \end{piecewise} &= 1-y \\
+        {(y)}_1 &= \begin{piecewise}
+            1 & y=1 \\
+            0 & y=0
+        \end{piecewise} &= y \\
+    \end{align*}
+
+    Substituting, this gives:
+    $$
+        f(x,y)=x(1-y)+(1-x)y+2xy=x+y
+    $$
+\end{example}
 \newpage
