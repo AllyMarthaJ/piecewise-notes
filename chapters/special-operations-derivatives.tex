@@ -401,6 +401,18 @@ But now, a fairly straightforward question emerges: Can we get further derivativ
 \end{theorem}
 
 \begin{theorem}
+    The degree of an $N$-extended dual number is given by the following:
+    $$
+        \deg{w}=\min\br{k\in\mathbb{Z}^+\mid (w-\Re{w})^{k+1}=0}
+    $$
+
+    Where $\Re{w}$ is the real part of $w$. In essence, we describe the degree of $w$ to be the smallest such integer so that the non real part of $w$, raised to $k+1$, is 0. Therefore:
+    $$
+        \deg{\varepsilon_k}=k
+    $$
+\end{theorem}
+
+\begin{theorem}
     A `simple' analytic extension of an analytic function to the $N$-extended dual numbers can be given by:
     $$
         f(a+b\varepsilon_m)=\sum_{n=0}^{m}{\frac{f^{(n)}(a)}{n!}\paren{b\varepsilon_m}^n}
@@ -486,34 +498,63 @@ This is for simplicity more than anything.
 \begin{example}
     As an exercise, let us verify that the minimal polynomial corresponding to $f(0)=2$, $f'(0)=3$ and $f(1)=6$ is given by $f(x)=x^2+3x+2$.
 
-    From $f(0)=2$ and $f'(0)=3$ we have $F(\varepsilon_1)=6+3\varepsilon_1$. Therefore:
+    From $f(0)=2$ and $f'(0)=3$ we have $F(\varepsilon_1)=2+3\varepsilon_1$. Therefore:
     \begin{align*}
         F(w) &= \begin{piecewise}
-            2 & x=0 \\
-            6 & x=1 \\
-            2+3\varepsilon_1 & x=\varepsilon_1 \\
+            2 & w=0 \\
+            6 & w=1 \\
+            2+3\varepsilon_1 & w=\varepsilon_1 \\
             \star & \star
         \end{piecewise} \\
-        &= 2+x\begin{piecewise}
-            4 & x=1 \\
-            3\frac{\varepsilon_1}{\varepsilon_1} & x=\varepsilon_1 \\
+        &= 2+w\begin{piecewise}
+            4 & w=1 \\
+            3\frac{\varepsilon_1}{\varepsilon_1} & w=\varepsilon_1 \\
             \star & \star
         \end{piecewise} \\
-        &= 2+x\paren*{4+(x-1)\begin{piecewise}
-            \frac{-1}{\varepsilon_1-1} & x=\varepsilon_1 \\
+        &= 2+w\paren*{4+(w-1)\begin{piecewise}
+            \frac{-1}{\varepsilon_1-1} & w=\varepsilon_1 \\
             \star & \star
         \end{piecewise}} \\
-        &= 2+x\paren*{4+(x-1)\begin{piecewise}
-            \varepsilon+1 & x=\varepsilon_1 \\
+        &= 2+w\paren*{4+(w-1)\begin{piecewise}
+            \varepsilon+1 & w=\varepsilon_1 \\
             \star & \star
         \end{piecewise}} \\
-        &= 2+x\paren*{4+(x-1)(\varepsilon_1+1)}
+        &= 2+w\paren*{4+(w-1)(\varepsilon_1+1)}
     \end{align*}
 
     Expanding this out and separating real and non-real parts, we get:
     $$
-        F(w)=2+4x+x(x-1)+x(x-1)\varepsilon_1 \implies f(x)=x^2+3x+2
+        F(w)=2+4w+w(w-1)+w(w-1)\varepsilon_1 \implies f(x)=x^2+3x+2
     $$
 \end{example}
+
+\begin{theorem}
+    Division by an extended dual number can be given by the following, for non-zero real part:
+    $$
+        \frac{1}{w}=\frac{1}{\Re{w}^{N+1}}\sum_{n=0}^{N}{\paren*{-1}^n\Re{w}^{N-n}(w-\Re{w})^n}
+    $$
+
+    Where $N=\deg{w}$. This can be derived from the Taylor series of $\frac{1}{x}$. Furthermore, division by a nilpotent, extended dual number isn't well-defined, as previously mentioned.
+
+    However, let us note that multiplying both sides of this equation by $w$ and $\Re{w}^{N+1}$ gives us the following:
+
+    $$
+        \Re{w}^{N+1}=w\cdot\sum_{n=0}^{N}{\paren*{-1}^n\Re{w}^{N-n}(w-\Re{w})^n}
+    $$
+
+    This, at least in form, resembles the norm of some complex number, namely that for some $z\in\mathbb{C}$ we have $z\overline{z}=\norm{z}^2$; instead, we have that $w\overline{w}=\norm{w}^{N+1}$. We can define $\overline{w}$, therefore, to be:
+    $$
+        \overline{w}=\frac{\Re{w}^{N+1}}{w}
+    $$
+
+    Even when $N$ is odd, this still isn't really a \textit{norm} since we fail $\norm{w}=0\iff w=0$, despite the fact that:
+    $$
+        \abs{\Re{w}}=\sqrt[N+1]{w\overline{w}}
+    $$
+
+    So really, this is a seminorm. For even $N$ then there's definitely no hope of it being a seminorm; $\sqrt[2n]{x^{2n}}=\abs{x}$ for integer $n$; for odd powers we have $\sqrt[2n+1]{x^{2n+1}}=x$, which is not non-negative\footnotemark.
+
+    \footnotetext{This phrase is problematic in English, see \href{https://ell.stackexchange.com/questions/11543/negation-of-must}{this English Stack Exchange thread}; what we mean to say is that $x$ is not restricted to being non-negative, as a property.}
+\end{theorem}
 
 \newpage
