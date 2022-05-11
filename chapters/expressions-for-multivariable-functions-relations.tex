@@ -89,15 +89,17 @@ $$
     \end{piecewise} = r(x,y)\prod_{k=1}^{n}\paren*{p_{k,1}(f_k(x,y))+p_{k,2}(g_k(x,y))}
 $$
 
-For some arbitrary, non-zero, function $r(x,y)$ and $p$ functions $p_{k,1}, p_{k,2}$.
+For some arbitrary, non-zero, function $r(x,y)$, as well as $p$ functions $p_{k,1}, p_{k,2}$.
 
 Since $F(x,y)=0$ forms our desired curve, we have:
 $$
     r(x,y)\prod_{k=1}^{n}\paren*{p_{k,1}(f_k(x,y))+p_{k,2}(g_k(x,y))}=0
 $$
 
+Creating the expressions for $g_{k}$ is fairly straightforward for inequalities. As an alternative for $\ell_{a}^{b}(x)=x$, we can also use $\max\br*{\abs{x-\frac{a+b}{2}}+\frac{a-b}{2},0}=0$; this is a direct result of $-m\leq x\leq m\iff \abs{x}\leq m$ and $x\leq 0\iff \max\br{x,0}=0$.
+
 \begin{example}
-    We want to find a curve such that $y=x$ for $x\geq 0$ and $y=-x$ for $x\leq 0$.
+    We want to find a curve such that for all $(x,y)\in\mathbb{R}^2$, we have $y=x$ for $x\geq 0$ and $y=-x$ for $x\leq 0$.
 
     Creating a function to generate the curve, we have:
     $$
@@ -122,5 +124,91 @@ $$
         \br*{(x,y)\in\mathbb{R}^2\mid (\abs{y-x}+\abs{\abs{x}-x})(\abs{y+x}+\abs{\abs{x}+x})=0}
     $$
 \end{example}
+
+This method has a pitfall in that it is unable to be graphed on most graphing calculators, as they make use of certain optimisations which interfere with the graphing of them. A good, simple example of this is the curve $\br*{(x,y)\in\mathbb{R}^2\mid \abs{y^2-x^2}=0}$. This curve is equivalent to $\br*{(x,y)\in\mathbb{R}^2\mid (y=x)\lor (y=-x)}$, but fails to be graphed sufficiently in tools like Mathematica, Desmos, and GeoGebra.
+
+These graphs can be approximated, however; regard that our function describing the curve, $s(x,y)$, generates our curve exactly for $s(x,y)=0$; it stands to reason that in a neighbourhood of $0$ we should have something `similar' to our curves (since $s(x,y)$ is continuous). That is, for some small $\varepsilon>0$ we have that $s(x,y)=\varepsilon$ approximates our curve.
+
+\subsubsection{Max of boundary functions generating curves}
+In the previous method of creating curves, we explicitly specified the boundary intersection points in our piecewise functions, which allowed us to create curves that are, for all intents and purposes, human readable, at the cost of being lengthy. Using the $\max$ function for boundary functions, we describe our boundary conditions in terms of other boundaries. The idea behind this is so that we can succinctly describe the boundary in terms of a single $\max$ expression.
+
+\begin{example}
+    For the boundary $y=0$ and conditions $0\leq x\leq 1$, we can define the boundaries $x=0$ and $x=1$. That is,
+    $$
+        F(x,y)=\begin{piecewise}
+            0 & y=0 & x\geq 0 & x\leq 1
+        \end{piecewise}
+    $$
+
+    In order for our definition to match the $\max$ function, we should have $x\geq 0\iff -x\leq 0$ and $x\leq 1\iff x-1\leq 0$. Then using the substitution $y=0$, we have:
+    $$
+        F(x,y)=\begin{piecewise}
+            y & y=0 & -x\leq y & x-1\leq y
+        \end{piecewise}
+    $$
+
+    Similarly, we could also write:
+    $$
+        F(x,y)=\begin{piecewise}
+            -y & -y=0 & -x\leq -y & x-1\leq -y
+        \end{piecewise}
+    $$
+
+    These generate two similar curves for $F(x,y)=0$ but are not identical (it depends on other boundary conditions). In any case, we can eliminate the $y=0$ or $-y=0$ condition if and only if the entire function is $0$. This gives us either:
+    $$
+        F(x,y)=\max\br*{-x,x-1,y}=0
+    $$
+    or
+    $$
+        F(x,y)=\max\br*{-x,x-1,-y}=0
+    $$
+\end{example}
+
+Using the above example as motivation for a general case, let us define the boundary functions $f_1,f_2,\dots,f_n:\mathbb{R}^2\to\mathbb{R}$ so that we construct the function:
+$$
+    F(x,y) = \begin{piecewise}
+        0 & f_1(x,y) = 0 & f_2(x,y)\leq 0 & f_2(x,y)\leq 0 & \dots & f_n(x,y) \leq 0 \\
+        0 & f_2(x,y) = 0 & f_1(x,y)\leq 0 & f_3(x,y)\leq 0 & \dots & f_n(x,y) \leq 0 \\
+        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & f_n(x,y) = 0 & f_1(x,y)\leq 0 & f_2(x,y)\leq 0 & \dots & f_{n-1}(x,y) \leq 0 \\
+    \end{piecewise}
+$$
+
+For all $k\in\br{1,2,\dot,n}$, $f_k(x,y)=0$, we can use the substitution $f_k(x,y)=0$ in the $k$ piece such that we have:
+$$
+    F(x,y) = \begin{piecewise}
+        f_1(x,y) & f_1(x,y) = 0 & f_2(x,y)\leq f_1(x,y) & f_2(x,y)\leq f_1(x,y) & \dots & f_n(x,y) \leq f_1(x,y) \\
+        f_2(x,y) & f_2(x,y) = 0 & f_1(x,y)\leq f_2(x,y) & f_3(x,y)\leq f_2(x,y) & \dots & f_n(x,y) \leq f_2(x,y) \\
+        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+        f_n(x,y) & f_n(x,y) = 0 & f_1(x,y)\leq f_n(x,y) & f_2(x,y)\leq f_n(x,y) & \dots & f_{n-1}(x,y) \leq f_n(x,y) \\
+    \end{piecewise}
+$$
+
+Again, we can now eliminiate the $f_k(x,y)=0$ case if and only if the entire function is zero. Using the definition of the $\max$ function then, we get:
+$$
+    F(x,y)=\max\br*{f_1(x,y),f_2(x,y),\dots,f_n(x,y)}=0
+$$
+
+\begin{example}
+    We wish to find the boundary functions of a triangle with vertices $(-1,-1)$, $(1,-1)$, $(0,1)$.
+
+    From these vertices, we get three linear lines for $(x,y)\in\mathbb{R}^2$: $y=-1$, $1-2x$ and $y=2x+1$.
+
+    Regard now that we wish to have the following:
+    \begin{itemize}
+        \item $y\geq -1\implies -y-1\leq 0$,
+        \item $y\leq 1-2x\implies y+2x-1\leq 0$,
+        \item $y\leq 2x+1\implies y-2x-1\leq 0$
+    \end{itemize}
+
+    Therefore, it stands to reason that our boundary functions are:
+    \begin{itemize}
+        \item $f_1(x,y)=-y-1$,
+        \item $f_2(x,y)=y+2x-1$,
+        \item $f_3(x,y)=y-2x-1$
+    \end{itemize}
+\end{example}
+
+\subsubsection{Max of boundary functions generating surface}
 
 \newpage
