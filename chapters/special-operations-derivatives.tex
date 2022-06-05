@@ -384,20 +384,12 @@ But now, a fairly straightforward question emerges: Can we get further derivativ
 \end{theorem}
 
 \begin{theorem}
-    In our $N$-extended dual number system, for all $i,j\in\br{1,2,\dots,N}$ and $i\neq j$, we have that:
+    In our $N$-extended dual number system, for all $i,j\in\br{1,2,\dots,N}$ and $i\neq j$, we define the following property:
     $$
         \varepsilon_i\cdot\varepsilon_j=\varepsilon_j\cdot\varepsilon_i=0
     $$
 
-    \begin{proof}
-        Suppose we have that $A=\varepsilon_i\varepsilon_j$ for some $j\in\br{1,2,\dots,N}$.
-
-        Then $\varepsilon_i^i\cdot A=\varepsilon_i^i\cdot\varepsilon_i\cdot\varepsilon_j=\varepsilon_i^{i+1}\cdot\varepsilon_j$.
-
-        The RHS is $0$ by definition, and so we have that $\varepsilon_i^i\cdot A=0$. Since $\varepsilon_i^i$ is a non-zero element, we must have $A=0$. This argument can be identically repeated for $\varepsilon_j\cdot\varepsilon_i$.
-    \end{proof}
-
-    In other words, we don't care about commutativity under multiplication.
+    We choose this out of simplicity. If we, however, decided to define our $\varepsilon$s based on their matrix representations, it is entirely possible this property would not hold and that $\varepsilon_i\cdot \varepsilon_j\not\in\br{\varepsilon_1,\varepsilon_2,\dots,\varepsilon_n}$.
 \end{theorem}
 
 \begin{theorem}
