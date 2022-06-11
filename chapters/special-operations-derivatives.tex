@@ -284,6 +284,7 @@ If we extend \ref{theorem:taylor_polynomial} to an infinite number of derivative
 % yessss we totally can, extended dual numbers! the epsilons :D
 
 \subsection{Dual numbers (and extensions)}
+\label{section:dual_numbers}
 The dual numbers are a number system in which we have an element, $\varepsilon$, such that $\varepsilon^2=0$. They extend the real numbers in such a way we have a real component and a dual number component;
 $$
 w=a+b\varepsilon
@@ -377,10 +378,10 @@ But now, a fairly straightforward question emerges: Can we get further derivativ
 
     Therefore, we can represent all elements in this number system using the following:
     $$
-        w=\sum_{n=1}^{N}{\sum_{m=1}^{n-1}{a_{n,m}\cdot\varepsilon_{n}^{m}}}
+        w=a+\sum_{n=1}^{N}{\sum_{m=1}^{n}{a_{n,m}\cdot\varepsilon_{n}^{m}}}=a+\sum_{1\leq m\leq n\leq N}{a_{n,m}\cdot\varepsilon_{n}^{m}}
     $$
 
-    This is because we haven't defined $\varepsilon_{n}^{n}$ and so on to be $0$.
+    This is because we haven't defined $\varepsilon_{n}^{n}$ and so on to be $0$. Furthermore, we denote the real part of $w$ to be $a=\Re{w}$.
 \end{theorem}
 
 \begin{theorem}
@@ -402,6 +403,47 @@ But now, a fairly straightforward question emerges: Can we get further derivativ
     $$
         \deg{\varepsilon_k}=k
     $$
+
+    As a corollary to the above, the degree of $\varepsilon_{a}^{b}$ for $b\leq a$ is given by:
+    $$
+        \deg{\varepsilon_{a}^{b}}=\floor*{\frac{a}{b}}
+    $$
+
+    It's worth noting that the degree of a real number diverges to positive infinity except for $0$; there is no such positive integer such that a non-zero \textit{real number} raised to that integer will be $0$.
+\end{theorem}
+
+\begin{theorem}
+    Two $N$-extended dual numbers of the following form:
+    \begin{align*}
+        u=a+\sum_{n=1}^{N}{a_n\cdot\varepsilon_{n}} \\
+        w=b+\sum_{n=1}^{N}{b_n\cdot\varepsilon_{n}}
+    \end{align*}
+
+    are equal if and only if $a=b$ and $a_{n,m}=b_{n,m}$ for all appropriate $n,m$.
+
+    \begin{proof}
+        We begin by noticing that the substitution $b=a$ and $b_{n,m}=a_{n,m}$ for all $n,m$ gives:
+        $$
+            w=a+\sum_{n=1}^{N}{a_n\cdot\varepsilon_{n}}=u
+        $$
+
+        On the other hand, suppose that we have $u=w$. Then:
+        $$
+            a-b=\sum_{n=1}^{N}{(b_n-a_n)\cdot\varepsilon_{n}}
+        $$
+
+        Raising both sides to $N+1$ gives $(a-b)^{N+1}=0\implies a=b$.
+
+        We then repeat this process with the next highest degree $\varepsilon$; extracting the case $n=N$ to the left hand side gives and raising both sides to $N$:
+        $$
+            ((a_N-b_N)\varepsilon_N)^{N}=0
+        $$
+
+        This is only possible if $a_N=b_N$, since $\varepsilon_N^N\neq 0$. Recursing on each $n$ following, we find that:
+        $$
+            a_1=b_1,\ a_2=b_2,\ \dots,\ a_N=b_N
+        $$
+    \end{proof}
 \end{theorem}
 
 \begin{theorem}

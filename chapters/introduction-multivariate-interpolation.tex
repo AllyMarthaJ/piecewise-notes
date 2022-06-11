@@ -380,4 +380,11 @@ And therefore we can use the left hand side as a substitution for the right hand
     $$
 \end{example}
 
+\subsection{Dual Numbers with Multivariable Taylor Series}
+We explored in \ref{section:dual_numbers} the idea of extending the dual numbers to allow us to `interpolate' an arbitrary number of derivatives in a single variable function. Now that we've covered the idea of multivariate interpolation in a point context, let us further extend the idea of encoding derivatives with respect to multivariate functions.
+
+This can be done via the multivariable taylor series (which won't be covered here). However, in order to `encode' a point and its first derivatives, say for a function $f(\vec{x})$, we would require points $f(\vec{u})$, $\pdv{f}{x_1} (\vec{u})$, $\pdv{f}{x_2} (\vec{u})$, $\dots$, $\pdv{f}{x_n} (\vec{u})$. We would then interpret this as requiring points in a hypercube of dimension $n$; i.e. $f(u_1,u_2,\dots,u_n)$, $f(u_1+\varepsilon_1,u_2,\dots,u_n)$, $\dots$, $f(u_1+\varepsilon_1,u_2+\varepsilon_1,\dots,u_n+\varepsilon_n)$ and so on. This gives us a well-determined system of points for which we can then interpolate using techniques as given in this chapter.
+
+% todo: explore this way more.
+
 \newpage
