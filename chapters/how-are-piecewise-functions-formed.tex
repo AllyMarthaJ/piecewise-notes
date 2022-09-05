@@ -127,6 +127,30 @@ Perhaps an arguably more natural way that piecewise functions can appear is thro
     It's quite an astonishing result.
 \end{theorem}
 
+\begin{theorem}
+    Using the idea that $\abs{x}$ can be represented, under the real numbers, using $\sqrt{x^2}$, it's intuitive to see that the following limit converges:
+    $$
+        \lim_{n\to 0}{\sqrt{x^2+n^2}}=\abs{x}
+    $$
+
+    Notably, therefore, for $x\neq 0$, we can write $\sgn{x}$ as:
+    $$
+        \lim_{n\to 0}{\frac{x}{\sqrt{x^2+n^2}}}
+    $$
+
+    Furthermore, using $\abs{x}=x\sgn{x}$, we have:
+    $$
+        \lim_[n\to 0]{\frac{x^2}{\sqrt{x^2+n^2}}}=\abs{x}
+    $$
+
+    In other words, for some arbitrarily small positive real number, $c$, we have that:
+    $$
+        \sqrt{x^2}{\sqrt{x^2+c}}
+    $$
+
+    is a smooth approximation of $\abs{x}$
+\end{theorem}
+
 \footnotetext{I'd love to fill this section up with more limits and more ways to generate piecewise functions. As it stands, this section is woefuly underfilled as I haven't particularly focused on it; these are not concepts that often pop up inside piecewise functions themselves. Rather, this section is about the approximation and representation of piecewise functions, of which I have frighteningly little knowledge.}
 % todo; i REALLY want to investigate this section. i want to learn how to work with
 % all of these functions in a systematic way and make it really make sense, not just

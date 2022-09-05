@@ -447,6 +447,23 @@ But now, a fairly straightforward question emerges: Can we get further derivativ
 \end{theorem}
 
 \begin{theorem}
+    No two powers of $N$-extended dual numbers are equal under the addition property of exponentials. That is, that:
+    $$
+        \varepsilon_{a}^{b}\neq \varepsilon_{\floor{\frac{a}{b}}}
+    $$
+
+    \begin{proof}
+        Assume by contradiction that for all $a,b\in\br{1,2,\dots,n}$ and $a\leq b$ that the above does not hold. Furthermore, assume that $\varepsilon_m^{a+b}=\varepsilon_m^a\varepsilon_m^b$ for $a+b\leq m$.
+
+        It then stands to reason that for $\varepsilon_{a}^{a+1}=0\iff\varepsilon_a\cdot\varepsilon_a^a=0$. Since $\varepsilon_a^a=\varepsilon_1$, we get that $\varepsilon_a\varepsilon_1=0$.
+
+        We then repeat this process for $\varepsilon_a^a=\varepsilon_1\iff\varepsilon_a\varepsilon_a^{a-1}=\varepsilon_1$. But regard that $\varepsilon_a^{a-1}=\varepsilon_1$ also, and therefore $\varepsilon_a\varepsilon_1=\varepsilon_1$.
+
+        From the above two results, we see that $\varepsilon_1=0$ which is a contradiction.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
     A `simple' analytic extension of an analytic function to the $N$-extended dual numbers can be given by:
     $$
         f(a+b\varepsilon_m)=\sum_{n=0}^{m}{\frac{f^{(n)}(a)}{n!}\paren{b\varepsilon_m}^n}
