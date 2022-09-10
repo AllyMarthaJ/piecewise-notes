@@ -1,11 +1,11 @@
 % function composition; `inverse'
 % limits
-\section{Forming Piecewise Functions}
+\chapter{Forming Piecewise Functions}
 So far, we've discussed the properties of piecewise functions independently of anything else, except with a few examples as to how we might rewrite certain piecewise functions in terms of other piecewise functions. This is a topic that we'll get back to soon, as well. However, one of the interesting, but more incomplete, parts which constitute piecewise objects as a whole is how exactly they come about in mathematics.
 
 Piecewise functions, particularly, have some interesting ways they come about.
 
-\subsection{Function composition}
+\section{Function composition}
 \label{section:function_composition}
 Piecewise functions can themselves be created from the composition of two (or so) functions. These piecewise functions are themselves elementary and continuous if the functions being composed are themselves elementary and continuous (in fact, this is why $\abs{x}$ is an elementary function... more on that later).
 
@@ -84,7 +84,7 @@ Piecewise functions can themselves be created from the composition of two (or so
 
 It is important to realise that piecewise functions do not strictly have a single representation in terms of elementary functions. Therefore, it is important to consider that non-trivial operations should be done piecewise instead with existing fundamental ideas and theorems, rather than on the representation/expression. A common example of this is using $\sqrt{x^2}=\abs{x}$ to find $\dv{}{x}{\abs{x}}$.
 
-\subsection{Piecewise functions as results of limits}
+\section{Piecewise functions as results of limits}
 Perhaps an arguably more natural way that piecewise functions can appear is through the parameterisation of limits.
 
 \begin{example}
@@ -138,14 +138,14 @@ Perhaps an arguably more natural way that piecewise functions can appear is thro
         \lim_{n\to 0}{\frac{x}{\sqrt{x^2+n^2}}}
     $$
 
-    Furthermore, using $\abs{x}=x\sgn{x}$, we have:
+    Furthermore, using $\abs{x}=x\cdot\sgn{x}$, we have:
     $$
-        \lim_[n\to 0]{\frac{x^2}{\sqrt{x^2+n^2}}}=\abs{x}
+        \lim_{n\to 0}{\frac{x^2}{\sqrt{x^2+n^2}}}=\abs{x}
     $$
 
     In other words, for some arbitrarily small positive real number, $c$, we have that:
     $$
-        \sqrt{x^2}{\sqrt{x^2+c}}
+        \frac{x^2}{\sqrt{x^2+c}}
     $$
 
     is a smooth approximation of $\abs{x}$

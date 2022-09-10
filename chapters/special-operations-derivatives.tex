@@ -4,9 +4,9 @@
 % splines?? i want to learn how to do this
 % could eventually reach a point we can interpolate using derivatives, would be very cool
 % MUST rename -- this is a really generic annoying name
-\section{Further Operations on Piecewise Functions}
+\chapter{Further Operations on Piecewise Functions}
 
-\subsection{Differentiation}
+\section{Differentiation}
 The differentiability of piecewise functions has been covered frequently in calculus courses, as both practice for differentiation and its applications, as well as for general awareness of piecewise functions (although these are introduced usually in a pre-calculus setting). The nuances of differentiating a piecewise function exceed the number of pages I wish to put in these notes, so I suggest sticking to your typical calculus or analysis book for all of that.
 
 With this being said, we can apply differentiation to interpolated functions (anonymous piecewise functions).
@@ -184,7 +184,7 @@ As given by the examples above, the process of interpolating with respect to not
     \end{proof}
 \end{theorem}
 
-\subsection{Taylor Polynomials}
+\section{Taylor Polynomials}
 We have now established two theorems which allow us to express the equality of polynomials, and analytic functions, through shared derivatives. We are therefore ready to establish the idea of a Taylor series: a function which encodes an infinite number of derivatives at a single point.
 
 \begin{theorem}
@@ -283,7 +283,7 @@ If we extend \ref{theorem:taylor_polynomial} to an infinite number of derivative
 % **really** really want to do it
 % yessss we totally can, extended dual numbers! the epsilons :D
 
-\subsection{Dual numbers (and extensions)}
+\section{Dual numbers (and extensions)}
 \label{section:dual_numbers}
 The dual numbers are a number system in which we have an element, $\varepsilon$, such that $\varepsilon^2=0$. They extend the real numbers in such a way we have a real component and a dual number component;
 $$
@@ -350,7 +350,7 @@ As we saw in this example, we actually divided by $\varepsilon$. We can't normal
 
 On another note, we needn't perform the final substitution $a+b\varepsilon$; we may take the real part directly. This is to do with how $\varepsilon^2$ vanishes anyway, and the we disregard the imaginary part at the end regardless (though if we didn't, we'd observe the derivative and vanishing points).
 
-\subsubsection{Dual number extension}
+\subsection{Dual number extension}
 When we define $\varepsilon^2=0$ but $\varepsilon\neq 0$, we're actually defining a nilpotent element and an indeterminate. That is, $\varepsilon$ doesn't have any specific value per se, but there exists a power $n$ for which $\varepsilon^n=0$. There exists a matrix representation, or several, rather, for $\varepsilon$:
 $$
     \varepsilon=\begin{pmatrix}
@@ -376,12 +376,10 @@ But now, a fairly straightforward question emerges: Can we get further derivativ
         \varepsilon_{n}^{n+1}=0
     $$
 
-    Therefore, we can represent all elements in this number system using the following:
+    Therefore, we can represent all elements in this number system using the following (where $\Re{w}=a$):
     $$
         w=a+\sum_{n=1}^{N}{\sum_{m=1}^{n}{a_{n,m}\cdot\varepsilon_{n}^{m}}}=a+\sum_{1\leq m\leq n\leq N}{a_{n,m}\cdot\varepsilon_{n}^{m}}
     $$
-
-    This is because we haven't defined $\varepsilon_{n}^{n}$ and so on to be $0$. Furthermore, we denote the real part of $w$ to be $a=\Re{w}$.
 \end{theorem}
 
 \begin{theorem}

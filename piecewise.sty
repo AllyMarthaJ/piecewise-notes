@@ -18,10 +18,31 @@
 \usepackage{microtype}
 % really conflicted on this: i like indentation on paragraphs,
 % but having no space between them makes the content *really* dense.
-\usepackage{parskip}
+% \usepackage{parskip}
 % glossaries
 \usepackage[toc]{glossaries}
 \makeglossaries
+
+% fancy headers
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\setlength{\headsep}{8pt}
+
+\pagestyle{fancy}
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection~-~#1}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter~-~#1}{}}
+
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\fancyhead[LE]{\textbf{ \nouppercase{\rightmark}} }
+\fancyhead[LO]{\textbf{ \nouppercase{\leftmark}} }
+
+\fancypagestyle{plain}{ %
+  \fancyhf{} % remove everything
+  \renewcommand{\headrulewidth}{0pt} % remove lines as well
+  \renewcommand{\footrulewidth}{0pt}
+}
 
 % doc info
 \title{Piecewise Notes}

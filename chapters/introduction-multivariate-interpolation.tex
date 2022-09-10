@@ -9,10 +9,10 @@
 % - using the multiple condition technique... done
 % this is where im lacking algebra also, clifford algebras would extend complex numbers etc.
 % - nope, we managed to extend dual numbers somehow?? indeterminate variables and nilpotent matrices should be explored
-\section{Introduction to Multivariate Interpolation}
+\chapter{Introduction to Multivariate Interpolation}
 While we are on the topic of interpolation, let us briefly introduce the concept of multivariate interpolation; interpolation in multiple variables. For example, instead of taking values on the real number line and then mapping them to other real numbers, we may wish, instead, to take values on a plane and map them to real numbers, i.e. some `height', thus producing a surface when graphed. Alternatively, we could instead associate numbers with vectors or coordinates (in fact, this is what a parametric equation is).
 
-\subsection{`And' multiple condition strategy}
+\section{`And' multiple condition strategy}
 Recall that we discussed how we might work with multiple conditions in a piecewise object in \ref{section:multiple_conditions}. Suppose we have an interpolation problem with the following APO representation (which can be complex, also), for $f:\mathbb{R}^n\to\mathbb{R}$:
 $$
     f(x_1,x_2,\dots,x_n) = \begin{piecewise}
@@ -109,7 +109,7 @@ Furthermore, it's worth noting that we're not restricted to the iff requirement 
     So both $x^2+y^2$ and $x+y$ satisfy our interpolation problem, and these solutions are dependent on how we choose our functions.
 \end{example}
 
-\subsection{Parametric strategy}
+\section{Parametric strategy}
 Rather than attempt to solve an interpolation problem $f:\mathbb{R}^n\to\mathbb{R}$, we could attempt to instead solve $f:\mathbb{R}\to\mathbb{R}^{n+1}$ by means of parameterisation. That is, we take the original arguments $x_1,x_2,\dots, x_n$ with the output $f$ and change to instead have some argument $t$ and outputs $x_1,x_2,\dots,x_n,f$. That is, we would write $x_1=x_1(t), x_2=x_2(t),\dots,x_n=x_n(t), f(x_1,\dots,x_n)=f(t)$.
 
 This, obviously, is not an ideal approach. Usually when we want to perform multivariate interpolation, we want a specific form for a reason. However, this technique demonstrates how we can also work with vectors or tuples in piecewise objects. We can represent the above problem as:
@@ -153,7 +153,7 @@ $$
 
 In general, this is one method for handling interpolations problems of the form $f:\mathbb{R}\to\mathbb{R}^n$.
 
-\subsection{Nesting strategy}
+\section{Nesting strategy}
 The gist of this strategy is to interpolate in one direction, then in another, and so on, for each of your arguments (or dimensions). For linear problems, this corresponds to multilinear interpolation.
 
 In terms of the piecewise notation, or APOs, this simply means recursively nesting pieces on our arguments, and then treating nested piecewise objects as their own interpolation problems. This is a decent method for finding reasonably simple functions which satisfy our points, but is subject to the order in which we nest piecewise objects. It is furthermore algebraically straightforward to perform.
@@ -237,7 +237,7 @@ In fact, recall Example \ref{example:truth_table}. This method more or less exte
     \end{align*}
 \end{example}
 
-\subsection{Complex number strategy}
+\section{Complex number strategy}
 This strategy works for functions with two arguments only (but can potentially be extended using other hypercomplex number systems). In essence, suppose we have a function $f:\mathbb{R}^2\to\mathbb{R}$, then we find a function $F$ such that:
 $$
     f(x,y)=\Re{F(x+iy)}
@@ -272,7 +272,7 @@ And for all our points, i.e. for all $k\in\br{1,2,\dots,n}$, $(x_k,y_k)\to z_k$,
     $$
 \end{example}
 
-\subsection{Extending the complex numbers}
+\section{Extending the complex numbers}
 Let us take inspiration from our extension of the dual numbers to create our own extension of the complex numbers. Rather creatively, let us call them the extended complex numbers, the gist of which is below.
 
 Let us denote the $n$-extended complex numbers via the indeterminates $\alpha_1$, $\alpha_2$, $\dots$, $\alpha_n$ such that for all $i,j\in\br{1,\dots,n}$, $i\neq j$ we have that $\alpha_i^2=-1$ and $\alpha_i\alpha_j=0$.
@@ -337,7 +337,7 @@ In any case, there exists a bijection between points in $\mathbb{R}^n$ and numbe
     \end{proof}
 \end{example}
 
-\subsection{Decomposition strategy}
+\section{Decomposition strategy}
 Recall from the univariate interpolation section with Lagrange polynomials, Section \ref{section:lagrange_polynomials}, we decomposed our APO into a sum of elements which looked a lot like Iverson brackets:
 $$
     (x)_{x_a}=\begin{piecewise}
@@ -445,7 +445,7 @@ And therefore we can use the left hand side as a substitution for the right hand
     $$
 \end{example}
 
-\subsection{Dual Numbers with Multivariable Taylor Series}
+\section{Dual Numbers with Multivariable Taylor Series}
 We explored in \ref{section:dual_numbers} the idea of extending the dual numbers to allow us to `interpolate' an arbitrary number of derivatives in a single variable function. Now that we've covered the idea of multivariate interpolation in a point context, let us further extend the idea of encoding derivatives with respect to multivariate functions.
 
 This can be done via the multivariable taylor series (which won't be covered here). However, in order to `encode' a point and its first derivatives, say for a function $f(\vec{x})$, we would require points $f(\vec{u})$, $\pdv{f}{x_1} (\vec{u})$, $\pdv{f}{x_2} (\vec{u})$, $\dots$, $\pdv{f}{x_n} (\vec{u})$. We would then interpret this as requiring points in a hypercube of dimension $n$; i.e. $f(u_1,u_2,\dots,u_n)$, $f(u_1+\varepsilon_1,u_2,\dots,u_n)$, $\dots$, $f(u_1+\varepsilon_1,u_2+\varepsilon_1,\dots,u_n+\varepsilon_n)$ and so on. This gives us a well-determined system of points for which we can then interpolate using techniques as given in this chapter.

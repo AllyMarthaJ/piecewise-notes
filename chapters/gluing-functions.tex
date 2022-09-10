@@ -1,7 +1,7 @@
-\section{Gluing Functions}
+\chapter{Gluing Functions}
 Until now, we've discussed piecewise concepts in the more abstract sense, with explicit examples permeating the paradigm behind them as previously discussed. From here, we'll begin introducing new concepts with a heavier focus on explicit constructions. This begins with our gluing functions.
 
-\subsection{Continuous gluing function}
+\section{Continuous gluing function}
 \label{section:gluing}
 Let us define intervals $D_1,D_2,\dots,D_n$ such that for $m\in\br{1,2,\dots,n-1}$ we have $\max\paren{D_m}=\min\paren{D_{m+1}}$. Then we define all respective functions to be glued $f_m:D_m\to\mathbb{R}$. To `glue' such functions together sequentially in a function $F(x)$ we write:
 $$
@@ -72,7 +72,7 @@ As a corollary, if all of $f_1,f_2,\dots,f_n$ are elementary functions, then $F(
 
 The derivation of the gluing function above doesn't actually do the function, nor the piecewise techniques involved, much justice. With this being said, it was derived with full generality, and other such derivations may need to deal with nuances more directly on a case-by-case basis (such as when $\min\paren{D_1}$ doesn't exist). Following this, I leave it as an exercise to the reader to derive this formula using, perhaps, induction, where each interval is finite (bounded above/below). This article \href{https://piecewise.org/exploration/gluing-functions}{Gluing Functions} can be used for inspiration.
 
-\subsection{Generalised gluing function in one dimension}
+\section{Generalised gluing function in one dimension}
 Recall that in \ref{theorem:iverson_form} we explored the Iverson bracket form of a piecewise object when each condition was `disjoint'. That is, the following are equivalent:
 \begin{align*}
     \phi &= \pwobj{\varphi_i}{C_i}{i\in I} \\
@@ -100,7 +100,7 @@ $$
 
 In fact, we can reach our continuous gluing function formula if what we have is continuous, per our usual techniques (although since our sets are disjoint, we resort to using $\sup$ and $\inf$ rather than $\max$ and $\min$, respectively).
 
-\subsection{The triangle wave}
+\section{The triangle wave}
 Let us consider the function $f(x)=\arcsin\paren{\sin\paren{x}}$ (a similar function is $g(x)=\arccos\paren{\cos{x}}$ though we won't derive it here). This function, is, in fact, piecewise, and can be written as:
 $$
     f(x) = \frac{\pi}{2}-\abs{x-\frac{\pi}{2}\paren*{1+4\floor*{\frac{x}{2\pi}+\frac{1}{4}}}}
@@ -168,7 +168,7 @@ This function can also be represented using the gluing formula we derived earlie
     f_n(x) &= n\pi+\frac{1}{2}\sum_{k=-n}^{n}{\paren*{\pi-\abs{\abs{x-\frac{\pi}{2}(4k-1)}-\abs{x-\frac{\pi}{2}(4k+3)}}}}
 \end{align*}
 
-\subsection{Representing periodic functions}
+\section{Representing periodic functions}
 There an infinite number of ways to represent periodic functions on $\mathbb{R}$, perhaps the most famous being the Fourier series. However, we can derive several representations here.
 
 \begin{theorem}

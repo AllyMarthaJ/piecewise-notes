@@ -1,11 +1,11 @@
-\section{Common Piecewise Functions}
+\chapter{Common Piecewise Functions}
 % abs(x), max(a,b), min(a,b), floor(x), ceil(x), indicator functions
 % at some point, cover combinations of piecewise functions etc. AND/OR/etc
 
 % for algebra, use example f(x)=sin(x) for x>=0 and -x for x<=0 using the substitution method. (max/min examples)
 So far we've really only used, rather than having properly introduced, the function $\abs{x}$. In this section we'll define a set of piecewise functions that crop up fairly frequently, in many areas of maths, and how we might apply them to the algebra-related problems we've encountered already.
 
-\subsection{Absolute value function}
+\section{Absolute value function}
 The absolute value function $\abs{x}$ is a real function defined as follows:
 
 $$
@@ -17,7 +17,7 @@ $$
 
 Alternatively, you might see $\abs{x}$ notated using $\sqrt{x^2}$ for real $x$ and principal square root. This is something which will be introduced and explained in the next section, although $\sqrt{x^2}$ is only one `representation' of $\abs{x}$.
 
-\subsection{The maximum function}
+\section{The maximum function}
 \label{section:max}
 The $\max$ of two variables is a function defined as:
 
@@ -111,7 +111,7 @@ This helps us to derive formulas for $\max\br{a,b,c}$ and so on. Really, in full
     Each of these properties can be proven inductively, and such a proof is left to the reader.
 \end{theorem}
 
-\subsection{The minimum function}
+\section{The minimum function}
 \label{section:min}
 The $\min$ of two variables is a function defined as:
 
@@ -179,7 +179,7 @@ This helps us to derive formulas for $\min\br{a,b,c}$ and so on. Really, in full
     Each of these properties can be proven inductively, and such a proof is left to the reader.
 \end{theorem}
 
-\subsection{Mixed maximum and minimum}
+\section{Mixed maximum and minimum}
 It is here we note some identities of $\max$ and $\min$ but also extend explicitly our ability to manipulate piecewise functions which would otherwise elude us, per Example \ref{example:algebra_1}.
 
 \begin{example}
@@ -241,7 +241,7 @@ It is here we note some identities of $\max$ and $\min$ but also extend explicit
     \end{enumerate}
 \end{theorem}
 
-\subsubsection{Clamping function}
+\subsection{Clamping function}
 \label{section:clamping_function}
 The clamping function is a function which restricts a number between an upper and lower bound, as per its definition:
 
@@ -421,7 +421,7 @@ We use this symbol to represent the clamping function as later on it will be giv
 
 The clamping function is useful for formulating single expressions for continuous piecewise functions as we've seen above. If the function is not continuous, we may not actually have much luck in using it. In fact, we'll derive the general `Gluing Formula' soon within these notes.
 
-\subsection{The sign function}
+\section{The sign function}
 The sign function is an interesting function in that it doesn't have a single explicit definition, but instead satisfies the following relation:
 $$
     x\cdot\sgn{x}=\abs{x}
@@ -509,7 +509,7 @@ It is useful to note that the sign function is discontinuous; we can express dis
     \end{proof}
 \end{theorem}
 
-\subsection{Step functions}
+\section{Step functions}
 Step functions are useful functions which, usually in calculus at higher levels, allow us to provide a form in which to express a piecewise function regardless of continuity or not. We look at the Heaviside step function, which, like the sign function, doesn't have a single explicit formulation, but instead satisfies:
 $$
     x\cdot\step{x}=\frac{1}{2}\paren*{x+\abs{x}}
@@ -617,7 +617,7 @@ $$
 
 This process is generalisable as with our continuous gluing function (i.e. through repeating nesting). I will, however, leave this process up to the reader.
 
-\subsection{The floor and ceiling functions}
+\section{The floor and ceiling functions}
 We've already introduced the floor function once previously, however we shall do so again here for the sake of completeness:
 $$
 \floor{x}=\pwobj{n}{x\in[n,n+1)}{n\in\mathbb{Z}}
@@ -642,7 +642,7 @@ $$
 
 That is, the ceiling function is the smallest integer $n$ such that $n$ is larger than or equal to $x$.
 
-\subsection{The modulo operation/function}
+\section{The modulo operation/function}
 The modulo operation is an operation used when computing the remainder in division. As such it has several ambiguities regarding the sign of the divisor and remainder. With that being said, for the purposes of these notes we shall define it per the following, for $y>0$:
 $$
     x\bmod y = \pwobj{x-ny}{x\in[ny,(n+1)y)}{n\in\mathbb{Z}}
@@ -675,7 +675,7 @@ Which gives the positive remainder for positive divisors.
     \end{proof}
 \end{theorem}
 
-\subsection{Characteristic functions and Iverson brackets}
+\section{Characteristic functions and Iverson brackets}
 Briefly, a characteristic (or indicator) function for a set $S$ is a function defined such that:
 $$
     \mathbf{1}_{S}(x)=\begin{piecewise}

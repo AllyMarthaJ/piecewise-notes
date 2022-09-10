@@ -1,7 +1,7 @@
-\section{Further Piecewise Algebra}
+\chapter{Further Piecewise Algebra}
 Until now, we've been focusing on ways we can use existing functions to motivate forms for our own constructions. It turns out there are far simpler methods of deriving what we have before using an interpolation-style approach with piecewise notation (which do in fact yield two important interpolation polynomials; Newton polynomials and Lagrange polynomials).
 
-\subsection{Anonymous piecewise objects}
+\section{Anonymous piecewise objects}
 The name anonymous piecewise object is more or less misleading, but we use these objects as a basis for extending the definition of a piecewise object where not defined. Namely, given a piecewise object, we can formulate an expression which defines the behaviour of the piecewise object overall.
 
 When we describe an anonymous piecewise object, we're actually describing a (very infinite) set of possible objects which we can use to represent an existing piecewise object. We simply denote this by $\star$ inside a piecewise object for either conditions, piece values or both (though when in a condition, it's effectively equivalent to the condition `otherwise').
@@ -26,7 +26,7 @@ When we describe an anonymous piecewise object, we're actually describing a (ver
 
 Any time we start manipulating such objects as will be discussed in this section, we reduce the number of functions that satisfy the piecewise definition provided. Generally, anonymous piecewise objects will be denoted (if the respective piecewise object is $\phi$) $\phi^\star$. This will be explored further. However, for the purposes of most of the working here, we \textit{minimally} interpolate.
 
-\subsection{Polynomial extraction}
+\section{Polynomial extraction}
 We should distinguish initially between the sort of `extractions' we can perform on piecewise objects. The first of which is polynomial extraction, as we rely on the roots of a polynomial. In our case, these roots are formed by the pieces of our piecewise objects.
 
 The premise of this extraction is as follows: We can reduce the number of pieces of a piecewise object by vanishing any number of those pieces, and `extracting'. This extraction is done by means of multiplication and addition on the respective piece conditions.
@@ -157,7 +157,7 @@ The premise of this extraction is as follows: We can reduce the number of pieces
 
 While we can continue to extract pieces progressively and do the appropriate manipulation to simplify, there are 2 slightly different processes we can perform which yield Newton and Lagrange polynomials.
 
-\subsubsection{Newton polynomials}
+\subsection{Newton polynomials}
 Let $f:\mathbb{R}\to\mathbb{R}$ be a function such that $f(x_m)=y_m$ for $m\in\br{0,1,2,\dots,n}$. Then $f$ can be given by a Newton polynomial:
 $$
     f(x) = \sum_{m=0}^{n}{[y_0,\dots,y_m]\prod_{l=0}^{m-1}{(x-x_l)}}
@@ -279,7 +279,7 @@ Where $[y_0,\dots,y_m]$ denotes divided differences. That is, $[y_0]=y_0$, $[y_0
     And this gives us a solution for our initial interpolation problem. Also notice that if $f(x)$ is simplified, it gives $x^2$.
 \end{example}
 
-\subsubsection{Lagrange polynomials}
+\subsection{Lagrange polynomials}
 \label{section:lagrange_polynomials}
 Let $f:\mathbb{R}\to\mathbb{R}$ be a function such that $f(x_m)=y_m$ for $m\in\br{0,1,2,\dots,n}$. Then $f$ can be given by a Lagrange polynomial:
 $$
@@ -325,7 +325,7 @@ This form might seem familiar; recall \ref{theorem:iverson_form}. The form of th
     From here, we can interpolate each anonymous piecewise object independently, by extracting each zero piece and simplifying, giving us the Lagrange polynomial as needed.
 \end{theorem}
 
-\subsubsection{General solutions}
+\subsection{General solutions}
 \label{section:polynomial_general}
 As we've seen so far, we've only been producing one solution of a polynomial kind for a set of values for which we wish to interpolate or create an expression for. In general, when we interpolate or perform these extractions, we produce an object in simplified form akin to the following:
 $$
@@ -365,7 +365,9 @@ Where $\mu$ is some solution to the problem, $[\phi]$ is an object which vanishe
 \end{theorem}
 
 \begin{theorem}
-    The decider of a polynomial interpolation problem with points $\br{(x_0,y_0),(x_1,y_1),\dots,(x_n,y_n)}$ can be given by $\prod_{m=0}^{n}{(x-x_m)}$.
+    The decider of a polynomial interpolation problem with the following points
+    $$\br{(x_0,y_0),(x_1,y_1),\dots,(x_n,y_n)}$$
+    can be given by $\prod_{m=0}^{n}{(x-x_m)}$.
 
     \begin{proof}
         We denote the corresponding function $F$ as per the following:
@@ -451,7 +453,7 @@ Where $\mu$ is some solution to the problem, $[\phi]$ is an object which vanishe
     \end{proof}
 \end{theorem}
 
-\subsection{Non-trivial piece conditions}
+\section{Non-trivial piece conditions}
 As per our regular piecewise properties, we can perform substitutions on piece conditions of a piecewise object. This is no different for anonymous piecewise objects, or even just piecewise objects when performing extractions as we have so far. With this being said, there are caveats.
 
 As we've observed with Examples \ref{example:max_further} and \ref{example:heaviside_further}, particularly with $\abs{x}$, overlapping conditions produce discontinuities and ambiguities. Sometimes, like in the former example, the resultant discontinuities are removable, but most times (such as in the latter example), they are not. Ultimately, operations on piecewise objects are only `nice' when these piecewise objects are well defined; it is important, therefore, to keep this in mind when performing piece condition substitution.
@@ -506,7 +508,7 @@ This also means that when we interpolate a set of points, we needn't produce a p
     This yields $f(x)=1-(x-1)(\sin\paren{x}-1)=x-x\sin\paren{x}+\sin\paren{x}$.
 \end{example}
 
-\subsection{Multiple conditions}
+\section{Multiple conditions}
 \label{section:multiple_conditions}
 Up until this point we've been dealing with piecewise objects whose pieces only have one condition (or objects whose conditions can't particularly be simplified by nesting); dealing with multiple conditions is far more difficult. With this being said, there are multiple strategies which we can employ to deal with various situations, including formulations for logical `or' and logical `and'.
 
@@ -591,7 +593,7 @@ We begin by dealing with the cases wherein each condition is an equality of some
     \end{proof}
 \end{theorem}
 
-\subsection{Further extraction}
+\section{Further extraction}
 \textit{Note, this is very much a section I wish to work on further and requires more knowledge in abstract algebra than I currently possess. As it stands I'm missing terminology, concepts and whatever else.}
 
 So far, we've been doing what I call in these notes `polynomial extraction'. Really, this is a process of two major steps: addition and multiplication, and then their respective inverses. That is, for each piece, we've vanished the piece value by adding (and subtracting), and then by reducing by multiplying the corresponding root (and dividing in each other piece), given by the piece condition. As it turns out, this process is not restricted to these operations.

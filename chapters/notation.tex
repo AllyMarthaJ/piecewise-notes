@@ -1,6 +1,6 @@
 \label{section:notation}
-\section{Notation}
-\subsection{Single variable piecewise functions}
+\chapter{Notation}
+\section{Single variable piecewise functions}
 A piecewise \textit{function} is a function defined over several pieces.
 
 Let us consider some function $f:\mathbb{R}\to\mathbb{R}$ and some intervals ${D_1,D_2,\dots,D_n\subseteq\mathbb{R}}$ such that $D_i\cap D_j=\varnothing$ for all $i\neq j$, where $i,j=1,2,\dots,n$. That is, we have some number real intervals which do not overlap. Suppose we have some functions $f_1: D_1\to\mathbb{R}$ and so on. We describe this function using the following notation:
@@ -50,7 +50,7 @@ Reading this function more verbosely, we say that if $x$ is in the domain $D_1$ 
     Since the condition in the second piece (or case) evaluates to true, we use the value in that piece. That is, since $-3\leq 0$ is true, $\abs{-3}=3$.
 \end{example}
 
-\subsection{Piecewise functions}
+\section{Piecewise functions}
 Piecewise functions needn't be restricted to a single variable. More generally, piecewise functions needn't be restricted to any number of conditions or pieces. The perfect example, as we'll see later, is the floor function, which has an infinite number of pieces. Similarly, the bivariate function describing a square when it intersects a certain plane has 4 pieces.
 
 In general, we can notate such a more general piecewise function like the following:
@@ -81,7 +81,7 @@ $$
 
 And of course we might package each piece's conditions together, effectively making one condition per piece. Though, in practice, this doesn't help very much at all (this is because, as we will later see, considering each condition individually yields results which affect the way we interpolate functions and other manipulation of piecewise objects).
 
-\subsection{Generalised piecewise object}
+\section{Generalised piecewise object}
 Finally, we might consider a set-like generalised form of a piecewise object. Let us denote the following:
 
 $$
@@ -156,8 +156,6 @@ Notably, this notation can be used to express individual pieces explicitly in a 
     $$
         \phi=\pwobj{\varphi_u}{C_u}{u\in U}\cup\pwobj{\varphi_v}{C_v}{v\in V}
     $$
-
-    (There is no intersection equivalent.)
 \end{theorem}
 
 \newpage

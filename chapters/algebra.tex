@@ -1,11 +1,11 @@
-\section{Algebra on Piecewise Objects}
-\subsection{Piece association}
+\chapter{Algebra on Piecewise Objects}
+\section{Piece association}
 Operations on piecewise objects are fairly straightforward and behave as any other object in the context you're working in (whether this be with the real numbers, complex numbers, certain algebras, spaces, and so on).
 
 What this section aims to do is not to teach you directly how to perform exactly the operations you want to on each piecewise object, but instead provide a basis for which you can base your ideas: no piece of a piecewise object is independent of another. Equivalently, each piece is dependent on each other piece. There is an intuitive reason for this: you are evaluating an object not conditionally, but in full generality; each piece exists, in some sense, `simultaneously'.
 
 It is here we might recognise that this idea could fairly easily lead into combinatorics; an area of maths which deals heavily with the enumeration and construction of such objects.
-\subsection{Equality property}
+\section{Equality property}
 \begin{theorem}
     Consider the following piecewise object:
 
@@ -27,7 +27,7 @@ It is here we might recognise that this idea could fairly easily lead into combi
     We have that $f(x)=0$. This is because everywhere in $\dom{f}$, or both when $x\geq 0$ and $x < 0$, we have that $f(x)=0$.
 \end{theorem}
 
-\subsection{Piece and condition equivalence}
+\section{Piece and condition equivalence}
 Arguably one of the most fundamental property of piecewise objects is the relationship between each piece's conditions and its respective value. That is, the values for which a piecewise object takes is dependent on their respective conditions, and so can be treated explicitly as such.
 
 \begin{theorem}
@@ -152,7 +152,7 @@ A strong note on functions which are not well-defined: Piecewise objects can eas
 \end{theorem}
 
 % piece values = conditions for all pieces, object = values
-\subsection{(De)nesting pieces; logical `and'}
+\section{(De)nesting pieces; logical `and'}
 The third of several special operations on piecewise objects involves the nesting and denesting of pieces; essentially, we decouple the conditions in each piece from one another in order to group and subsequently simplify the piece values.
 
 \begin{example}
@@ -262,7 +262,7 @@ In general, if we have common, and multiple, conditions for pieces, we should be
 \end{theorem}
 
 
-\subsection{Combining, splitting piece conditions; logical `or'}
+\section{Combining, splitting piece conditions; logical `or'}
 Finally, we'll look at explicit logical `or' in piece conditions at a basic level and in full generality. This is just as important as the previous section, particularly for grouping.
 
 \begin{theorem}
@@ -319,7 +319,7 @@ Finally, we'll look at explicit logical `or' in piece conditions at a basic leve
 
     The reason for this comes down to our well-definition argument as before (equal values).
 \end{theorem}
-\subsection{Functions on piecewise objects}
+\section{Functions on piecewise objects}
 
 Arguably the most important property of piecewise objects is the following:
 
