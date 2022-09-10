@@ -95,21 +95,18 @@ Finally, depending on the context of the problem, function or object, we can rew
 
     The following two representations are equivalent:
 
-    $$
-        f(x) = \begin{piecewise}
+    \begin{align*}
+        f(x) &= \begin{piecewise}
             x & x > 5 \\
             5 & x = 5 \\
             x & x < 5
-        \end{piecewise}
-    $$
-
-    $$
-        f(x) = \begin{piecewise}
+        \end{piecewise} \\
+        f(x) &= \begin{piecewise}
             x & x\in(5,6) \\
             5 & x = 5 \\
             x & x\in(-6,5)
         \end{piecewise}
-    $$
+    \end{align*}
 
     The reason for this is that for all $x\in(-6,5)$ we have that $x<5$, despite the contrary not being always true. The reason the contrary needn't always be true for all $\mathbb{R}$ is because our function $f$ is defined on the interval $(-6,6)$. This same argument can also be applied to $x\in(5,6)\implies x>5$.
 \end{example}

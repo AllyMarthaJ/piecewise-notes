@@ -1,6 +1,7 @@
 % yay we revisit non elementary functions
 % step functions for example, approximations
-\chapter{Discontinuous Piecewise Functions as Limits}
+\chapter{Discontinuous Piecewise Functions}
+\section{Limit Method}
 We've already explored some elementary functions which can approximate piecewise functions (continuous or not). Some functions, however aren't covered, and, moreover, there is no systematic way to derive such approximations except via substitution using existing functions. This is what we cover here, with some extra steps.
 
 Let $f$ be some discontinuous piecewise function. Then we shall define $f$ using a limit. For all real $x$, let us define the following:
@@ -147,6 +148,93 @@ This should look familiar; we're given a set of individual points, which means c
         $$
 
         This gives $\floor{x}=N-(N-m)=m$.
+    \end{proof}
+\end{theorem}
+
+\section{Sign-related substitutions}
+Recall that we use the substitution $\max\br{x,a}=x$ for our continuous function gluing. This has the advantage that we invoke functions within their respective domains only (where the endpoints of the domain are defined). Unfortunately, this method doesn't work if the endpoints are undefined, but the function doesn't diverge. Such an example is $\exp\paren*{-\frac{1}{x^2}}$.
+
+Taking inspiration from our $\max$ function substitution, for problems which require proper domain handling, we can perform a $\sgn{x}$ related substitution, using an auxillary function or functions which reduce the problem.
+
+\begin{example}
+    We want to write the function $f:\mathbb{R}\to\mathbb{R}$ in terms of $\sgn{x}$ so that it is defined everywhere:
+    $$
+        f(x) = \begin{piecewise}
+            \sqrt{\frac{1}{x}} & x>0 \\
+            0 & x\leq 0
+        \end{piecewise}
+    $$
+
+    In order to do this, let us create an auxillary function, $A:\mathbb{R}\to\mathbb{R}$, to allow us appropriately create a substitution for $x$ when $x>0$. Suppose $a\in\mathbb{R}^+$, then such a function could be:
+    $$
+        A(x) = \begin{piecewise}
+            x & x > 0 \\
+            a & x\leq 0
+        \end{piecewise}
+    $$
+
+    Then $x>0\iff A(x)=x$ and $x\leq 0\iff A(x)=a$ (which we will ignore). Returning to $f$, we get:
+    $$
+        f(x) = \begin{piecewise}
+            \sqrt{\frac{1}{A(x)}} & A(x)=x \\
+            0 & x\leq 0
+        \end{piecewise} = \sqrt{\frac{1}{A(x)}}+\begin{piecewise}
+            0 & x > 0 \\
+            0-\sqrt{\frac{1}{A(x)}} & x\leq 0
+        \end{piecewise}
+    $$
+
+    When simplified, we get:
+    $$
+        f(x) = \sqrt{\frac{1}{A(x)}}-\sqrt{\frac{1}{a}}+\begin{piecewise}
+            \sqrt{\frac{1}{a}} & x > 0 \\
+            0 & x\leq 0
+        \end{piecewise}
+    $$
+
+    This gives motivation to set $a=1$. We will further simplify using techniques explored previously, giving us:
+    $$
+        f(x)=\sqrt{\frac{1}{A(x)}}+\frac{1}{2}\sgn{x}(\sgn{x}+1)-1
+    $$
+
+    Since $A(x)=a+\frac{x-a}{2}\sgn{x}(\sgn{x}+1)$:
+    $$
+        f(x)=\sqrt{\frac{1}{a+\frac{x-a}{2}\sgn{x}(\sgn{x}+1)}}+\frac{1}{2}\sgn{x}(\sgn{x}+1)-1
+    $$
+\end{example}
+
+\begin{theorem}
+    Let $D\subseteq\mathbb{R}$, $a\in D$ and $f:D\setminus\br{a}\to\mathbb{R}$ such that $f(a)=s$. Then for some $r\in D$ the function $F:D\to\mathbb{R}$ patches $f$:
+    $$
+        F(x) = f(x+(x-r)(\sgn{x-a}^2-1))+(f(r)-s)(\sgn{x-a}^2-1)
+    $$
+
+    \begin{proof}
+        Let $F:D\to\mathbb{R}$ be a function such that:
+        $$
+            F(x) = \begin{piecewise}
+                f(x) & x\neq a\\
+                s & x=a
+            \end{piecewise}
+        $$
+
+        We create a patching (auxillary) function $P:D\to\mathbb{R}$ such that
+        $$
+            P(x,a) = \begin{piecewise}
+                r & x=a \\
+                x & x\neq a
+            \end{piecewise} = x + (x-r)(\sgn{x-a}^2-1)
+        $$
+
+        Rewriting $F$:
+        $$
+            F(x) = \begin{piecewise}
+                f(x) & P(x,a)=x \\
+                s & P(x,a)=r
+            \end{piecewise} = f(P(x,a)) + (f(r)-s)(\sgn{x-a}^2-1)
+        $$
+
+        Simplifying yields the result as desired.
     \end{proof}
 \end{theorem}
 
