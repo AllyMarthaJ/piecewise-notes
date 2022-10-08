@@ -2,5 +2,109 @@
 % modulo function using complex numbers
 % show that we can interpolate over the complex numbers
 \chapter{Complex Numbers and Piecewise Objects}
+The ordering of real numbers allows us to place conditions, $\geq$ and $\leq$, on numbers such that we can form real piecewise functions. Unfortunately, such an endeavour in the complex numbers is far less straightforward as they have no intrinsic ordering. Instead, for complex piecewise functions, we can reduce our conditions to those which include properties of complex numbers, such as the magnitude, $\abs{z}$, the principal argument $\Arg{z}$, and real and imaginary parts of $z$, $\Re{z}$ and $\Im{z}$.
+
+\section{Representations of piecewise functions}
+We call a representation of a piecewise object \textit{compact} if it is composed of only limits and elementary functions, and is not defined over more than one piece. We label representations of piecewise objects that do not satisfy this property \textit{conditional}.
+
+Compact representations of piecewise objects over the real numbers provide a means by which we can extend real piecewise functions to complex piecewise functions, but do not necessarily preserve equality, since compact representations of a piecewise object are not necessarily unique.
+
+\begin{example}
+    A compact representation of $f:\mathbb{R}\to\mathbb{R}, f(x)=\abs{x}$ can be given by $f(x)=\sqrt{x^2}$ or by $f(x)=\sqrt[4]{x^4}$, where $\sqrt{x}$ is the principal square root, and $\sqrt[4]{x}$ is the principal fourth root. However, over the complex numbers, we have that $\sqrt{z}\neq\sqrt[4]{z}$.
+\end{example}
+
+\section{Magnitude and absolute value}
+Recall that the magnitude of a complex number, $z$, is given by $\sqrt{\Re{z}^2+\Im{z}^2}$ (again, for principal square root). It just so happens that over the real numbers, the magnitude is, in fact, equal to the absolute value function its compact representation.
+
+However, suppose that we extended the compact representation $f(x)=\sqrt{x^2}$ to the complex numbers, i.e. $f(z)=\sqrt{z^2}$, what piecewise function over the complex numbers does this represent?
+
+It is here we introduce $\Arg{z}$, which is the principal argument of a complex number, i.e. $\Arg{z}\in(-\pi, \pi]$.
+\begin{theorem}
+    The principal argument, $\Arg{z}$, is given as $\Atan{\Re{x},\Im{y}}$, which is a piecewise function defined as an intuitive extension to the $\arctan$ function:
+    $$
+        \Atan{x,y}=\begin{piecewise}
+            \arctan{\frac{y}{x}} & x>0 & y>0 \\
+            \arctan{\frac{y}{x}} & x>0 & y<0 \\
+            \arctan{\frac{y}{x}}+\pi & x<0 & y>0 \\
+            \arctan{\frac{y}{x}}-\pi & x<0 & y<0 \\
+            0 & x>0 & y=0 \\
+            \frac{\pi}{2} & x=0 & y>0 \\
+            \pi & x<0 & y=0 \\
+            -\frac{\pi}{2} & x=0 & y<0
+        \end{piecewise}
+    $$
+
+    That is, we measure the angle from the positive real axis (or $x$ axis), to a point, and constrain it to be within $(-\pi,\pi]$.
+
+    Equivalently, we can write it as:
+    $$
+        \Atan{x_0,y_0}=\lim_{x\to x_0^{+}}{\arctan\paren*{\frac{y_0}{x}}}+\frac{\pi}{2}\sgn{x_0}(\sgn{x_0}-1)(1+\sgn{y_0}-\sgn{y_0}^2)
+    $$
+
+    \begin{proof}
+        We begin by noticing that the angle between the $x$ axis and a point, $(x,y)$, is given by $\arctan\paren*{\frac{y}{x}}$ if $(x,y)$ is in quadrants 1 and 4 (that is, $x>0\land y>0$ or $x>0\land y<0$).
+
+        Furthermore, the desired angle is given by $\arctan\paren*{\frac{y}{x}}+\pi$ if $(x,y)$ is in quadrant 2; $x<0\land y>0$. Likewise, in quadrant 3, the angle is given by $\arctan\paren*{\frac{y}{x}}-\pi$; $x<0\land y<0$.
+
+        On the boundary of each quadrant, we notice the desired angles follow $0$, $\frac{\pi}{2}$, $\pi$ and $-\frac{\pi}{2}$ respectively, giving us the piecewise function:
+        $$
+            \Atan{x,y}=\begin{piecewise}
+                \arctan{\frac{y}{x}} & x>0 & y>0 \\
+                \arctan{\frac{y}{x}} & x>0 & y<0 \\
+                \arctan{\frac{y}{x}}+\pi & x<0 & y>0 \\
+                \arctan{\frac{y}{x}}-\pi & x<0 & y<0 \\
+                0 & x>0 & y=0 \\
+                \frac{\pi}{2} & x=0 & y>0 \\
+                \pi & x<0 & y=0 \\
+                -\frac{\pi}{2} & x=0 & y<0
+            \end{piecewise}
+        $$
+
+        We can rewrite the values of $x>0\land y=0$ and $x<0\land y=0$ in terms of their arctan counterparts respectively:
+        $$
+            \Atan{x,y}=\begin{piecewise}
+                \arctan{\frac{y}{x}} & x>0 & y>0 \\
+                \arctan{\frac{y}{x}} & x>0 & y=0 \\
+                \arctan{\frac{y}{x}} & x>0 & y<0 \\
+                \arctan{\frac{y}{x}}+\pi & x<0 & y>0 \\
+                \arctan{\frac{y}{x}}+\pi & x<0 & y=0 \\
+                \arctan{\frac{y}{x}}-\pi & x<0 & y<0 \\
+                \frac{\pi}{2} & x=0 & y>0 \\
+                -\frac{\pi}{2} & x=0 & y<0
+            \end{piecewise}
+        $$
+
+        Note that the former term in each piece can each be written as $\lim_{t\to x^{+}}{\arctan\paren*{\frac{y}{t}}}$ (regard that the one-sided limit does exist for $x=0$, $y\neq 0$). We get, therefore:
+        $$
+            \Atan{x,y}=\lim_{t\to x^{+}}{\arctan\paren*{\frac{y}{t}}}+\begin{piecewise}
+                0 & x>0 \\
+                0 & x=0 \\
+                \begin{piecewise}
+                    \pi & y>0 \\
+                    \pi & y=0 \\
+                    -\pi & x<0
+                \end{piecewise} & x<0
+            \end{piecewise}
+        $$
+
+        The inner piecewise function is equal to $\pi\paren*{\sgn{y}+1-\sgn{y}^2}$, by our standard techniques. After simplifying the outer piecewise function using the same way, we obtain the desired result.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    The solutions to $w=\sqrt[n]{z^n}$ are given by $w=w_k=z\exp\paren*{\frac{2k\pi i}{n}}$ for all $k\in\br{0,1,\dots,n-1}$.
+
+    \begin{proof}
+        Let $w=w_k=\sqrt[n]{z^n}$; we then have that $w_k^n=z^n$. Note that for $z=0$ we have $w=0$. Then:
+        $$
+            \paren*{\frac{w_k}{z}}^n=1\implies \frac{w_k}{z}=\exp\paren*{\frac{2k\pi i}{n}}
+        $$
+
+        From here we have our result.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+\end{theorem}
 
 \newpage
