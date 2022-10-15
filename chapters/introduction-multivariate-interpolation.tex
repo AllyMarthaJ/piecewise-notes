@@ -13,7 +13,7 @@
 While we are on the topic of interpolation, let us briefly introduce the concept of multivariate interpolation; interpolation in multiple variables. For example, instead of taking values on the real number line and then mapping them to other real numbers, we may wish, instead, to take values on a plane and map them to real numbers, i.e. some `height', thus producing a surface when graphed. Alternatively, we could instead associate numbers with vectors or coordinates (in fact, this is what a parametric equation is).
 
 \section{`And' multiple condition strategy}
-Recall that we discussed how we might work with multiple conditions in a piecewise object in \ref{section:multiple_conditions}. Suppose we have an interpolation problem with the following APO representation (which can be complex, also), for $f:\mathbb{R}^n\to\mathbb{R}$:
+Recall that we discussed how we might work with multiple conditions in a piecewise object in \autoref{section:multiple_conditions}. Suppose we have an interpolation problem with the following APO representation (which can be complex, also), for $f:\mathbb{R}^n\to\mathbb{R}$:
 $$
     f(x_1,x_2,\dots,x_n) = \begin{piecewise}
         y_1 & x_1=x_{1,1} & x_2=x_{1,2} & \dots & x_n=x_{1,n} \\
@@ -165,7 +165,7 @@ $$
 
 There are alternate ways to formulate this, but they're irrelevant: the idea is that we superimpose the solutions in the way we interpolate. We could use the geometric mean for exponential extraction, and the arithmetic mean for polynomial extraction.
 
-In fact, recall Example \ref{example:truth_table}. This method more or less extends this approach (or, rather, that example was one in a subset of problems we can solve using this strategy now).
+In fact, recall \autoref{example:truth_table}. This method more or less extends this approach (or, rather, that example was one in a subset of problems we can solve using this strategy now).
 
 \begin{example}
     Suppose we have a function $f:\mathbb{R}^2\to\mathbb{R}$ such that $f(0,0)=0$, $f(1,0)=1$, $f(0,1)=1$ and $f(1,1)=2$. Then we can represent this problem as the following:
@@ -338,7 +338,7 @@ In any case, there exists a bijection between points in $\mathbb{R}^n$ and numbe
 \end{example}
 
 \section{Decomposition strategy}
-Recall from the univariate interpolation section with Lagrange polynomials, Section \ref{section:lagrange_polynomials}, we decomposed our APO into a sum of elements which looked a lot like Iverson brackets:
+Recall from the univariate interpolation section with Lagrange polynomials, \autoref{section:lagrange_polynomials}, we decomposed our APO into a sum of elements which looked a lot like Iverson brackets:
 $$
     (x)_{x_a}=\begin{piecewise}
         1 & x=x_a \\
@@ -446,7 +446,7 @@ And therefore we can use the left hand side as a substitution for the right hand
 \end{example}
 
 \section{Dual numbers with multivariable Taylor series}
-We explored in \ref{section:dual_numbers} the idea of extending the dual numbers to allow us to `interpolate' an arbitrary number of derivatives in a single variable function. Now that we've covered the idea of multivariate interpolation in a point context, let us further extend the idea of encoding derivatives with respect to multivariate functions.
+We explored in \autoref{section:dual_numbers} the idea of extending the dual numbers to allow us to `interpolate' an arbitrary number of derivatives in a single variable function. Now that we've covered the idea of multivariate interpolation in a point context, let us further extend the idea of encoding derivatives with respect to multivariate functions.
 
 This can be done via the multivariable taylor series (which won't be covered here). However, in order to `encode' a point and its first derivatives, say for a function $f(\vec{x})$, we would require points $f(\vec{u})$, $\pdv{f}{x_1} (\vec{u})$, $\pdv{f}{x_2} (\vec{u})$, $\dots$, $\pdv{f}{x_n} (\vec{u})$. We would then interpret this as requiring points in a hypercube of dimension $n$; i.e. $f(u_1,u_2,\dots,u_n)$, $f(u_1+\varepsilon_1,u_2,\dots,u_n)$, $\dots$, $f(u_1+\varepsilon_1,u_2+\varepsilon_1,\dots,u_n+\varepsilon_n)$ and so on. This gives us a well-determined system of points for which we can then interpolate using techniques as given in this chapter.
 

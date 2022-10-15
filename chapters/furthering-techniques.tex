@@ -75,7 +75,7 @@ The premise of this extraction is as follows: We can reduce the number of pieces
 
 \begin{example}
     \label{example:max_further}
-    We revisit the absolute value formula for $\max$ once again. Recall the piecewise definition of this function per \ref{section:max}.
+    We revisit the absolute value formula for $\max$ once again. Recall the piecewise definition of this function per \autoref{section:max}.
 
     We wish to derive the absolute value formula for $\max$:
     $$
@@ -286,7 +286,7 @@ $$
     f(x) = \sum_{m=0}^{n}{y_m\prod_{\substack{l=0\\l\neq m}}^{n}{\frac{x-x_l}{x_m-x_l}}}
 $$
 
-This form might seem familiar; recall \ref{theorem:iverson_form}. The form of this sum looks similar to the Iverson form of a piecewise object, except that each polynomial term in the sum approximates the Iverson bracket $[x=x_m]$ for some $m$. This is not, in fact, coincidence (and will be covered soon).
+This form might seem familiar; recall \autoref{theorem:iverson_form}. The form of this sum looks similar to the Iverson form of a piecewise object, except that each polynomial term in the sum approximates the Iverson bracket $[x=x_m]$ for some $m$. This is not, in fact, coincidence (and will be covered soon).
 
 \begin{theorem}
     Lagrange polynomials can be formed by separating each piece into its own piecewise object with roots at every other piece, and then interpolating. Setting up our interpolation problem, we have:
@@ -299,7 +299,7 @@ This form might seem familiar; recall \ref{theorem:iverson_form}. The form of th
         \end{piecewise}
     $$
 
-    We can now separate our pieces, similarly to $\ref{theorem:iverson_form}$:
+    We can now separate our pieces, similarly to $\autoref{theorem:iverson_form}$:
     $$
         f(x) = \begin{piecewise}
             y_0 & x=x_0 \\
@@ -456,7 +456,7 @@ Where $\mu$ is some solution to the problem, $[\phi]$ is an object which vanishe
 \section{Non-trivial piece conditions}
 As per our regular piecewise properties, we can perform substitutions on piece conditions of a piecewise object. This is no different for anonymous piecewise objects, or even just piecewise objects when performing extractions as we have so far. With this being said, there are caveats.
 
-As we've observed with Examples \ref{example:max_further} and \ref{example:heaviside_further}, particularly with $\abs{x}$, overlapping conditions produce discontinuities and ambiguities. Sometimes, like in the former example, the resultant discontinuities are removable, but most times (such as in the latter example), they are not. Ultimately, operations on piecewise objects are only `nice' when these piecewise objects are well defined; it is important, therefore, to keep this in mind when performing piece condition substitution.
+As we've observed with Examples \autoref{example:max_further} and \autoref{example:heaviside_further}, particularly with $\abs{x}$, overlapping conditions produce discontinuities and ambiguities. Sometimes, like in the former example, the resultant discontinuities are removable, but most times (such as in the latter example), they are not. Ultimately, operations on piecewise objects are only `nice' when these piecewise objects are well defined; it is important, therefore, to keep this in mind when performing piece condition substitution.
 
 \begin{theorem}
     Given some piecewise object $\phi$ as defined below:
@@ -554,7 +554,7 @@ We begin by dealing with the cases wherein each condition is an equality of some
     \begin{proof}
         For all $i\in I$ we have that $x_i=y_i\implies x_i-y_i=0$. It therefore stands to reason that $0\in\br*{x_i-y_i\mid i\in I}\leftrightarrow A$.
 
-        By \ref{theorem:set_variable} we have that $A\leftrightarrow \prod_{i\in I}{(x_i-y_i)}=0$.
+        By \autoref{theorem:set_variable} we have that $A\leftrightarrow \prod_{i\in I}{(x_i-y_i)}=0$.
     \end{proof}
 \end{theorem}
 \begin{theorem}

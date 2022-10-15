@@ -17,7 +17,7 @@ That is, there exists some function $F$ which is exactly $f$ everywhere except a
     \item If $\lim_{x\to a}{f(x)}=b$ then $f(a)\approx b$ (if $f(a)$ exists).
 \end{enumerate}
 
-This should look familiar; we're given a set of individual points, which means can interpolate these points where appropriately. Furthermore, since we interpolate only in the region of the discontinuity, we can then apply our gluing formula to the rest of the domain, as derived in Section \ref{section:gluing}.
+This should look familiar; we're given a set of individual points, which means can interpolate these points where appropriately. Furthermore, since we interpolate only in the region of the discontinuity, we can then apply our gluing formula to the rest of the domain, as derived in \autoref{section:gluing}.
 
 \begin{example}
     Let us find a function $F$ as per the above which approximates $\sgn{x}$. Recall that $\sgn{x}$ is defined as the following:
@@ -53,7 +53,7 @@ This should look familiar; we're given a set of individual points, which means c
         F(x,\varepsilon) = \paren*{1 + \frac{\ell_{-\varepsilon}^{\varepsilon}(x)}{\varepsilon} + (-1)} - \paren*{1 + (-1)}
     $$
 
-    Fully simplifying using the properties of the clamping function given in \ref{section:clamping_function}, this leaves:
+    Fully simplifying using the properties of the clamping function given in \autoref{section:clamping_function}, this leaves:
     $$
         F(x,\varepsilon) = \ell_{-1}^{1}\paren*{\frac{x}{\varepsilon}}
     $$
@@ -128,7 +128,7 @@ This should look familiar; we're given a set of individual points, which means c
 \end{example}
 
 \begin{theorem}
-    Using the floor function per Example \ref{example:floor_sum}, we can restate our proposition as the following:
+    Using the floor function per \autoref{example:floor_sum}, we can restate our proposition as the following:
 
     For all $\abs{x}\leq N\in\mathbb{Z}^+$ we have that:
     $$
@@ -157,6 +157,7 @@ Recall that we use the substitution $\max\br{x,a}=x$ for our continuous function
 Taking inspiration from our $\max$ function substitution, for problems which require proper domain handling, we can perform a $\sgn{x}$ related substitution, using an auxillary function or functions which reduce the problem.
 
 \begin{example}
+    \label{example:sign_substitution}
     We want to write the function $f:\mathbb{R}\to\mathbb{R}$ in terms of $\sgn{x}$ so that it is defined everywhere:
     $$
         f(x) = \begin{piecewise}
@@ -173,7 +174,9 @@ Taking inspiration from our $\max$ function substitution, for problems which req
         \end{piecewise}
     $$
 
-    Then $x>0\iff A(x)=x$ and $x\leq 0\iff A(x)=a$ (which we will ignore). Returning to $f$, we get:
+    See \autoref{clarify:patch_auxillary} for why we choose this auxillary function.
+
+    Then $x>0\iff A(x)=x$ by definition and $x\leq 0\iff A(x)=a$ (which we will ignore). Returning to $f$, we get:
     $$
         f(x) = \begin{piecewise}
             \sqrt{\frac{1}{A(x)}} & A(x)=x \\
@@ -197,9 +200,9 @@ Taking inspiration from our $\max$ function substitution, for problems which req
         f(x)=\sqrt{\frac{1}{A(x)}}+\frac{1}{2}\sgn{x}(\sgn{x}+1)-1
     $$
 
-    Since $A(x)=a+\frac{x-a}{2}\sgn{x}(\sgn{x}+1)$:
+    Since $A(x)=1+\frac{x-1}{2}\sgn{x}(\sgn{x}+1)$:
     $$
-        f(x)=\sqrt{\frac{1}{a+\frac{x-a}{2}\sgn{x}(\sgn{x}+1)}}+\frac{1}{2}\sgn{x}(\sgn{x}+1)-1
+        f(x)=\sqrt{\frac{1}{1+\frac{x-1}{2}\sgn{x}(\sgn{x}+1)}}+\frac{1}{2}\sgn{x}(\sgn{x}+1)-1
     $$
 \end{example}
 

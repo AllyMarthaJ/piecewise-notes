@@ -61,6 +61,7 @@
     middleextra={\node[anchor=north west,inner xsep=0pt,xshift=10pt] at (P-|O) {\bfseries{\thetheorem}\ \mdseries{(continued)}\bfseries{.}};},
     secondextra={\node[anchor=north west,inner xsep=0pt,xshift=10pt] at (P-|O) {\bfseries{\thetheorem}\ \mdseries{(continued)}\bfseries{.}};}
 ]{theorem}{}[subsection]
+\renewcommand*\theoremautorefname{\@gobble}
 
 \theoremstyle{definition}
 \newmdtheoremenv[%
@@ -73,6 +74,7 @@
     middleextra={\node[anchor=north west,inner xsep=0pt,xshift=10pt] at (P-|O) {\bfseries{Example~\theexample}\ \mdseries{(continued)}\bfseries{.}};},
     secondextra={\node[anchor=north west,inner xsep=0pt,xshift=10pt] at (P-|O) {\bfseries{Example~\theexample}\ \mdseries{(continued)}\bfseries{.}};}
 ]{example}{Example}[subsection]
+\providecommand*\exampleautorefname{Example}
 
 % my first environment
 % i hate amsmath doesn't support multicase piecewise
