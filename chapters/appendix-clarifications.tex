@@ -1,0 +1,6 @@
+\chapter{Clarifications}
+\section{Discontinuous Piecewise Functions}
+
+\paragraph{Why this patching function (\autoref{example:sign_substitution})?}
+\label{clarify:patch_auxillary}
+Recall that for typically continuous functions, under a condition such as $x\geq a$, we use the relationship and substitution $x\geq a\iff \max(x,a)=x$ to provide a reduction of our problem to a far simpler one to deal with. Unfortunately, this sort of relationship doesn't exist in this context; we're looking for $x>a\iff F(x)=x$ (for some $F$), and functions such as sign or the Heaviside step function are locally constant. The behaviour we're looking for is a function that's only sometimes locally constant, but otherwise equal to the variable in question. The choice of function above is a result of pondering these requirements for a minute.
